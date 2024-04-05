@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/Images/Ash Hollow.JPG</name>
-			<type>1</type>
-			<location>C:/Users/Kaiden/Downloads/Ash Hollow.JPG</location>
-		</link>
-	</linkedResources>
 </projectDescription>
