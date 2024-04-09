@@ -144,18 +144,25 @@ public class Wagon {
 		return daysTraveled;
 	}
 	
+	/**
+	 * getMilesTraveled - gets the number of miles traveled. 
+	 * @return - the number of miles traveled. 
+	 */
 	public int getMilesTraveled() {
 		return milesTraveled;
 	}
 	
+	/**
+	 * death - removes 1 member of party when a person dies
+	 */
 	public void death() {
 		numberOfPeople--;
 	}
 	
 	/**
-	 * travel - calculates whether there is enough food to make it to Oregon given the food
-	 * consumption rate and total days to travel.
-	 * @return - false if the total food required is greater than the total food on the wagon, and true otherwise.
+	 * travel - keeps track of the number of days the party has been traveling for. 
+	 * Also determines the ammount of food consumed by the party and if the party has enough food to survive
+	 * @return - the number of days traveled
 	 */
 	public int travel() {
 		// Calculate the food consumed per day, (4 people * consumption rate)
