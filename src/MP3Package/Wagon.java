@@ -20,6 +20,10 @@ public class Wagon {
 	private int foodConsumption;
 	private int milesPerDay;
 	private int totalDays;
+	private int daysTraveled;
+	private int numberOfPeople = 4;
+	private int totalFoodUsed = 0;
+	private int milesTraveled = 0;
 	// Initialize ArrayList of Item object that contains all of the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
 	
@@ -117,7 +121,7 @@ public class Wagon {
 		for(int i = 0; i < Items.size(); i++) {
 			totalWeight += Items.get(i).getWeight();
 		}
-		return totalWeight;
+		return totalWeight - totalFoodUsed;
 	}
 	
 	/**
@@ -129,20 +133,23 @@ public class Wagon {
 		for(int i = 0; i < food.size(); i++) {
 			totalFoodWeight += food.get(i).getWeight();
 		}
-		return totalFoodWeight;
+		return totalFoodWeight - totalFoodUsed;
 	}
 	
 	/**
 	 * getTotalDays - calculates the total number of days it will take to reach Oregon
 	 * @return totalDays -  the number of days it takes to reach Oregon
 	 */
-	public int getTotalDays() {
-		// Divide the distance (2,200 miles) by the miles traveled per day 
-		totalDays = 2200 / milesPerDay;
-		
-		// If there is any remainder, add another day to reach Oregon
-		if(2200 % milesPerDay > 0) totalDays++;
-		return totalDays;
+	public int getTotalDaysTraveled() {
+		return daysTraveled;
+	}
+	
+	public int getMilesTraveled() {
+		return milesTraveled;
+	}
+	
+	public void death() {
+		numberOfPeople--;
 	}
 	
 	/**
@@ -150,19 +157,23 @@ public class Wagon {
 	 * consumption rate and total days to travel.
 	 * @return - false if the total food required is greater than the total food on the wagon, and true otherwise.
 	 */
-	public boolean travel() {
+	public int travel() {
 		// Calculate the food consumed per day, (4 people * consumption rate)
-		int foodPerDay = 4 * foodConsumption;
+		int foodPerDay = numberOfPeople * foodConsumption;
+		
+		daysTraveled++;
 		
 		// Calculate the total food used using the food used per day times the number of days to travel.
-		int totalFoodUsed = foodPerDay * this.getTotalDays();
-		
-		// If the total food used is greater than the amount of food on the wagon, return false (lose condition)
-		if(totalFoodUsed > totalFoodWeight) {
-			return false;
+		totalFoodUsed = foodPerDay * daysTraveled;
+		if(this.getTotalFoodWeight() <= 0) {
+			this.death();
 		}
+		System.out.println(numberOfPeople);
+		if(numberOfPeople == 0) {
+			return -1;
+		}
+		milesTraveled += milesPerDay;
 		
-		// Otherwise, return true (win condition)
-		else return true;
+		return daysTraveled;
 	}
 }

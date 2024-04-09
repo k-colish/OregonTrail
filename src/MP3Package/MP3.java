@@ -24,11 +24,14 @@ import java.awt.Font;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
 
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
@@ -58,7 +61,21 @@ public class MP3 {
 	// Setting the ImageIcon for use with ImageLabel
 	private ImageIcon backgroundImage = new ImageIcon(this.getClass().getResource(filename));
 	
+	private javax.swing.Timer clock;
+	
+	private JOptionPane pane = null;
+	private JButton stopTravel = new JButton("Stop Travel");
+	private JButton continue1 = new JButton("Continue");
+	private Object[] options = {continue1, stopTravel};
+	
+	private JLabel TotalFoodLabel = null;
+	private JLabel TotalWeightLabel = null;
+	
 	private DestinationActivities activity = new DestinationActivities();
+	
+	private Destinations cheviot = new Destinations(0, "Cheviot", true);
+	private Destinations paris = new Destinations(180, "Paris, Illinois", true);
+	private Destinations springfield = new Destinations(280, "Springfield, Illinois", true);
 	/**
 	 * Launch the application.
 	 */
@@ -96,10 +113,43 @@ public class MP3 {
 				activity.talkToRandos();
 			}
 		});
+		
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnNewButton.setBounds(525, 627, 89, 23);
 		frame.getContentPane().add(btnNewButton);
 		
+	}
+	
+	
+	
+	public void clockActionPerformed(ActionEvent e) {
+		System.out.println("Clock Action Performed");
+		switch(wagon.travel()) {
+		case -1: JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE); clock.stop(); break;
+		default:
+			pane = new JOptionPane();
+			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFoodWeight() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {"Yes", "No"}, -1);								
+			
+			if(res == JOptionPane.YES_OPTION) {
+				System.out.println("Yes selected");
+				clock.stop();
+				TotalFoodLabel.setText("Total Food Weight: " + wagon.getTotalFoodWeight());
+				TotalWeightLabel.setText("Total Weight: " + wagon.calculateTotalWeight());
+			}
+			else if(res == JOptionPane.NO_OPTION) {
+				System.out.println("No selected");
+			}
+			else System.out.println("Nothing selected");
+		}
+	}
+	
+	
+	
+	public int milesToLandmark() {
+		if(paris.getDistance() > wagon.getMilesTraveled()) {
+			return paris.getDistance() - wagon.getMilesTraveled();
+		}
+		else return springfield.getDistance() - wagon.getMilesTraveled();
 	}
 	
 	/**
@@ -175,7 +225,26 @@ public class MP3 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		clock = new javax.swing.Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				clockActionPerformed( evt );
+				}
+				});
 		
+		stopTravel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clock.stop();
+				frame.remove(pane);
+//				pane.setValue(JOptionPane.CLOSED_OPTION);
+			}
+		});
+		
+		continue1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pane.setValue(JOptionPane.CLOSED_OPTION);
+				frame.remove(pane);
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("The Oregon Trail");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -185,14 +254,14 @@ public class MP3 {
 		
 		
 		// Displays the total weight of items on the wagon. Initial value displayed is set as 0
-		JLabel TotalWeightLabel = new JLabel("Total Weight: " + wagon.calculateTotalWeight());
+		TotalWeightLabel = new JLabel("Total Weight: " + wagon.calculateTotalWeight());
 		TotalWeightLabel.setForeground(Color.WHITE);
 		TotalWeightLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		TotalWeightLabel.setBounds(100, 550, 150, 16);
 		frame.getContentPane().add(TotalWeightLabel);
 		
 		// Displays the total weight of food items that are on the wagon. Initial value displayed is set to 0.
-		JLabel TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.calculateTotalWeight());
+		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.calculateTotalWeight());
 		TotalFoodLabel.setForeground(Color.WHITE);
 		TotalFoodLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		TotalFoodLabel.setBounds(250, 550, 170, 16);
@@ -292,11 +361,6 @@ public class MP3 {
 		JButton btnNewButton = new JButton("Travel!");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Win message that is displayed when the user has enough food
-				String winMessage = "You made it to Oregon in " + wagon.getTotalDays() + " days!";
-				// Lose message when the user did not select enough food to make it to Oregon
-				String loseMessage = "You did not make it to Oregon.";
-				
 				/* 
 				 * Checks if a button has been selected. Otherwise, tell the user to select
 				 * a consumption rate button.
@@ -321,13 +385,8 @@ public class MP3 {
 				 * if there isn't enough food.
 				 */
 				else {
-					ConsumptionErrorLabel.setText("");
-					if(wagon.travel()) {
-						JOptionPane.showMessageDialog(null, winMessage, "You Win!", JOptionPane.INFORMATION_MESSAGE);
-					}
-					else {
-						JOptionPane.showMessageDialog(null, loseMessage, "You Lose!", JOptionPane.ERROR_MESSAGE);
-					}
+					System.out.println("Clock start");
+					clock.start();
 				}
 			}
 		});
