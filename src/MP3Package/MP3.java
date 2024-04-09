@@ -124,9 +124,16 @@ public class MP3 {
 	
 	public void clockActionPerformed(ActionEvent e) {
 		System.out.println("Clock Action Performed");
-		switch(wagon.travel()) {
-		case -1: JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE); clock.stop(); break;
-		default:
+		if(wagon.travel() == -1) {
+		JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE); clock.stop();
+		}
+		else {
+			if(wagon.getMilesTraveled() >= paris.getDistance() && (paris.getDistance() - wagon.getMilesTraveled() > -20)) {
+				JOptionPane.showMessageDialog(null, "You made it to " + paris.getName() + "!");
+			}
+			else if(wagon.getMilesTraveled() >= springfield.getDistance() && (springfield.getDistance() - wagon.getMilesTraveled()) > -20) {
+				JOptionPane.showMessageDialog(null, "You made it to " + springfield.getName() + "!", "You made it!", JOptionPane.INFORMATION_MESSAGE);
+			}
 			pane = new JOptionPane();
 			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFoodWeight() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {"Yes", "No"}, -1);								
 			
