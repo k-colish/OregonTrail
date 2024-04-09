@@ -1,20 +1,25 @@
-/**
+/** 
  * Destinations.java
  * 
- * Class to be used with MP3.java that deals with getting distances from destinations and checks to see if a destination has a store.
- * This class also checks to see if the user would like to stop and look around at a location.
+ * Represents destinations used in the Oregon Trail game, providing distance information
+ * and store availability. This class also allows players to choose to stop and look around
+ * at a destination.
  * 
- * @author - Kaiden Colish
+ * This class is designed to be used with MP3.java to manage destination-related functionality.
+ * 
+ * 
+ * @author - Kaiden Colish, Justin Schiefer, Zachary Iles, & Mitchell Gerwin
  * @version - 1.0.0 4/9/24
  * 
  */
+
 package MP3Package;
 
 public class Destinations {
 	//Initialize instance variables
-	private int distance;
-	private String name;
-	private boolean hasStore;
+	private int distance;        // Distance from the starting point
+    private String name;         // Name of the destination
+    private boolean hasStore;    // Indicates whether the destination has a store
 	
 	/**
 	 * Destinations - constructor for Destination objects. 
@@ -51,11 +56,9 @@ public class Destinations {
 	 */
 	public boolean lookAround(char choice) {
 		
-		if(choice == 'y' || choice == 'Y') {
+		if(choice == 'y' || choice == 'Y')
 			return true;
-		}
-		else{
+		else
 			return false;
-		}
 	}
 }

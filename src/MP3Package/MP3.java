@@ -1,4 +1,5 @@
-/** MP3.java
+/** 
+ * MP3.java
  * 
  * Simple educational Oregon Trail game, to test if you will be able to make it 
  * to Oregon, depending on the amount of food and other items are
@@ -8,7 +9,7 @@
  * experiment with the amount of food that people during the Oregon Trail era 
  * would have needed to take with them.
  * 
- * @author - Kaiden Colish
+ * @author - Kaiden Colish, Justin Schiefer, Zachary Iles, & Mitchell Gerwin
  * @version - 1.0.0 - 3/25/24
  */
 
@@ -106,7 +107,7 @@ public class MP3 {
 	 * Create the application.
 	 */
 	public MP3() {
-		// Process csv file for list of items
+		// Process CSV file for list of items
 		readFile();
 		initialize();
 		
@@ -191,26 +192,23 @@ public class MP3 {
 	public int milesToLandmark() {
 		
 		// If travel distance is less than distance to paris from start, return the difference
-		if(paris.getDistance() > wagon.getMilesTraveled()) {
+		if(paris.getDistance() > wagon.getMilesTraveled())
 			return paris.getDistance() - wagon.getMilesTraveled();
-		}
 		
-		// else return the difference between distance traveled and distance to springfield from start
+		// else return the difference between distance traveled and distance to Springfield from start
 		else return springfield.getDistance() - wagon.getMilesTraveled();
 	}
 	
 	/**
-	 * readFile - reads from a csv file with a list of the items that can be added to the wagon,
+	 * readFile - reads from a CSV file with a list of the items that can be added to the wagon,
 	 *  including their weight, name, and whether they are a food item. This method generates 
-	 *  an Item object for each line in the csv file, and adds them to the ArrayList of all items.
-	 *  
-	 *  @param - none
-	 *  @return - none
+	 *  an Item object for each line in the CSV file, and adds them to the ArrayList of all items.
 	 */
 	public void readFile() {
 		InputStreamReader reader = null;
 		Scanner in = null;
 		String itemFile = "/csv/Items.csv";
+		
 		try {
 			reader = new InputStreamReader(this.getClass().getResourceAsStream(itemFile));
 		}
@@ -218,7 +216,7 @@ public class MP3 {
 			System.out.print("Could not open file ");
 		}
 		
-		// Create a InputStreamReader Scanner to read in the csv file
+		// Create a InputStreamReader Scanner to read in the CSV file
 		in = new Scanner(reader);
 		
 		while(in.hasNext()) {
@@ -250,7 +248,7 @@ public class MP3 {
 				food.setIsFood(isFood);
 			}
 			
-			// Create a new Item object with the new information from the csv file
+			// Create a new Item object with the new information from the CSV file
 			else {
 				Item item = new Item(tempWeight, tempName, tempPrice);
 				// Add the item to the ArrayList of all items

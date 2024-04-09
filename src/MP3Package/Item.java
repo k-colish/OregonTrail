@@ -1,19 +1,25 @@
-/** Item.java
+/** 
+ * Item.java
  * 
  * Class to be used with MP3.java to implement individual items that can be added to an object of the Wagon class. 
- * Each item has a unique name, a weight, and whether or not it is a consumable food item with nutritional value.
+ * This class serves as the base class for various types of items that can be included in the wagon's inventory.
  * 
- * @author - Kaiden Colish
+ * Represents an individual item that can be added to a wagon in the Oregon Trail simulation game.
+ * Each item has a specific weight, name, and can be categorized as a consumable food item.
+ *
+ * 
+ * @author - Kaiden Colish, Justin Schiefer, Zachary Iles, & Mitchell Gerwin
  * @version - 1.0.0 - 3/25/24
  */
+
 package MP3Package;
 
 public class Item {
 	// Initialize instance variables
-	private int weight;
-	private String name;
-	private boolean isFood;
-	private double price;
+    private int weight;       // The weight of the item in pounds
+    private String name;      // The name item
+    private boolean isFood;   // Indicates whether the item is a consumable food item
+    private double price;     // The price or value of the item
 	
 	
 	/**

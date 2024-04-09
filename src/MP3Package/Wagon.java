@@ -1,29 +1,33 @@
-/** Wagon.java
+/** 
+ * Wagon.java
  * 
- * Class to be used with MP3.java, that simulates adding items to a wagon. This class tracks the total weight of all items
- * and food items that have been added to the wagon. This class also calculates whether there is enough food to make
- * it to Oregon, depending on the food consumption rate and miles traveled per day, as set by the user.
+ * Simulates a wagon used in the Oregon Trail game to carry items and food supplies.
+ * This class tracks the total weight of items and food in the wagon, calculates food consumption,
+ * and manages travel-related calculations such as distance traveled and days spent.
  * 
- * @author - Kaiden Colish
+ * This class provides methods to add and remove items from the wagon, set travel parameters,
+ * and perform travel calculations based on the set parameters.
+ * 
+ * @author - Kaiden Colish, Justin Schiefer, Zachary Iles, & Mitchell Gerwin
  * @version - 1.0.0 - 3/25/24
  */
+
 package MP3Package;
 
-
 import java.util.ArrayList;
-;
 
 public class Wagon {
 	// Initialize instance variables
-	private int totalFoodWeight = 0;
-	private int totalWeight = 0;
-	private int foodConsumption;
-	private int milesPerDay;
-	private int totalDays;
-	private int daysTraveled;
-	private int numberOfPeople = 4;
-	private int totalFoodUsed = 0;
-	private int milesTraveled = 0;
+	private int totalFoodWeight = 0;      // Total weight of all food items in the wagon
+    private int totalWeight = 0;           // Total weight of all items in the wagon
+    private int foodConsumption;           // Food consumption rate per person per day
+    private int milesPerDay;               // Distance traveled per day in miles
+    private int totalDays;                 // Total number of days required to reach the destination
+    private int daysTraveled;              // Number of days the wagon has been traveling
+    private int numberOfPeople = 4;        // Number of people in the wagon party
+    private int totalFoodUsed = 0;         // Total food consumed during travel
+    private int milesTraveled = 0;         // Total miles traveled
+    
 	// Initialize ArrayList of Item object that contains all of the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
 	
@@ -52,8 +56,8 @@ public class Wagon {
 	}
 	
 	/**
-	 *  removeItem - Takes and item and finds the matching item that is in the wagon, and removes it from the ArrayList of
-	 *  items in the wagon
+	 * removeItem - Takes and item and finds the matching item that is in the wagon, and removes it from the ArrayList of
+	 * items in the wagon
 	 * @param item - the item to be removed from the wagon
 	 */
 	public void removeItem(Item item) {
@@ -81,7 +85,7 @@ public class Wagon {
 	}
 	
 	/**
-	 *  setMilesPerDay - sets the miles traveled per day for travel calculations
+	 * setMilesPerDay - sets the miles traveled per day for travel calculations
 	 * @param miles - the number of miles to be traveled each day
 	 */
 	public void setMilesPerDay(int miles) {
@@ -89,7 +93,7 @@ public class Wagon {
 	}
 	
 	/**
-	 *  getMilesPerDay - gets the number of miles traveled per day
+	 * getMilesPerDay - gets the number of miles traveled per day
 	 * @return - milesPerDay - the number of miles traveled per day as an int
 	 */
 	public int getMilesPerDay() {
@@ -126,7 +130,7 @@ public class Wagon {
 	
 	/**
 	 * getTotalFoodWeight - calculates the total weight of all food items that have been added to the wagon
-	 * @return - totalFoodWeight - the total weight of all food items
+	 * @return - totalFoodWeight - the total weight of all items in the wagon
 	 */
 	public int getTotalFoodWeight() {
 		totalFoodWeight = 100;
@@ -176,10 +180,12 @@ public class Wagon {
 			this.death();
 		}
 		System.out.println(numberOfPeople);
+		
+		// Return -1 if all party members have died
 		if(numberOfPeople == 0) {
 			return -1;
 		}
-		milesTraveled += milesPerDay;
+		milesTraveled += milesPerDay; // Update total miles traveled
 		
 		return daysTraveled;
 	}
