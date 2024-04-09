@@ -57,6 +57,8 @@ public class MP3 {
 	
 	// Setting the ImageIcon for use with ImageLabel
 	private ImageIcon backgroundImage = new ImageIcon(this.getClass().getResource(filename));
+	
+	private DestinationActivities activity = new DestinationActivities();
 	/**
 	 * Launch the application.
 	 */
@@ -87,6 +89,16 @@ public class MP3 {
 		ImageLabel.setBounds(0, 0, 734, 661);
 		frame.getContentPane().add(ImageLabel);
 		ImageLabel.setIcon(backgroundImage);
+		
+		JButton btnNewButton = new JButton("Travel!");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				activity.talkToRandos();
+			}
+		});
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnNewButton.setBounds(525, 627, 89, 23);
+		frame.getContentPane().add(btnNewButton);
 		
 	}
 	
