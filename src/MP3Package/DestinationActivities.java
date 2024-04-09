@@ -11,7 +11,7 @@ public class DestinationActivities{
 	
 	private InputStreamReader reader = null;
 	private Scanner in = null;
-	private String itemFile = "/csv/WagonDialoglist.csv";
+	private String itemFile = "/csv/WagonDialogList.csv";
 	
 	public void talkToRandos() {
 		Random rnd = new Random();
@@ -28,8 +28,7 @@ public class DestinationActivities{
 		while(in.hasNext()) {
 			Scanner itemData = new Scanner(in.nextLine());
 			itemData.useDelimiter(", ");
-			
-			int quote = Integer.parseInt(itemData.next());
+			int quote = itemData.nextInt();
 			
 			if(quote == line) {
 				JOptionPane.showMessageDialog(null, itemData.next(), "Rando", JOptionPane.ERROR_MESSAGE);

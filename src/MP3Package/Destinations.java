@@ -22,8 +22,6 @@ public class Destinations {
 	
 	public boolean lookAround(char choice) {
 		
-		JDialog
-		
 		if(choice == 'y' || choice == 'Y') {
 			return true;
 		}
