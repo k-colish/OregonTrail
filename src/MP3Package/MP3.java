@@ -300,6 +300,7 @@ public class MP3 {
 		TotalFoodLabel.setBounds(250, 550, 170, 16);
 		frame.getContentPane().add(TotalFoodLabel);
 		
+		// [1] R. P. Bouchard, "Building the Mathematical Models" in You Have Died of Dysentry, R. P. Bouchard, 2016, ch. 16
 		// "Filling" button sets the food consumption for each person to 3 lbs per person.
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Filling");
 		rdbtnNewRadioButton.setForeground(Color.WHITE);
@@ -314,6 +315,7 @@ public class MP3 {
 		rdbtnNewRadioButton.setBounds(100, 607, 71, 23);
 		frame.getContentPane().add(rdbtnNewRadioButton);
 		
+		// [1]
 		// "Meager" button sets the food consumption for each person to 2 lbs per person.
 		JRadioButton rdbtnMeager = new JRadioButton("Meager");
 		rdbtnMeager.setForeground(Color.WHITE);
@@ -327,6 +329,7 @@ public class MP3 {
 		rdbtnMeager.setBounds(179, 608, 71, 23);
 		frame.getContentPane().add(rdbtnMeager);
 		
+		// [1]
 		// "Bare Bones" button sets the food consumption for each person to 1 lbs per person.
 		JRadioButton rdbtnBareBones = new JRadioButton("Bare Bones");
 		rdbtnBareBones.setOpaque(false);
