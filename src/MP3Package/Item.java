@@ -14,6 +14,7 @@ public class Item {
 	private String name;
 	private boolean isFood;
 	
+	
 	/**
 	 *  Item - constructor for Item objects
 	 * @param weight -  the weight of the item
