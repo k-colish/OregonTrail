@@ -294,7 +294,7 @@ public class MP3 {
 		frame.getContentPane().add(TotalWeightLabel);
 		
 		// Displays the total weight of food items that are on the wagon. Initial value displayed is set to 0.
-		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.calculateTotalWeight());
+		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.getTotalFoodWeight());
 		TotalFoodLabel.setForeground(Color.WHITE);
 		TotalFoodLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		TotalFoodLabel.setBounds(250, 550, 170, 16);

@@ -117,7 +117,7 @@ public class Wagon {
 	 * @return -  totalWeight - the total weight of all items
 	 */
 	public int calculateTotalWeight() {
-		totalWeight = 0;
+		totalWeight = 100;
 		for(int i = 0; i < Items.size(); i++) {
 			totalWeight += Items.get(i).getWeight();
 		}
@@ -129,7 +129,7 @@ public class Wagon {
 	 * @return - totalFoodWeight - the total weight of all food items
 	 */
 	public int getTotalFoodWeight() {
-		totalFoodWeight = 0;
+		totalFoodWeight = 100;
 		for(int i = 0; i < food.size(); i++) {
 			totalFoodWeight += food.get(i).getWeight();
 		}
