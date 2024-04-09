@@ -45,9 +45,9 @@ public class Destinations {
 	}
 	
 	/**
-	 * lookAround - gets if the player wants to stop and look around. 
+	 * lookAround - gets if the player wants to stop and look around. (Currently not finished)
 	 * @param choice - the choice the player makes
-	 * @return - true if player selects "Y" or "y", otherwise returns false.
+	 * @return - (For now) true if player selects "Y" or "y", otherwise returns false.
 	 */
 	public boolean lookAround(char choice) {
 		

@@ -20,6 +20,7 @@ public class Item {
 	 *  Item - constructor for Item objects
 	 * @param weight -  the weight of the item
 	 * @param name - the name of the item
+	 * @param price - the price of the item
 	 */
 	public Item(int weight, String name,double price) {
 		this.weight = weight;
