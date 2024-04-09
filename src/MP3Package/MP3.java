@@ -61,21 +61,30 @@ public class MP3 {
 	// Setting the ImageIcon for use with ImageLabel
 	private ImageIcon backgroundImage = new ImageIcon(this.getClass().getResource(filename));
 	
+	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
 	
+	// Initialize a null OptionPane for use with the clock
 	private JOptionPane pane = null;
-	private JButton stopTravel = new JButton("Stop Travel");
-	private JButton continue1 = new JButton("Continue");
-	private Object[] options = {continue1, stopTravel};
 	
+	// Initialize the labels for weight labels, so they can be updated after the user wants to stop traveling
 	private JLabel TotalFoodLabel = null;
 	private JLabel TotalWeightLabel = null;
 	
+	// Create a DestinationActivites object (Currently not used)
 	private DestinationActivities activity = new DestinationActivities();
 	
-	private Destinations cheviot = new Destinations(0, "Cheviot", true);
+	// Instantiate Destinations objects for each of the landmarks
+	// cheviot is the start location
+	private Destinations cheviot = new Destinations(0, "Cheviot, Ohio", true);
+	
+	// paris is the first landmark on the trail
 	private Destinations paris = new Destinations(180, "Paris, Illinois", true);
+	
+	// springfield is the second landmark (last for this version)
 	private Destinations springfield = new Destinations(280, "Springfield, Illinois", true);
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -107,6 +116,8 @@ public class MP3 {
 		frame.getContentPane().add(ImageLabel);
 		ImageLabel.setIcon(backgroundImage);
 		
+		
+		// An "easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
 		JButton btnNewButton = new JButton("Travel!");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,41 +132,70 @@ public class MP3 {
 	}
 	
 	
-	
+	/**
+	 * clockActionPerformed - displays the JOptionPane with current run information AFTER the previous JOptionPane is closed
+	 * @param e - ActionEvent
+	 */
 	public void clockActionPerformed(ActionEvent e) {
+		
+		// Print out for debugging
 		System.out.println("Clock Action Performed");
+		
+		// Check for sentinel value, this is true when all of the people in the wagon are dead.
 		if(wagon.travel() == -1) {
-		JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE); clock.stop();
+			
+			// Display a lose message
+			JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE); clock.stop();
 		}
 		else {
+			
+			// Checks to see if the player has made it to Paris, IL
 			if(wagon.getMilesTraveled() >= paris.getDistance() && (paris.getDistance() - wagon.getMilesTraveled() > -20)) {
+				
+				// Display a message that the play has reached Paris
 				JOptionPane.showMessageDialog(null, "You made it to " + paris.getName() + "!");
 			}
+			
+			// Checks to see if the player has made it to Springfield, IL
 			else if(wagon.getMilesTraveled() >= springfield.getDistance() && (springfield.getDistance() - wagon.getMilesTraveled()) > -20) {
+				
+				// Display a message that the play has reached Springfield
 				JOptionPane.showMessageDialog(null, "You made it to " + springfield.getName() + "!", "You made it!", JOptionPane.INFORMATION_MESSAGE);
 			}
+			// Initialize the JOptionPane
 			pane = new JOptionPane();
+			
+			// Get the value from the JOptionPane, after the user selects one of the buttons
 			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFoodWeight() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {"Yes", "No"}, -1);								
 			
+			// If the selection equals 0, stop the clock and update weight labels, allowing the user to adjust pace and food rations
 			if(res == JOptionPane.YES_OPTION) {
 				System.out.println("Yes selected");
 				clock.stop();
 				TotalFoodLabel.setText("Total Food Weight: " + wagon.getTotalFoodWeight());
 				TotalWeightLabel.setText("Total Weight: " + wagon.calculateTotalWeight());
 			}
-			else if(res == JOptionPane.NO_OPTION) {
+			
+			// If the selection equals 1, or if no selection is made, print debugging message and let the clock run
+			else{
 				System.out.println("No selected");
 			}
-			else System.out.println("Nothing selected");
 		}
 	}
 	
 	
-	
+	/**
+	 * milesToLandmark - calculates the miles to the next landmark
+	 * @return - the distance to the next landmark
+	 */
 	public int milesToLandmark() {
+		
+		// If travel distance is less than distance to paris from start, return the difference
 		if(paris.getDistance() > wagon.getMilesTraveled()) {
 			return paris.getDistance() - wagon.getMilesTraveled();
 		}
+		
+		// else return the difference between distance traveled and distance to springfield from start
 		else return springfield.getDistance() - wagon.getMilesTraveled();
 	}
 	
@@ -232,26 +272,12 @@ public class MP3 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		// Instantiate timer
 		clock = new javax.swing.Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				clockActionPerformed( evt );
 				}
 				});
-		
-		stopTravel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clock.stop();
-				frame.remove(pane);
-//				pane.setValue(JOptionPane.CLOSED_OPTION);
-			}
-		});
-		
-		continue1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pane.setValue(JOptionPane.CLOSED_OPTION);
-				frame.remove(pane);
-			}
-		});
 		
 		JLabel lblNewLabel = new JLabel("The Oregon Trail");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -384,13 +410,7 @@ public class MP3 {
 					ConsumptionErrorLabel.setText("Wagon cannot be over 2,400 lbs");
 				}
 				
-				/*
-				 * Runs calculation to see if the user packed enough food in the wagon, given
-				 * the set food consumption rate and miles traveled per day.
-				 * 
-				 * Displays a win message if there is sufficient food, and a lose message 
-				 * if there isn't enough food.
-				 */
+				// Starts the clock to start traveling
 				else {
 					System.out.println("Clock start");
 					clock.start();
