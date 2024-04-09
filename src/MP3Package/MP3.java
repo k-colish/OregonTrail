@@ -134,11 +134,13 @@ public class MP3 {
 			String tempName = "";
 			int tempWeight = 0;
 			int isFood;
+			double tempPrice = 0;
 			
 			// Get the data from the csv and assign to the temp values to make an Item object
 			tempWeight = itemData.nextInt();		
 			tempName = itemData.next();
 			isFood = itemData.nextInt();
+			tempPrice = itemData.nextDouble();
 			
 			// Debugging messages
 			System.out.println("Weight: " + tempWeight);
@@ -146,14 +148,14 @@ public class MP3 {
 			System.out.println("Is Food: " + isFood);
 			
 			if(isFood >= 1) {
-				FoodItem food = new FoodItem(tempWeight, tempName);
+				FoodItem food = new FoodItem(tempWeight, tempName, tempPrice);
 				allItems.add(food);
 				food.setIsFood(isFood);
 			}
 			
 			// Create a new Item object with the new information from the csv file
 			else {
-				Item item = new Item(tempWeight, tempName);
+				Item item = new Item(tempWeight, tempName, tempPrice);
 				// Add the item to the ArrayList of all items
 				allItems.add(item);
 				

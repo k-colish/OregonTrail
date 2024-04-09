@@ -13,6 +13,7 @@ public class Item {
 	private int weight;
 	private String name;
 	private boolean isFood;
+	private double price;
 	
 	
 	/**
@@ -20,9 +21,10 @@ public class Item {
 	 * @param weight -  the weight of the item
 	 * @param name - the name of the item
 	 */
-	public Item(int weight, String name) {
+	public Item(int weight, String name,double price) {
 		this.weight = weight;
 		this.name = name;
+		this.price = price;
 	}
 	
 	/**
@@ -48,6 +50,14 @@ public class Item {
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * getPrice - gets the price of the Item
+	 * @return price - the price of the Item
+	 */
+	public double getPrice() {
+		return price;
 	}
 	
 	/**

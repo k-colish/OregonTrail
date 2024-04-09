@@ -17,8 +17,8 @@ public class FoodItem extends Item{
 	 * @param weight - the weight of the item
 	 * @param name - the name of the item
 	 */
-	public FoodItem(int weight, String name) {
-		super(weight, name);
+	public FoodItem(int weight, String name, double price) {
+		super(weight, name, price);
 		
 	}
 }
