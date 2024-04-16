@@ -45,27 +45,40 @@ public class Forts extends JFrame {
                     String[] parts = line.split(",");
                     if (parts.length >= 2) {
                         String itemName = parts[0].trim();
-                        String quantityStr = parts[1].trim();
+                        int cost = 0;
 
                         try {
-                            double quantity = Integer.parseInt(quantityStr);
-                            JCheckBox itemCheckBox = new JCheckBox(itemName + ": " + quantity);
-                            itemCheckBox.setBounds(10, yOffset, 300, 30);
-                            getContentPane().add(itemCheckBox);
-                            itemCheckBoxes.add(itemCheckBox);
-                            yOffset += 40;
+                            cost = Integer.parseInt(parts[1].trim());
                         } catch (NumberFormatException e) {
-                            System.err.println("Invalid quantity format for item: " + itemName);
+                            System.err.println("Invalid cost format for item: " + itemName);
+                            continue; // Skip this item if cost is invalid
                         }
+
+                        // Create checkbox and label for the item with cost
+                        JCheckBox itemCheckBox = new JCheckBox(itemName + " - $" + cost);
+                        itemCheckBox.setBounds(10, yOffset, 200, 30);
+                        getContentPane().add(itemCheckBox);
+
+                        itemCheckBoxes.add(itemCheckBox); // Add checkbox to list
+
+                        yOffset += 40; // Increase vertical spacing
                     } else {
                         System.err.println("Invalid line format: " + line);
                     }
                 }
             }
+
+            // Update UI on the Event Dispatch Thread
+            SwingUtilities.invokeLater(() -> {
+                revalidate(); // Refresh the layout
+                repaint();    // Repaint the JFrame
+            });
+
         } catch (Exception e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
         }
     }
+
 
     private void buySelectedItems() {
         System.out.println("Buying selected items:");
