@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class Forts extends JFrame {
 
-    private String itemFile = "/csv/WagonDialoglist.csv";
+    private String itemFile = "/csv/Fort Stock.csv";
     private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>();
     private JLabel moneyAmountLabel;
-    private int moneyTotal = 100; // Initial money amount (example)
+    private int moneyTotal = 100; 
 
     public Forts() {
         setTitle("Fort");
@@ -48,7 +48,7 @@ public class Forts extends JFrame {
                         String quantityStr = parts[1].trim();
 
                         try {
-                            int quantity = Integer.parseInt(quantityStr);
+                            double quantity = Integer.parseInt(quantityStr);
                             JCheckBox itemCheckBox = new JCheckBox(itemName + ": " + quantity);
                             itemCheckBox.setBounds(10, yOffset, 300, 30);
                             getContentPane().add(itemCheckBox);
@@ -73,7 +73,7 @@ public class Forts extends JFrame {
             if (checkBox.isSelected()) {
                 String itemName = checkBox.getText().split(":")[0];
                 System.out.println("- " + itemName);
-                spendMoney(checkBox); // Deduct money for the selected item
+                spendMoney(checkBox);
             }
         }
     }
@@ -82,13 +82,9 @@ public class Forts extends JFrame {
         String[] itemInfo = checkBox.getText().split(":");
         if (itemInfo.length == 2) {
             int cost = Integer.parseInt(itemInfo[1].trim());
-            moneyTotal -= cost; // Deduct the cost from moneyTotal
-            updateMoneyAmountLabel(); // Update the money amount label
+            moneyTotal -= cost;
+           moneyAmountLabel.setText("Current money amount: " + moneyTotal);
         }
-    }
-
-    private void updateMoneyAmountLabel() {
-        moneyAmountLabel.setText("Current money amount: " + moneyTotal);
     }
 
     public static void main(String[] args) {
