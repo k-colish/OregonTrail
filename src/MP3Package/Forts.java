@@ -21,7 +21,7 @@ public class Forts extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
         
-        JLabel moneyAmountLabel = new JLabel("Current money amount: ");
+        JLabel moneyAmountLabel = new JLabel("Current money amount:");
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         moneyAmountLabel.setBounds(10, 10, 300, 30);
         getContentPane().add(moneyAmountLabel);
@@ -32,7 +32,6 @@ public class Forts extends JFrame {
         getContentPane().add(buySelectedButton);
         buySelectedButton.addActionListener(e -> buySelectedItems()); // Add action listener
         
-        // Load items from CSV and display checkboxes
         loadItemsFromCSV();
     }
 
@@ -52,13 +51,10 @@ public class Forts extends JFrame {
             int yOffset = 50; // Initial y-offset for positioning checkboxes
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                // Trim leading and trailing whitespace from the line
-                line = line.trim();
                 if (line.isEmpty()) {
                     continue; // Skip empty lines
                 }
-
-                // Parse each line of CSV (assuming comma-separated values)
+                
                 String[] parts = line.split(",");
                 if (parts.length >= 2) {
                     String itemName = parts[0].trim(); // Item name (first part)
@@ -85,23 +81,28 @@ public class Forts extends JFrame {
                 }
             }
 
-            bufferedReader.close(); // Close the reader
+            bufferedReader.close();
         } catch (Exception e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
         }
     }
 
     private void buySelectedItems() {
-        // Handle buying selected items
         System.out.println("Buying selected items:");
         for (JCheckBox checkBox : itemCheckBoxes) {
             if (checkBox.isSelected()) {
-                String itemName = checkBox.getText().split(":")[0].trim();
+                String itemName = checkBox.getText().split(":")[0];
                 System.out.println("- " + itemName);
-                // Add logic here to process the purchase of the selected item
+                
+                //Add thing to put items into the wagon here
             }
         }
     }
+    private void SpendMoney()
+    {
+    	
+    }
+    
 
     public static void main(String[] args) {
         // Create an instance of Forts
