@@ -7,14 +7,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/**
+ * The Forts class represents a GUI application for managing items with associated costs.
+ * Users can view items from a CSV file, select items to purchase, and update the displayed money amount accordingly.
+ * 
+ * @author Kaiden Colish, Justin Schiefer, Zachary Iles, & Mitchell Gerwin
+ * @version 1.0.0 - 4/16/24
+ */
 public class Forts extends JFrame {
 
-    private String itemFile = "/csv/Fort Stock.csv";
-    private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>();
-    private JLabel moneyAmountLabel;
-    private int moneyTotal = 10000; 
-    private final double fortcost = 6.5;
+    private String itemFile = "/csv/Fort Stock.csv"; // Path to the CSV file containing item names and costs
+    private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>(); // List to hold checkboxes for each item loaded from the CSV file
+    private JLabel moneyAmountLabel; // Label to display the current amount of money available
+    private int moneyTotal = 10000; // Total amount of money available to spend at start
+    private final double fortcost = 6.5; // Multiplier to calculate item cost based on the base cost (e.g., fort cost)
 
+    /**
+     * Constructs a new Forts instance.
+     * Sets up the JFrame and initializes components.
+     */
     public Forts() {
         setTitle("Fort");
         setSize(400, 400);
@@ -35,6 +46,9 @@ public class Forts extends JFrame {
         loadItemsFromCSV();
     }
 
+    /**
+     * Loads items from a CSV file and displays them as checkboxes with associated costs.
+     */
     private void loadItemsFromCSV() {
         try (InputStream inputStream = getClass().getResourceAsStream(itemFile);
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -62,8 +76,7 @@ public class Forts extends JFrame {
                         itemCheckBoxes.add(itemCheckBox);
 
                         yOffset += 40; 
-                        } 
-                    else {
+                    } else {
                         System.err.println("Invalid line format: " + line);
                     }
                 }
@@ -80,7 +93,10 @@ public class Forts extends JFrame {
         }
     }
 
-
+    /**
+     * Handles the action of buying selected items.
+     * Deducts the cost of selected items from the total money amount.
+     */
     private void buySelectedItems() {
         System.out.println("Buying selected items:");
         for (JCheckBox checkBox : itemCheckBoxes) {
@@ -98,6 +114,12 @@ public class Forts extends JFrame {
         }
     }
 
+    /**
+     * Deducts the specified cost from the current money amount.
+     * Updates the money amount label to reflect the remaining money.
+     *
+     * @param cost the cost of the item to be deducted
+     */
     private void spendMoney(double cost) {
         if (moneyTotal >= cost) {
             moneyTotal -= cost;
@@ -107,6 +129,11 @@ public class Forts extends JFrame {
         }
     }
 
+    /**
+     * Main method to start the Forts application.
+     *
+     * @param args the command-line arguments
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Forts fortsGame = new Forts();
