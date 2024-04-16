@@ -13,6 +13,7 @@ public class Forts extends JFrame {
     private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>();
     private JLabel moneyAmountLabel;
     private int moneyTotal = 100; 
+    private final double fortcost = 6.5;
 
     public Forts() {
         setTitle("Fort");
@@ -53,16 +54,16 @@ public class Forts extends JFrame {
                             System.err.println("Invalid cost format for item: " + itemName);
                             continue; // Skip this item if cost is invalid
                         }
-
-                        // Create checkbox and label for the item with cost
-                        JCheckBox itemCheckBox = new JCheckBox(itemName + " - $" + cost);
+                        
+                        JCheckBox itemCheckBox = new JCheckBox(itemName + " - $" + cost * fortcost);
                         itemCheckBox.setBounds(10, yOffset, 200, 30);
                         getContentPane().add(itemCheckBox);
 
-                        itemCheckBoxes.add(itemCheckBox); // Add checkbox to list
+                        itemCheckBoxes.add(itemCheckBox);
 
-                        yOffset += 40; // Increase vertical spacing
-                    } else {
+                        yOffset += 40; 
+                        } 
+                    else {
                         System.err.println("Invalid line format: " + line);
                     }
                 }
@@ -84,19 +85,25 @@ public class Forts extends JFrame {
         System.out.println("Buying selected items:");
         for (JCheckBox checkBox : itemCheckBoxes) {
             if (checkBox.isSelected()) {
-                String itemName = checkBox.getText().split(":")[0];
-                System.out.println("- " + itemName);
-                spendMoney(checkBox);
+                String itemInfo = checkBox.getText();
+                String[] parts = itemInfo.split(" - \\$"); // Split using " - $" as separator
+                if (parts.length == 2) {
+                    String itemName = parts[0];
+                    double itemCost = Double.parseDouble(parts[1]);
+                    System.out.println("- " + itemName);
+
+                    spendMoney(itemCost); // Deduct the item cost from moneyTotal
+                }
             }
         }
     }
 
-    private void spendMoney(JCheckBox checkBox) {
-        String[] itemInfo = checkBox.getText().split(":");
-        if (itemInfo.length == 2) {
-            int cost = Integer.parseInt(itemInfo[1].trim());
+    private void spendMoney(double cost) {
+        if (moneyTotal >= cost) {
             moneyTotal -= cost;
-           moneyAmountLabel.setText("Current money amount: " + moneyTotal);
+            moneyAmountLabel.setText("Current money amount: " + moneyTotal);
+        } else {
+            System.err.println("Insufficient funds to buy this item: " + cost);
         }
     }
 
