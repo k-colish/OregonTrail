@@ -1,87 +1,67 @@
 package MP3Package;
 
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import javax.swing.*;
-import java.awt.Font;
 
 public class Forts extends JFrame {
 
-    private String itemFile = "/csv/WagonDialoglist.csv"; // Example CSV file name (change as needed)
-    private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>(); // List to hold item checkboxes
+    private String itemFile = "/csv/Fort Stock.csv";
+    private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>();
+    private JLabel moneyAmountLabel;
+    private int moneyTotal = 100; 
 
     public Forts() {
-        // Set up the JFrame
         setTitle("Fort");
-        setSize(400, 400); // Set frame size
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Exit when close button clicked
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
-        
-        JLabel moneyAmountLabel = new JLabel("Current money amount:");
+
+        moneyAmountLabel = new JLabel("Current money amount: " + moneyTotal);
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         moneyAmountLabel.setBounds(10, 10, 300, 30);
         getContentPane().add(moneyAmountLabel);
-        
-        // Button to buy selected items
+
         JButton buySelectedButton = new JButton("BUY");
         buySelectedButton.setBounds(150, 320, 100, 30);
         getContentPane().add(buySelectedButton);
-        buySelectedButton.addActionListener(e -> buySelectedItems()); // Add action listener
-        
+        buySelectedButton.addActionListener(e -> buySelectedItems());
+
         loadItemsFromCSV();
     }
 
     private void loadItemsFromCSV() {
-        // Open the CSV file for reading using an InputStreamReader
-        try {
-            // Obtain InputStream for the CSV file
-            InputStream inputStream = getClass().getResourceAsStream(itemFile);
-            if (inputStream == null) {
-                System.err.println("CSV file not found: " + itemFile);
-                return;
-            }
+        try (InputStream inputStream = getClass().getResourceAsStream(itemFile);
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
 
-            // Use BufferedReader to read the CSV file line by line
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-            int yOffset = 50; // Initial y-offset for positioning checkboxes
+            int yOffset = 50;
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.isEmpty()) {
-                    continue; // Skip empty lines
-                }
-                
-                String[] parts = line.split(",");
-                if (parts.length >= 2) {
-                    String itemName = parts[0].trim(); // Item name (first part)
-                    String quantityStr = parts[1].trim(); // Quantity as string (second part)
+                if (!line.trim().isEmpty()) {
+                    String[] parts = line.split(",");
+                    if (parts.length >= 2) {
+                        String itemName = parts[0].trim();
+                        String quantityStr = parts[1].trim();
 
-                    // Validate and parse quantity as integer
-                    int quantity;
-                    try {
-                        quantity = Integer.parseInt(quantityStr);
-                    } catch (NumberFormatException e) {
-                        System.err.println("Invalid quantity format for item: " + itemName);
-                        continue; // Skip this item if quantity is invalid
+                        try {
+                            double quantity = Integer.parseInt(quantityStr);
+                            JCheckBox itemCheckBox = new JCheckBox(itemName + ": " + quantity);
+                            itemCheckBox.setBounds(10, yOffset, 300, 30);
+                            getContentPane().add(itemCheckBox);
+                            itemCheckBoxes.add(itemCheckBox);
+                            yOffset += 40;
+                        } catch (NumberFormatException e) {
+                            System.err.println("Invalid quantity format for item: " + itemName);
+                        }
+                    } else {
+                        System.err.println("Invalid line format: " + line);
                     }
-
-                    // Create JCheckBox for the item and add to JFrame
-                    JCheckBox itemCheckBox = new JCheckBox(itemName + ": " + quantity);
-                    itemCheckBox.setBounds(10, yOffset, 300, 30); // Set position
-                    getContentPane().add(itemCheckBox); // Add JCheckBox to the JFrame
-                    itemCheckBoxes.add(itemCheckBox); // Add to list
-
-                    yOffset += 40; // Increase y-offset for next checkbox
-                } else {
-                    System.err.println("Invalid line format: " + line);
                 }
             }
-
-            bufferedReader.close();
         } catch (Exception e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
         }
@@ -93,20 +73,24 @@ public class Forts extends JFrame {
             if (checkBox.isSelected()) {
                 String itemName = checkBox.getText().split(":")[0];
                 System.out.println("- " + itemName);
-                
-                //Add thing to put items into the wagon here
+                spendMoney(checkBox);
             }
         }
     }
-    private void SpendMoney()
-    {
-    	
+
+    private void spendMoney(JCheckBox checkBox) {
+        String[] itemInfo = checkBox.getText().split(":");
+        if (itemInfo.length == 2) {
+            int cost = Integer.parseInt(itemInfo[1].trim());
+            moneyTotal -= cost;
+           moneyAmountLabel.setText("Current money amount: " + moneyTotal);
+        }
     }
-    
 
     public static void main(String[] args) {
-        // Create an instance of Forts
-        Forts fortsGame = new Forts();
-        fortsGame.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            Forts fortsGame = new Forts();
+            fortsGame.setVisible(true);
+        });
     }
 }
