@@ -12,7 +12,7 @@ public class Forts extends JFrame {
     private String itemFile = "/csv/Fort Stock.csv";
     private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>();
     private JLabel moneyAmountLabel;
-    private int moneyTotal = 100; 
+    private int moneyTotal = 10000; 
     private final double fortcost = 6.5;
 
     public Forts() {
