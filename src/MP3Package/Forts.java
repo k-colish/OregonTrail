@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author Kaiden Colish, Justin Schiefer, Zachary Iles, & Mitchell Gerwin
  * @version 1.0.0 - 4/16/24
  */
-public class Forts extends JFrame {
+public class Forts extends JPanel {
 
     private String itemFile = "/csv/Fort Stock.csv"; // Path to the CSV file containing item names and costs
     private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>(); // List to hold checkboxes for each item loaded from the CSV file
@@ -27,20 +27,16 @@ public class Forts extends JFrame {
      * Sets up the JFrame and initializes components.
      */
     public Forts() {
-        setTitle("Fort");
-        setSize(400, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        getContentPane().setLayout(null);
+    	setLayout(null); // Set layout to null for absolute positioning
 
         moneyAmountLabel = new JLabel("Current money amount: " + moneyTotal);
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         moneyAmountLabel.setBounds(10, 10, 300, 30);
-        getContentPane().add(moneyAmountLabel);
+        add(moneyAmountLabel);
 
         JButton buySelectedButton = new JButton("BUY");
         buySelectedButton.setBounds(150, 320, 100, 30);
-        getContentPane().add(buySelectedButton);
+        add(buySelectedButton);
         buySelectedButton.addActionListener(e -> buySelectedItems());
 
         loadItemsFromCSV();
@@ -71,7 +67,7 @@ public class Forts extends JFrame {
                         
                         JCheckBox itemCheckBox = new JCheckBox(itemName + " - $" + cost * fortcost);
                         itemCheckBox.setBounds(10, yOffset, 200, 30);
-                        getContentPane().add(itemCheckBox);
+                        add(itemCheckBox);
 
                         itemCheckBoxes.add(itemCheckBox);
 
