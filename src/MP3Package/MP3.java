@@ -49,6 +49,8 @@ public class MP3 {
 
 	private JFrame frame;
 	
+	JButton StoreButton;
+	
 	// File name and JLabel for use with the background image
 	private String filename = "/Images/Ash Hollow.JPG";
 	private JLabel ImageLabel;
@@ -293,12 +295,16 @@ public class MP3 {
 		RiverButton.setBounds(53, 32, 118, 23);
 		loadWagonPanel.add(RiverButton);
 		
-		JButton StoreButton = new JButton("Buy Items");
+		StoreButton = new JButton("Buy Items");
 		StoreButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+				System.err.println("BUY ITEMS!"); //tell if its doing anything 
+				System.err.println("BUY ITEMS!"); //tell if its doing anything FOR MAC
+	                    Forts fortsPanel = new Forts();
+	                    openPanel(fortsPanel);
+	                }
+	            });
+		
 		StoreButton.setBounds(566, 11, 101, 23);
 		loadWagonPanel.add(StoreButton);
 		
