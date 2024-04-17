@@ -41,6 +41,8 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JButton;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 public class MP3 {
@@ -87,6 +89,7 @@ public class MP3 {
 	
 	// springfield is the second landmark (last for this version)
 	private Destinations springfield = new Destinations(280, "Springfield, Illinois", true);
+	private JPanel loadWagonPanel = new JPanel();
 	
 	
 	/**
@@ -117,7 +120,7 @@ public class MP3 {
 		// Sets a JLabel for the background image
 		JLabel ImageLabel = new JLabel("");
 		ImageLabel.setBounds(0, 0, 734, 661);
-		frame.getContentPane().add(ImageLabel);
+		loadWagonPanel.add(ImageLabel);
 		ImageLabel.setIcon(backgroundImage);
 	}
 	
@@ -264,7 +267,9 @@ public class MP3 {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 750, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(new BorderLayout());
+		loadWagonPanel.setLayout(null);
+		openPanel(loadWagonPanel);
 		
 		// Instantiate timer
 		clock = new javax.swing.Timer(1000, new ActionListener() {
@@ -277,7 +282,7 @@ public class MP3 {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Vineta BT", Font.PLAIN, 17));
 		lblNewLabel.setBounds(250, 27, 267, 32);
-		frame.getContentPane().add(lblNewLabel);
+		loadWagonPanel.add(lblNewLabel);
 		
 		JButton RiverButton = new JButton("Cross River");
 		RiverButton.addActionListener(new ActionListener() {
@@ -286,7 +291,7 @@ public class MP3 {
 			}
 		});
 		RiverButton.setBounds(53, 32, 118, 23);
-		frame.getContentPane().add(RiverButton);
+		loadWagonPanel.add(RiverButton);
 		
 		JButton StoreButton = new JButton("Buy Items");
 		StoreButton.addActionListener(new ActionListener() {
@@ -295,7 +300,7 @@ public class MP3 {
 			}
 		});
 		StoreButton.setBounds(566, 11, 101, 23);
-		frame.getContentPane().add(StoreButton);
+		loadWagonPanel.add(StoreButton);
 		
 		JButton TradeButton = new JButton("Trade");
 		TradeButton.addActionListener(new ActionListener() {
@@ -303,21 +308,21 @@ public class MP3 {
 			}
 		});
 		TradeButton.setBounds(566, 61, 101, 23);
-		frame.getContentPane().add(TradeButton);
+		loadWagonPanel.add(TradeButton);
 		
 		// Displays the total weight of items on the wagon. Initial value displayed is set as 0
 		TotalWeightLabel = new JLabel("Total Weight: " + wagon.calculateTotalWeight());
 		TotalWeightLabel.setForeground(Color.WHITE);
 		TotalWeightLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		TotalWeightLabel.setBounds(100, 550, 150, 16);
-		frame.getContentPane().add(TotalWeightLabel);
+		loadWagonPanel.add(TotalWeightLabel);
 		
 		// Displays the total weight of food items that are on the wagon. Initial value displayed is set to 0.
 		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.getTotalFoodWeight());
 		TotalFoodLabel.setForeground(Color.WHITE);
 		TotalFoodLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		TotalFoodLabel.setBounds(250, 550, 170, 16);
-		frame.getContentPane().add(TotalFoodLabel);
+		loadWagonPanel.add(TotalFoodLabel);
 		
 		// [1] R. P. Bouchard, "Building the Mathematical Models" in You Have Died of Dysentry, R. P. Bouchard, 2016, ch. 16
 		// "Filling" button sets the food consumption for each person to 3 lbs per person.
@@ -332,7 +337,7 @@ public class MP3 {
 		});
 		rdbtnNewRadioButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		rdbtnNewRadioButton.setBounds(100, 607, 71, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton);
+		loadWagonPanel.add(rdbtnNewRadioButton);
 		
 		// [1]
 		// "Meager" button sets the food consumption for each person to 2 lbs per person.
@@ -346,7 +351,7 @@ public class MP3 {
 		});
 		rdbtnMeager.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		rdbtnMeager.setBounds(179, 608, 71, 23);
-		frame.getContentPane().add(rdbtnMeager);
+		loadWagonPanel.add(rdbtnMeager);
 		
 		// [1]
 		// "Bare Bones" button sets the food consumption for each person to 1 lbs per person.
@@ -360,7 +365,7 @@ public class MP3 {
 		});
 		rdbtnBareBones.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		rdbtnBareBones.setBounds(264, 608, 100, 23);
-		frame.getContentPane().add(rdbtnBareBones);
+		loadWagonPanel.add(rdbtnBareBones);
 		
 		// An "easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
 		JButton btnNewButton = new JButton("Talk to People");
@@ -372,14 +377,14 @@ public class MP3 {
 		
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnNewButton.setBounds(525, 627, 142, 23);
-		frame.getContentPane().add(btnNewButton);
+		loadWagonPanel.add(btnNewButton);
 		
 		
 		JLabel lblNewLabel_1 = new JLabel("Choose Food Consumption: ");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblNewLabel_1.setBounds(100, 577, 197, 23);
-		frame.getContentPane().add(lblNewLabel_1);
+		loadWagonPanel.add(lblNewLabel_1);
 		
 		// Initializing a button group, so only one radio button can be selected at one time
 		ButtonGroup buttons = new ButtonGroup();
@@ -391,7 +396,7 @@ public class MP3 {
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblNewLabel_2.setBounds(467, 510, 216, 23);
-		frame.getContentPane().add(lblNewLabel_2);
+		loadWagonPanel.add(lblNewLabel_2);
 		
 		// Initialize and stateChange listener for a JSlider so the user can set the number of 
 		// miles per day. 
@@ -410,7 +415,7 @@ public class MP3 {
 		slider.setPaintLabels(true);
 		slider.setForeground(Color.WHITE);
 		
-		frame.getContentPane().add(slider);
+		loadWagonPanel.add(slider);
 		
 		
 		// JLabel to display errors if the user either has added more than 2,400 lbs to the wagon,
@@ -419,7 +424,7 @@ public class MP3 {
 		ConsumptionErrorLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		ConsumptionErrorLabel.setBounds(486, 616, 197, 16);
 		ConsumptionErrorLabel.setForeground(Color.WHITE);
-		frame.getContentPane().add(ConsumptionErrorLabel);
+		loadWagonPanel.add(ConsumptionErrorLabel);
 		
 		
 		/* 
@@ -454,7 +459,7 @@ public class MP3 {
 		});
 		btnNewButton1.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		btnNewButton1.setBounds(525, 578, 89, 23);
-		frame.getContentPane().add(btnNewButton1);
+		loadWagonPanel.add(btnNewButton1);
 		
 		
 		
@@ -517,7 +522,7 @@ public class MP3 {
 				if(i > 15) {
 					label.setBounds(121 + 300, 70 + (i-15)*30, 300, 23);
 				}
-				frame.getContentPane().add(label);
+				loadWagonPanel.add(label);
 				label.setOpaque(false);
 				label.setForeground(Color.WHITE);
 				labels.add(label);

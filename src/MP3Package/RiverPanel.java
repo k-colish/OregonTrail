@@ -1,14 +1,10 @@
 package MP3Package;
 
 import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -16,29 +12,10 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 
 public class RiverPanel extends JPanel{
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
-	JFrame frame = new JFrame();
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RiverPanel window = new RiverPanel(new River(200, "Kansas River", 3.5, 300, 2));
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-	}
 	
 	public RiverPanel(River river) {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 750, 700);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		setLayout(null);
 		
 		JLabel RiverName = new JLabel("You made it to " + river.getName() + "!");
 		RiverName.setFont(new Font("Times New Roman", Font.PLAIN, 15));
