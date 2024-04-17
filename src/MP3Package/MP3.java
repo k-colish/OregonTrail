@@ -298,6 +298,7 @@ public class MP3 {
 		StoreButton = new JButton("Buy Items");
 		StoreButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.err.println("BUY ITEMS!");
 	                    Forts fortsPanel = new Forts();
 	                    openPanel(fortsPanel);
 	                }
