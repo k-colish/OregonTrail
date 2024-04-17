@@ -15,7 +15,7 @@
 
 package MP3Package;
 
-import java.awt.EventQueue;
+import java.awt.EventQueue; 
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,6 +50,7 @@ public class MP3 {
 	private JFrame frame;
 	
 	JButton StoreButton;
+	JButton TradeButton;
 	
 	// File name and JLabel for use with the background image
 	private String filename = "/Images/Ash Hollow.JPG";
@@ -97,6 +98,7 @@ public class MP3 {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -109,8 +111,7 @@ public class MP3 {
 			}
 		});
 	}
-
-
+	
 	/**
 	 * Create the application.
 	 */
@@ -266,6 +267,7 @@ public class MP3 {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+				
 		frame = new JFrame();
 		frame.setBounds(100, 100, 750, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -287,6 +289,7 @@ public class MP3 {
 		loadWagonPanel.add(lblNewLabel);
 		
 		JButton RiverButton = new JButton("Cross River");
+		RiverButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		RiverButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				openPanel(panel);
@@ -296,6 +299,7 @@ public class MP3 {
 		loadWagonPanel.add(RiverButton);
 		
 		StoreButton = new JButton("Buy Items");
+		StoreButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		StoreButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.err.println("BUY ITEMS!"); //tell if its doing anything 
@@ -308,15 +312,16 @@ public class MP3 {
 		StoreButton.setBounds(566, 11, 101, 23);
 		loadWagonPanel.add(StoreButton);
 		
-		JButton TradeButton = new JButton("Trade");
+		TradeButton = new JButton("Trade");
+		TradeButton.setBounds(566, 61, 101, 23);
+		TradeButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		loadWagonPanel.add(TradeButton);
 		TradeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Trading trade = new Trading(allItems);
 				
 			}
 		});
-		TradeButton.setBounds(566, 61, 101, 23);
-		loadWagonPanel.add(TradeButton);
 		
 		// Displays the total weight of items on the wagon. Initial value displayed is set as 0
 		TotalWeightLabel = new JLabel("Total Weight: " + wagon.calculateTotalWeight());
