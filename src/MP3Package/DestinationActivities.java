@@ -54,7 +54,7 @@ public class DestinationActivities{
 		// Iterate through lines in the CSV file
 		while(in.hasNext()) {
 			
-			// Read in the first line from the csv
+			// Read in the first line from the CSV
 			Scanner itemData = new Scanner(in.nextLine());
 			itemData.useDelimiter(", ");
 			

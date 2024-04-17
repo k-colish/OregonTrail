@@ -1,5 +1,5 @@
 /** 
- * MP3.java
+ * MP3.java 
  * 
  * Simple educational Oregon Trail game, to test if you will be able to make it 
  * to Oregon, depending on the amount of food and other items are
@@ -227,7 +227,7 @@ public class MP3 {
 			int isFood;
 			double tempPrice = 0;
 			
-			// Get the data from the csv and assign to the temp values to make an Item object
+			// Get the data from the CSV and assign to the temp values to make an Item object
 			tempWeight = itemData.nextInt();		
 			tempName = itemData.next();
 			isFood = itemData.nextInt();
