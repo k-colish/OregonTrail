@@ -19,7 +19,6 @@ public class Trading {
 	private int tradingIndex;
 	private int yourIndex;
 	
-	
 	/**
 	 * Trading - Constructor for Trading objects. Opens a JOptionPane with a trade opportunity, giving the user a choice on whether or not
 	 * 			they want to trade.
@@ -30,8 +29,6 @@ public class Trading {
 		
 		tradingIndex = rnd.nextInt(items.size());
 		yourIndex = rnd.nextInt(items.size());
-		
-		
 		 
 		Item traderItem = items.get(tradingIndex);
 		Item yourItem = items.get(yourIndex);
