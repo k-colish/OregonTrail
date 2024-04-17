@@ -299,7 +299,7 @@ public class MP3 {
 		StoreButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.err.println("BUY ITEMS!"); //tell if its doing anything 
-				System.err.println("BUY ITEMS!"); //tell if its doing anything 
+				System.err.println("BUY ITEMS!"); //tell if its doing anything FOR MAC
 	                    Forts fortsPanel = new Forts();
 	                    openPanel(fortsPanel);
 	                }
