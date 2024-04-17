@@ -47,8 +47,6 @@ public class MP3 {
 
 	private JFrame frame;
 	
-	JButton TradeButton;
-	
 	// File name and JLabel for use with the background image
 	private String filename = "/Images/Ash Hollow.JPG";
 	private JLabel ImageLabel;
@@ -299,21 +297,11 @@ public class MP3 {
 		StoreButton.setBounds(566, 11, 101, 23);
 		frame.getContentPane().add(StoreButton);
 		
+		JButton TradeButton = new JButton("Trade");
 		TradeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Create an instance of the Forts class
-                Forts fortsPanel = new Forts();
-                JFrame fortsFrame = new JFrame("Forts Trading");
-                fortsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Close only this frame
-                fortsFrame.setSize(600, 400);
-
-                // Add the Forts panel to the JFrame
-                fortsFrame.add(fortsPanel);
-
-                // Make the Forts JFrame visible
-                fortsFrame.setVisible(true);
-            }
-        });
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		TradeButton.setBounds(566, 61, 101, 23);
 		frame.getContentPane().add(TradeButton);
 		
