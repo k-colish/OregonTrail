@@ -19,7 +19,7 @@ public class Forts extends JPanel {
     private String itemFile = "/csv/Fort Stock.csv"; // Path to the CSV file containing item names and costs
     private ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>(); // List to hold checkboxes for each item loaded from the CSV file
     private JLabel moneyAmountLabel; // Label to display the current amount of money available
-    private int moneyTotal = 10000; // Total amount of money available to spend at start
+    private int moneyTotal = 1000; // Total amount of money available to spend at start
     private final double fortcost = 6.5; // Multiplier to calculate item cost based on the base cost (e.g., fort cost)
 
     /**

@@ -311,6 +311,8 @@ public class MP3 {
 		JButton TradeButton = new JButton("Trade");
 		TradeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Trading trade = new Trading(allItems);
+				
 			}
 		});
 		TradeButton.setBounds(566, 61, 101, 23);

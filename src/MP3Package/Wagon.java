@@ -84,6 +84,10 @@ public class Wagon {
 		System.out.println();
 	}
 	
+	public ArrayList<Item> getItems(){
+		return Items;
+	}
+	
 	/**
 	 * setMilesPerDay - sets the miles traveled per day for travel calculations
 	 * @param miles - the number of miles to be traveled each day
