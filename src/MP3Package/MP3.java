@@ -20,6 +20,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import java.awt.Font;
 import java.io.InputStreamReader;
@@ -64,6 +65,8 @@ public class MP3 {
 	
 	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
+	
+	private RiverPanel panel = new RiverPanel(new River(200, "Kansas River", 3.5, 300, 2));;
 	
 	// Initialize a null OptionPane for use with the clock
 	private JOptionPane pane = null;
@@ -116,20 +119,13 @@ public class MP3 {
 		ImageLabel.setBounds(0, 0, 734, 661);
 		frame.getContentPane().add(ImageLabel);
 		ImageLabel.setIcon(backgroundImage);
-		
-		
-		// An "easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
-		JButton btnNewButton = new JButton("Travel!");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				activity.talkToRandos();
-			}
-		});
-		
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		btnNewButton.setBounds(525, 627, 89, 23);
-		frame.getContentPane().add(btnNewButton);
-		
+	}
+	
+	public  void openPanel(JPanel panelOpen) {
+		frame.getContentPane().removeAll();
+		frame.getContentPane().add(panelOpen);
+		frame.getContentPane().revalidate();
+		frame.getContentPane().repaint();
 	}
 	
 	
@@ -283,6 +279,30 @@ public class MP3 {
 		lblNewLabel.setBounds(250, 27, 267, 32);
 		frame.getContentPane().add(lblNewLabel);
 		
+		JButton RiverButton = new JButton("Cross River");
+		RiverButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				openPanel(panel);
+			}
+		});
+		RiverButton.setBounds(53, 32, 118, 23);
+		frame.getContentPane().add(RiverButton);
+		
+		JButton StoreButton = new JButton("Buy Items");
+		StoreButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		StoreButton.setBounds(566, 11, 101, 23);
+		frame.getContentPane().add(StoreButton);
+		
+		JButton TradeButton = new JButton("Trade");
+		TradeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		TradeButton.setBounds(566, 61, 101, 23);
+		frame.getContentPane().add(TradeButton);
 		
 		// Displays the total weight of items on the wagon. Initial value displayed is set as 0
 		TotalWeightLabel = new JLabel("Total Weight: " + wagon.calculateTotalWeight());
@@ -341,6 +361,19 @@ public class MP3 {
 		rdbtnBareBones.setBounds(264, 608, 100, 23);
 		frame.getContentPane().add(rdbtnBareBones);
 		
+		// An "easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
+		JButton btnNewButton = new JButton("Talk to People");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				activity.talkToRandos();
+			}
+		});
+		
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnNewButton.setBounds(525, 627, 142, 23);
+		frame.getContentPane().add(btnNewButton);
+		
+		
 		JLabel lblNewLabel_1 = new JLabel("Choose Food Consumption: ");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 14));
@@ -392,8 +425,8 @@ public class MP3 {
 		 * JButton for the user to select that calculates whether or not the user will make it
 		 * to Oregon with the amount of food, food consumption, and miles per day that were selected
 		 */
-		JButton btnNewButton = new JButton("Travel!");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnNewButton1 = new JButton("Travel!");
+		btnNewButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/* 
 				 * Checks if a button has been selected. Otherwise, tell the user to select
@@ -418,9 +451,9 @@ public class MP3 {
 				}
 			}
 		});
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		btnNewButton.setBounds(525, 578, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnNewButton1.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		btnNewButton1.setBounds(525, 578, 89, 23);
+		frame.getContentPane().add(btnNewButton1);
 		
 		
 		
