@@ -44,9 +44,7 @@ public class River extends Destinations{
 	}
 	
 	public boolean floatRiver() {
-		Random rnd = new Random();
-		int chanceToFail = rnd.nextInt(10) + 1;
-		if(chanceToFail == 1) {
+		if(flow > 1) {
 			lossSeverity = this.depth - 2.5;
 			return false;
 		}
