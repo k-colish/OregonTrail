@@ -21,21 +21,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import java.awt.Font;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.Timer;
 
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
-import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -118,7 +114,6 @@ public class MP3 {
 	 * Create the application.
 	 */
 	public MP3() {
-		// Process CSV file for list of items
 		readFile();
 		initialize();
 		System.out.println(filename);
@@ -280,8 +275,7 @@ public class MP3 {
 		clock = new javax.swing.Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				clockActionPerformed( evt );
-				}
-				});
+				}});
 		
 		JLabel lblNewLabel = new JLabel("The Oregon Trail");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
