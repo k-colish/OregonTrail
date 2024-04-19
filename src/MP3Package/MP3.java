@@ -96,8 +96,7 @@ public class MP3 {
 	// springfield is the second landmark (last for this version)
 	private Destinations springfield = new Destinations(280, "Springfield, Illinois", true);
 	private JPanel loadWagonPanel = new JPanel();
-	
-	
+
 	/**
 	 * Launch the application.
 	 */
