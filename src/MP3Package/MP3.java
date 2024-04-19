@@ -499,9 +499,9 @@ public class MP3 {
 							}
 						}
 						/*
-						 * When the check box is unchecked, remove the item from the wagon, using the removeItem method from the Wagon class.
+						 * When the checkbox is unchecked, remove the item from the wagon, using the removeItem method from the Wagon class.
 						 * 
-						 * Similarly to when the check box is checked, update the total weight labels accordingly.
+						 * Similarly to when the checkbox is checked, update the total weight labels accordingly.
 						 */
 						else if(!itemlabel.isSelected()) {
 							// Remove the corresponding item to the array list after the check box is unselected
