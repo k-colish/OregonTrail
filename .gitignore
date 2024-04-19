@@ -24,3 +24,8 @@ hs_err_pid*
 replay_pid*
 .project
 /bin/
+/.metadata
+/.idea
+/classes
+OregonTrail.iml
+.DS_Store
