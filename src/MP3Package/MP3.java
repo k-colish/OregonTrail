@@ -105,11 +105,6 @@ public class MP3 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-				    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-				    e.printStackTrace();
-				}
-				try {
 					MP3 window = new MP3();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
