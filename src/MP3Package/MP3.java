@@ -61,10 +61,10 @@ public class MP3 {
 	// Initialization of an object of the Wagon class
 	private Wagon wagon = new Wagon();
 	
-	// ArrayList including all of the JCheckBoxes of the items to be displayed
+	// ArrayList including all the JCheckBoxes of the items to be displayed
 	private ArrayList<JCheckBox> labels = new ArrayList<JCheckBox>(); 
 	
-	// ArrayList including all of the items that can be added to the Wagon class object
+	// ArrayList including all the items that can be added to the Wagon class object
 	private ArrayList<Item> allItems = new ArrayList<Item>();
 	
 	// Setting the ImageIcon for use with ImageLabel
