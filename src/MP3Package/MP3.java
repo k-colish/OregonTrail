@@ -15,23 +15,18 @@
 
 package MP3Package;
 
-import java.awt.EventQueue;  
-
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import java.awt.Font;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
-
 import javax.swing.JCheckBox;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
@@ -39,7 +34,6 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JButton;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 
