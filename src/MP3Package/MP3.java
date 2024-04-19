@@ -355,7 +355,7 @@ public class MP3 {
 			}
 		});
 		rdbtnNewRadioButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		rdbtnNewRadioButton.setBounds(100, 607, 71, 23);
+		rdbtnNewRadioButton.setBounds(100, 607, 80, 23);
 		loadWagonPanel.add(rdbtnNewRadioButton);
 		
 		// [1]
@@ -369,7 +369,7 @@ public class MP3 {
 			}
 		});
 		rdbtnMeager.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		rdbtnMeager.setBounds(179, 608, 71, 23);
+		rdbtnMeager.setBounds(179, 608, 80, 23);
 		loadWagonPanel.add(rdbtnMeager);
 		
 		// [1]
@@ -429,7 +429,7 @@ public class MP3 {
 				wagon.setMilesPerDay(slider.getValue());
 			}
 		});
-		slider.setBounds(467, 540, 200, 26);
+		slider.setBounds(467, 540, 200, 35);
 		slider.setLabelTable(slider.createStandardLabels(1, 12));
 		slider.setPaintLabels(true);
 		slider.setForeground(Color.WHITE);
@@ -441,7 +441,7 @@ public class MP3 {
 		// or if the user did not select a food consumption rate
 		JLabel ConsumptionErrorLabel = new JLabel("");
 		ConsumptionErrorLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		ConsumptionErrorLabel.setBounds(486, 616, 197, 16);
+		ConsumptionErrorLabel.setBounds(486, 600, 197, 16);
 		ConsumptionErrorLabel.setForeground(Color.WHITE);
 		loadWagonPanel.add(ConsumptionErrorLabel);
 		

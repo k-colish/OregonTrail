@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class Forts extends JPanel {
 
+    String itemFile = "/csv/FortStock.csv";
     private final ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>(); // List to hold checkboxes for each item loaded from the CSV file
     private final JLabel moneyAmountLabel; // Label to display the current amount of money available
     private double moneyTotal = 1000; // Total amount of money available to spend at start
@@ -46,7 +47,6 @@ public class Forts extends JPanel {
      */
     private void loadItemsFromCSV() {
         // Path to the CSV file containing item names and costs
-        String itemFile = "csv/FortStock.csv";
         try (InputStream inputStream = getClass().getResourceAsStream(itemFile);
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
 
