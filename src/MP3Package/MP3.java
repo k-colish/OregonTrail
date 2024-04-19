@@ -125,7 +125,7 @@ public class MP3 {
 		ImageLabel.setIcon(backgroundImage);
 	}
 	
-	public  void openPanel(JPanel panelOpen) {
+	public void openPanel(JPanel panelOpen) {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().add(panelOpen);
 		frame.getContentPane().revalidate();
