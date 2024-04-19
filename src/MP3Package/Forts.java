@@ -46,7 +46,7 @@ public class Forts extends JPanel {
      */
     private void loadItemsFromCSV() {
         // Path to the CSV file containing item names and costs
-        String itemFile = "csv/Fort Stock.csv";
+        String itemFile = "csv/FortStock.csv";
         try (InputStream inputStream = getClass().getResourceAsStream(itemFile);
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
 

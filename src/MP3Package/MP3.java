@@ -1,6 +1,6 @@
 /** 
  * MP3.java 
- * 
+ *
  * Simple educational Oregon Trail game, to test if you will be able to make it 
  * to Oregon, depending on the amount of food and other items are
  * added to the wagon. User is able to click check boxes to add items to the wagon, 
@@ -27,6 +27,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.Font;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Timer;
 
@@ -55,7 +56,7 @@ public class MP3 {
 	JButton TradeButton;
 	
 	// File name and JLabel for use with the background image
-	private String filename = "/Images/Ash Hollow.JPG";
+	private String filename = "/Images/AshHollow.JPG";
 	private JLabel ImageLabel;
 	
 	// Initialization of an object of the Wagon class
@@ -68,7 +69,7 @@ public class MP3 {
 	private ArrayList<Item> allItems = new ArrayList<Item>();
 	
 	// Setting the ImageIcon for use with ImageLabel
-	private ImageIcon backgroundImage = new ImageIcon(this.getClass().getResource(filename));
+	private ImageIcon backgroundImage = new ImageIcon(Objects.requireNonNull(this.getClass().getResource(filename)));
 	
 	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
@@ -126,6 +127,7 @@ public class MP3 {
 		// Process CSV file for list of items
 		readFile();
 		initialize();
+		System.out.println(filename);
 		
 		// Sets a JLabel for the background image
 		JLabel ImageLabel = new JLabel("");
@@ -140,59 +142,57 @@ public class MP3 {
 		frame.getContentPane().revalidate();
 		frame.getContentPane().repaint();
 	}
-	
-	
+
 	/**
 	 * clockActionPerformed - displays the JOptionPane with current run information AFTER the previous JOptionPane is closed
 	 * @param e - ActionEvent
 	 */
 	public void clockActionPerformed(ActionEvent e) {
-		
+
 		// Print out for debugging
 		System.out.println("Clock Action Performed");
-		
+
 		// Check for sentinel value, this is true when all of the people in the wagon are dead.
-		if(wagon.travel() == -1) {
-			
+		if (wagon.travel() == -1) {
+
 			// Display a lose message
-			JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE); clock.stop();
-		}
-		else {
-			
+			JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE);
+			clock.stop();
+		} else {
+
 			// Checks to see if the player has made it to Paris, IL
-			if(wagon.getMilesTraveled() >= paris.getDistance() && (paris.getDistance() - wagon.getMilesTraveled() > -20)) {
-				
+			if (wagon.getMilesTraveled() >= paris.getDistance() && (paris.getDistance() - wagon.getMilesTraveled() > -20)) {
+
 				// Display a message that the play has reached Paris
 				JOptionPane.showMessageDialog(null, "You made it to " + paris.getName() + "!");
 			}
-			
+
 			// Checks to see if the player has made it to Springfield, IL
-			else if(wagon.getMilesTraveled() >= springfield.getDistance() && (springfield.getDistance() - wagon.getMilesTraveled()) > -20) {
-				
+			else if (wagon.getMilesTraveled() >= springfield.getDistance() && (springfield.getDistance() - wagon.getMilesTraveled()) > -20) {
+
 				// Display a message that the play has reached Springfield
 				JOptionPane.showMessageDialog(null, "You made it to " + springfield.getName() + "!", "You made it!", JOptionPane.INFORMATION_MESSAGE);
 			}
 			// Initialize the JOptionPane
 			pane = new JOptionPane();
-			
+
 			// Get the value from the JOptionPane, after the user selects one of the buttons
-			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFoodWeight() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {"Yes", "No"}, -1);								
-			
+			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFoodWeight() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Yes", "No"}, -1);
+
 			// If the selection equals 0, stop the clock and update weight labels, allowing the user to adjust pace and food rations
-			if(res == JOptionPane.YES_OPTION) {
+			if (res == JOptionPane.YES_OPTION) {
 				System.out.println("Yes selected");
 				clock.stop();
 				TotalFoodLabel.setText("Total Food Weight: " + wagon.getTotalFoodWeight());
 				TotalWeightLabel.setText("Total Weight: " + wagon.calculateTotalWeight());
 			}
-			
+
 			// If the selection equals 1, or if no selection is made, print debugging message and let the clock run
-			else{
+			else {
 				System.out.println("No selected");
 			}
 		}
 	}
-	
 	
 	/**
 	 * milesToLandmark - calculates the miles to the next landmark
