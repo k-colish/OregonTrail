@@ -1,5 +1,5 @@
 /** 
- * MP3.java 
+ * MP3.java
  * 
  * Simple educational Oregon Trail game, to test if you will be able to make it 
  * to Oregon, depending on the amount of food and other items are
@@ -15,7 +15,7 @@
 
 package MP3Package;
 
-import java.awt.EventQueue; 
+import java.awt.EventQueue;  
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +32,7 @@ import java.util.Timer;
 
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
+
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 
@@ -54,10 +54,6 @@ public class MP3 {
 	JButton StoreButton;
 	JButton TradeButton;
 	
-	// File name and JLabel for use with the background image
-	private String filename = "/Images/Ash Hollow.JPG";
-	private JLabel ImageLabel;
-	
 	// Initialization of an object of the Wagon class
 	private Wagon wagon = new Wagon();
 	
@@ -68,7 +64,6 @@ public class MP3 {
 	private ArrayList<Item> allItems = new ArrayList<Item>();
 	
 	// Setting the ImageIcon for use with ImageLabel
-	private ImageIcon backgroundImage = new ImageIcon(this.getClass().getResource(filename));
 	
 	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
@@ -128,10 +123,6 @@ public class MP3 {
 		initialize();
 		
 		// Sets a JLabel for the background image
-		JLabel ImageLabel = new JLabel("");
-		ImageLabel.setBounds(0, 0, 734, 661);
-		loadWagonPanel.add(ImageLabel);
-		ImageLabel.setIcon(backgroundImage);
 	}
 	
 	public  void openPanel(JPanel panelOpen) {
@@ -275,7 +266,6 @@ public class MP3 {
 	 */
 	private void initialize() {
 				
-		frame = new JFrame();
 		frame.setBounds(100, 100, 750, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout());
@@ -542,6 +532,7 @@ public class MP3 {
 				if(i > 15) {
 					label.setBounds(121 + 300, 70 + (i-15)*30, 300, 23);
 				}
+				
 				loadWagonPanel.add(label);
 				label.setOpaque(false);
 				label.setForeground(Color.WHITE);
