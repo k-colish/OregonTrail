@@ -16,7 +16,6 @@ import java.util.ArrayList;
  */
 public class Forts extends JPanel {
 
-    private final String itemFile = "csv/Fort Stock.csv"; // Path to the CSV file containing item names and costs
     private final ArrayList<JCheckBox> itemCheckBoxes = new ArrayList<>(); // List to hold checkboxes for each item loaded from the CSV file
     private final JLabel moneyAmountLabel; // Label to display the current amount of money available
     private double moneyTotal = 1000; // Total amount of money available to spend at start
@@ -46,6 +45,8 @@ public class Forts extends JPanel {
      * Loads items from a CSV file and displays them as checkboxes with associated costs.
      */
     private void loadItemsFromCSV() {
+        // Path to the CSV file containing item names and costs
+        String itemFile = "csv/Fort Stock.csv";
         try (InputStream inputStream = getClass().getResourceAsStream(itemFile);
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
 
@@ -64,14 +65,14 @@ public class Forts extends JPanel {
                             System.err.println("Invalid cost format for item: " + itemName);
                             continue; // Skip this item if cost is invalid
                         }
-                        
+
                         JCheckBox itemCheckBox = new JCheckBox(itemName + " - $" + cost * fortcost);
                         itemCheckBox.setBounds(10, yOffset, 200, 30);
                         add(itemCheckBox);
 
                         itemCheckBoxes.add(itemCheckBox);
 
-                        yOffset += 40; 
+                        yOffset += 40;
                     } else {
                         System.err.println("Invalid line format: " + line);
                     }
