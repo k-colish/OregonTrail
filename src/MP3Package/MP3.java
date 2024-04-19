@@ -116,7 +116,6 @@ public class MP3 {
 	public MP3() {
 		readFile();
 		initialize();
-		System.out.println(filename);
 		
 		// Sets a JLabel for the background image
 		JLabel ImageLabel = new JLabel("");
@@ -141,7 +140,7 @@ public class MP3 {
 		// Print out for debugging
 		System.out.println("Clock Action Performed");
 
-		// Check for sentinel value, this is true when all of the people in the wagon are dead.
+		// Check for sentinel value, this is true when all the people in the wagon are dead.
 		if (wagon.travel() == -1) {
 
 			// Display a lose message
@@ -297,8 +296,7 @@ public class MP3 {
 		StoreButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		StoreButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.err.println("BUY ITEMS!"); //tell if its doing anything 
-				System.err.println("BUY ITEMS!"); //tell if its doing anything FOR MAC
+				System.err.println("BUY ITEMS!"); //tell if its doing anything
 	                    Forts fortsPanel = new Forts();
 	                    openPanel(fortsPanel);
 	                }
@@ -376,23 +374,21 @@ public class MP3 {
 		loadWagonPanel.add(rdbtnBareBones);
 		
 		// An "easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
-		JButton btnNewButton = new JButton("Talk to People");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton talkButton = new JButton("Talk to People");
+		talkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				activity.talkToRandos();
-			}
-		});
+			}});
 		
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		btnNewButton.setBounds(525, 627, 142, 23);
-		loadWagonPanel.add(btnNewButton);
+		talkButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		talkButton.setBounds(525, 627, 142, 23);
+		loadWagonPanel.add(talkButton);
 		
-		
-		JLabel lblNewLabel_1 = new JLabel("Choose Food Consumption: ");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(100, 577, 197, 23);
-		loadWagonPanel.add(lblNewLabel_1);
+		JLabel consumptionLabel = new JLabel("Choose Food Consumption: ");
+		consumptionLabel.setForeground(Color.WHITE);
+		consumptionLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		consumptionLabel.setBounds(100, 577, 197, 23);
+		loadWagonPanel.add(consumptionLabel);
 		
 		// Initializing a button group, so only one radio button can be selected at one time
 		ButtonGroup buttons = new ButtonGroup();
@@ -400,30 +396,30 @@ public class MP3 {
 		buttons.add(rdbtnMeager);
 		buttons.add(rdbtnNewRadioButton);
 		
-		JLabel lblNewLabel_2 = new JLabel("How many miles per day?");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		lblNewLabel_2.setBounds(467, 510, 216, 23);
-		loadWagonPanel.add(lblNewLabel_2);
+		JLabel milesLabel = new JLabel("How many miles per day?");
+		milesLabel.setForeground(Color.WHITE);
+		milesLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		milesLabel.setBounds(467, 510, 216, 23);
+		loadWagonPanel.add(milesLabel);
 		
 		// Initialize and stateChange listener for a JSlider so the user can set the number of 
 		// miles per day. 
-		JSlider slider = new JSlider(12, 20);
-		slider.setOpaque(false);
-		slider.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		wagon.setMilesPerDay(slider.getValue());
-		slider.addChangeListener(new ChangeListener() {
+		JSlider mileSlider = new JSlider(12, 20);
+		mileSlider.setOpaque(false);
+		mileSlider.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		wagon.setMilesPerDay(mileSlider.getValue());
+		mileSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				System.out.println(slider.getValue());
-				wagon.setMilesPerDay(slider.getValue());
+				System.out.println(mileSlider.getValue());
+				wagon.setMilesPerDay(mileSlider.getValue());
 			}
 		});
-		slider.setBounds(467, 540, 200, 35);
-		slider.setLabelTable(slider.createStandardLabels(1, 12));
-		slider.setPaintLabels(true);
-		slider.setForeground(Color.WHITE);
+		mileSlider.setBounds(467, 540, 200, 35);
+		mileSlider.setLabelTable(mileSlider.createStandardLabels(1, 12));
+		mileSlider.setPaintLabels(true);
+		mileSlider.setForeground(Color.WHITE);
 		
-		loadWagonPanel.add(slider);
+		loadWagonPanel.add(mileSlider);
 		
 		
 		// JLabel to display errors if the user either has added more than 2,400 lbs to the wagon,
@@ -439,8 +435,8 @@ public class MP3 {
 		 * JButton for the user to select that calculates whether or not the user will make it
 		 * to Oregon with the amount of food, food consumption, and miles per day that were selected
 		 */
-		JButton btnNewButton1 = new JButton("Travel!");
-		btnNewButton1.addActionListener(new ActionListener() {
+		JButton travelButton = new JButton("Travel!");
+		travelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				/* 
 				 * Checks if a button has been selected. Otherwise, tell the user to select
@@ -465,9 +461,9 @@ public class MP3 {
 				}
 			}
 		});
-		btnNewButton1.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		btnNewButton1.setBounds(525, 578, 89, 23);
-		loadWagonPanel.add(btnNewButton1);
+		travelButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		travelButton.setBounds(525, 578, 89, 23);
+		loadWagonPanel.add(travelButton);
 		
 		
 		
@@ -478,17 +474,17 @@ public class MP3 {
 				final int j = i; // Make Compiler Happy
 				
 				// Create a new JCheckbox, using i as the index of the items ArrayList and getting that item's name and weight for the text.
-				JCheckBox label = new JCheckBox(allItems.get(i).getName() + ": weighs " + allItems.get(i).getWeight() + " lbs");
-				label.addActionListener(new ActionListener() {
+				JCheckBox itemlabel = new JCheckBox(allItems.get(i).getName() + ": weighs " + allItems.get(i).getWeight() + " lbs");
+				itemlabel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						/*
-						 *  When the check box is checked, add the item to the wagon using the addItem() method from the Wagon class
+						 *  When the checkbox is checked, add the item to the wagon using the addItem() method from the Wagon class
 						 *  Then update the total weight label, adding that items weight to the total.
 						 *  
 						 *  Also check if the item is a food item, if it is, update the total food weight displayed.
 						 */
-						if(label.isSelected()) {
+						if(itemlabel.isSelected()) {
 							// Add the corresponding item to the array list after the check box is selected
 							wagon.addItem(allItems.get(j));
 							
@@ -507,7 +503,7 @@ public class MP3 {
 						 * 
 						 * Similarly to when the check box is checked, update the total weight labels accordingly.
 						 */
-						else if(!label.isSelected()) {
+						else if(!itemlabel.isSelected()) {
 							// Remove the corresponding item to the array list after the check box is unselected
 							wagon.removeItem(allItems.get(j));
 							
@@ -523,17 +519,17 @@ public class MP3 {
 						}
 					}
 				});
-				label.setFont(new Font("Times New Roman", Font.BOLD, 14));
+				itemlabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 				
 				// Logic for x and y coordinates for the JCheckboxes, since they don't appear in Design, using i for the spacing calculations.
-				label.setBounds(121, 70 + i*30, 300, 23);
+				itemlabel.setBounds(121, 70 + i*30, 300, 23);
 				if(i > 15) {
-					label.setBounds(121 + 300, 70 + (i-15)*30, 300, 23);
+					itemlabel.setBounds(121 + 300, 70 + (i-15)*30, 300, 23);
 				}
-				loadWagonPanel.add(label);
-				label.setOpaque(false);
-				label.setForeground(Color.WHITE);
-				labels.add(label);
+				loadWagonPanel.add(itemlabel);
+				itemlabel.setOpaque(false);
+				itemlabel.setForeground(Color.WHITE);
+				labels.add(itemlabel);
 		}
 	}
 }
