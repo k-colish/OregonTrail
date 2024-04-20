@@ -5,12 +5,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RandomEvents {
     private final ArrayList<String> items = new ArrayList<String>();
 
     public RandomEvents() {
-        loadItemsFromCSV("/csv/Items.csv");
+        loadItemsFromCSV("/csv/AllItems.csv");
     }
 
     public void loadItemsFromCSV(String itemFilePath) {
@@ -30,8 +31,12 @@ public class RandomEvents {
         }
     }
 
-    public ArrayList<String> getItems() {
-        return items;
+    public void loseItem ()
+    {
+        Random rnd = new Random();
+        int randomItem = rnd.nextInt(10) + 1;
+        int userItem =
+        rnd.nextInt(10) + 1;
     }
 
 }
