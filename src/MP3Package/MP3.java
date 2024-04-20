@@ -165,14 +165,13 @@ public class MP3 {
 			pane = new JOptionPane();
 
 			// Get the value from the JOptionPane, after the user selects one of the buttons
-			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFoodWeight() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Yes", "No"}, -1);
+			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFood() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Yes", "No"}, -1);
 
 			// If the selection equals 0, stop the clock and update weight labels, allowing the user to adjust pace and food rations
 			if (res == JOptionPane.YES_OPTION) {
 				System.out.println("Yes selected");
 				clock.stop();
-				TotalFoodLabel.setText("Total Food Weight: " + wagon.getTotalFoodWeight());
-				TotalWeightLabel.setText("Total Weight: " + wagon.calculateTotalWeight());
+				TotalFoodLabel.setText("Total Food: " + wagon.getTotalFood());
 			}
 
 			// If the selection equals 1, or if no selection is made, print debugging message and let the clock run
@@ -223,38 +222,24 @@ public class MP3 {
 			itemData.useDelimiter(", ");
 			
 			// Instantiate temporary variables for item info
+			int tempAmmount;
 			String tempName = "";
-			int tempWeight = 0;
-			int isFood;
 			double tempPrice = 0;
 			
-			// Get the data from the CSV and assign to the temp values to make an Item object
-			tempWeight = itemData.nextInt();		
+			// Get the data from the CSV and assign to the temp values to make an Item object	
+			tempAmmount = itemData.nextInt();
 			tempName = itemData.next();
-			isFood = itemData.nextInt();
 			tempPrice = itemData.nextDouble();
 			
 			// Debugging messages
-			System.out.println("Weight: " + tempWeight);
+			System.out.print("Ammount: " + tempAmmount);
 			System.out.println("Name: " + tempName);
-			System.out.println("Is Food: " + isFood);
-			
-			if(isFood >= 1) {
-				FoodItem food = new FoodItem(tempWeight, tempName, tempPrice);
-				allItems.add(food);
-				food.setIsFood(isFood);
-			}
+			System.out.println("Price: " + tempPrice);
 			
 			// Create a new Item object with the new information from the CSV file
-			else {
-				Item item = new Item(tempWeight, tempName, tempPrice);
+				Item item = new Item(tempAmmount, tempName, tempPrice);
 				// Add the item to the ArrayList of all items
 				allItems.add(item);
-				
-				// Set whether the item is a food item
-				item.setIsFood(isFood);
-			}
-			
 		}
 		in.close();
 	}
@@ -316,15 +301,8 @@ public class MP3 {
 			}
 		});
 		
-		// Displays the total weight of items on the wagon. Initial value displayed is set as 0
-		TotalWeightLabel = new JLabel("Total Weight: " + wagon.calculateTotalWeight());
-		TotalWeightLabel.setForeground(Color.WHITE);
-		TotalWeightLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		TotalWeightLabel.setBounds(100, 550, 150, 16);
-		loadWagonPanel.add(TotalWeightLabel);
-		
-		// Displays the total weight of food items that are on the wagon. Initial value displayed is set to 0.
-		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.getTotalFoodWeight());
+		// Displays the total ammount of food that is in the wagon. Initial value displayed is set to 0.
+		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.getTotalFood());
 		TotalFoodLabel.setForeground(Color.WHITE);
 		TotalFoodLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		TotalFoodLabel.setBounds(250, 550, 170, 16);
@@ -450,7 +428,7 @@ public class MP3 {
 				 * Checks if the total amount of weight of items selected is over the maximum allowed (2,400).
 				 * If there is too much weight, tell the user that they have too much weight on the wagon.
 				 */
-				else if(wagon.calculateTotalWeight() > 2400) {
+				else if(wagon.getTotalFood() > 2400) {
 					ConsumptionErrorLabel.setText("Wagon cannot be over 2,400 lbs");
 				}
 				
@@ -467,69 +445,5 @@ public class MP3 {
 		
 		
 		
-		/*
-		 * Loop for generating JCheckboxes for each item that is able to be added to the wagon
-		 */
-		for(int i = 0; i < allItems.size(); i++) {
-				final int j = i; // Make Compiler Happy
-				
-				// Create a new JCheckbox, using i as the index of the items ArrayList and getting that item's name and weight for the text.
-				JCheckBox itemlabel = new JCheckBox(allItems.get(i).getName() + ": weighs " + allItems.get(i).getWeight() + " lbs");
-				itemlabel.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						/*
-						 *  When the checkbox is checked, add the item to the wagon using the addItem() method from the Wagon class
-						 *  Then update the total weight label, adding that items weight to the total.
-						 *  
-						 *  Also check if the item is a food item, if it is, update the total food weight displayed.
-						 */
-						if(itemlabel.isSelected()) {
-							// Add the corresponding item to the array list after the check box is selected
-							wagon.addItem(allItems.get(j));
-							
-							// Set the total weight label to display the total weight of all items
-							TotalWeightLabel.setText("Total Weight: ");
-							TotalWeightLabel.setText(TotalWeightLabel.getText() + wagon.calculateTotalWeight());
-							
-							// If the item is a food item, update the total food weight label with the weight of all food items
-							if(allItems.get(j).getIsFood()) {
-								TotalFoodLabel.setText("Total Food Weight: ");
-								TotalFoodLabel.setText(TotalFoodLabel.getText() + wagon.getTotalFoodWeight());
-							}
-						}
-						/*
-						 * When the checkbox is unchecked, remove the item from the wagon, using the removeItem method from the Wagon class.
-						 * 
-						 * Similarly to when the checkbox is checked, update the total weight labels accordingly.
-						 */
-						else if(!itemlabel.isSelected()) {
-							// Remove the corresponding item to the array list after the check box is unselected
-							wagon.removeItem(allItems.get(j));
-							
-							// Set the total weight label to display the total weight of all items
-							TotalWeightLabel.setText("Total Weight: ");
-							TotalWeightLabel.setText(TotalWeightLabel.getText() + wagon.calculateTotalWeight());
-							
-							// If the item is a food item, update the total food weight label with the weight of all food items
-							if(allItems.get(j).getIsFood()) {
-								TotalFoodLabel.setText("Total Food Weight: ");
-								TotalFoodLabel.setText(TotalFoodLabel.getText() + wagon.getTotalFoodWeight());
-							}
-						}
-					}
-				});
-				itemlabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
-				
-				// Logic for x and y coordinates for the JCheckboxes, since they don't appear in Design, using i for the spacing calculations.
-				itemlabel.setBounds(121, 70 + i*30, 300, 23);
-				if(i > 15) {
-					itemlabel.setBounds(121 + 300, 70 + (i-15)*30, 300, 23);
-				}
-				loadWagonPanel.add(itemlabel);
-				itemlabel.setOpaque(false);
-				itemlabel.setForeground(Color.WHITE);
-				labels.add(itemlabel);
-		}
 	}
 }

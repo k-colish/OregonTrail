@@ -18,8 +18,7 @@ import java.util.ArrayList;
 
 public class Wagon {
 	// Initialize instance variables
-	private int totalFoodWeight = 0;      // Total weight of all food items in the wagon
-    private int totalWeight = 0;           // Total weight of all items in the wagon
+	private int totalFood = 0;      	   // Total of all food in the wagon
     private int foodConsumption;           // Food consumption rate per person per day
     private int milesPerDay;               // Distance traveled per day in miles
     private int totalDays;                 // Total number of days required to reach the destination
@@ -31,10 +30,6 @@ public class Wagon {
 	// Initialize ArrayList of Item object that contains all of the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
 	
-	// Initialize ArrayList of FoodItem objects that contains all of the FoodItems that have been added to the wagon
-	private ArrayList<FoodItem> food = new ArrayList<>();
-	
-	
 	/**
 	 *  addItem - Takes an Item object and adds it to the ArrayList of items that are in the wagon.
 	 * @param item - the item to be added to the wagon.
@@ -43,11 +38,7 @@ public class Wagon {
 		Items.add(item);
 		System.out.println("Item added");
 		
-		// If the item is a FoodItem, add it to the food ArrayList
-		if(item.getIsFood()) {
-			food.add( (FoodItem) item);
-			System.out.println("Food item added");
-		}
+		
 		// Prints out the list of items in the wagon for debugging purposes
 		for(int i = 0; i < Items.size(); i++) {
 			System.out.print(Items.get(i).getName() + ", ");
@@ -68,11 +59,6 @@ public class Wagon {
 			if(item.getName() == Items.get(j).getName()) {
 				// When a match is found, remove the item from the ArrayList
 				Items.remove(j);
-				
-				// Check if the item is a food item and remove it from the food ArrayList
-				if(item.getIsFood()) {
-					food.remove( (FoodItem) item);
-				}
 			}
 		}
 		System.out.println("Item removed");
@@ -121,27 +107,12 @@ public class Wagon {
 	}
 	
 	/**
-	 * calculateTotalWeight - calculates the total weight of all items that have been added to the wagon
-	 * @return -  totalWeight - the total weight of all items
+	 * getTotalFood - calculates the total ammount of food that has been added to the wagon
+	 * @return - totalFood - the total ammount of food that has been added to the wagon
 	 */
-	public int calculateTotalWeight() {
-		totalWeight = 100;
-		for(int i = 0; i < Items.size(); i++) {
-			totalWeight += Items.get(i).getWeight();
-		}
-		return totalWeight - totalFoodUsed;
-	}
-	
-	/**
-	 * getTotalFoodWeight - calculates the total weight of all food items that have been added to the wagon
-	 * @return - totalFoodWeight - the total weight of all items in the wagon
-	 */
-	public int getTotalFoodWeight() {
-		totalFoodWeight = 100;
-		for(int i = 0; i < food.size(); i++) {
-			totalFoodWeight += food.get(i).getWeight();
-		}
-		return totalFoodWeight - totalFoodUsed;
+	public int getTotalFood() {
+		totalFood = 100;
+		return totalFood - totalFoodUsed;
 	}
 	
 	/**
@@ -180,7 +151,7 @@ public class Wagon {
 		
 		// Calculate the total food used using the food used per day times the number of days to travel.
 		totalFoodUsed = foodPerDay * daysTraveled;
-		if(this.getTotalFoodWeight() <= 0) {
+		if(this.getTotalFood() <= 0) {
 			this.death();
 		}
 		System.out.println(numberOfPeople);
