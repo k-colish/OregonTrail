@@ -32,9 +32,6 @@ public class Wagon {
 	// Initialize ArrayList of Item object that contains all of the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
 	
-	// Initialize ArrayList of FoodItem objects that contains all of the FoodItems that have been added to the wagon
-	private ArrayList<FoodItem> food = new ArrayList<>();
-	
 	// Initialize ArrayList of Destinations objects that contains all of the Destinations that can be visited
 	private ArrayList<Destinations> destinations = new ArrayList<>();
 	

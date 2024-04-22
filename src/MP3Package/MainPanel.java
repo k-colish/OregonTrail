@@ -8,9 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
@@ -53,7 +52,7 @@ public class MainPanel extends JFrame{
 		lblNewLabel_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_1, "cell 9 1,alignx right");
 		
-		JLabel TotalFood = new JLabel(Integer.toString(wagon.getTotalFoodWeight()));
+		JLabel TotalFood = new JLabel(Integer.toString(wagon.getTotalFood()));
 		TotalFood.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(TotalFood, "cell 10 1");
 		
