@@ -28,7 +28,7 @@ public class Wagon {
     private int numberOfPeople = 4;        // Number of people in the wagon party
     private int totalFoodUsed = 0;         // Total food consumed during travel
     private int milesTraveled = 0;         // Total miles traveled
-	RandomEvents events = null;
+	RandomEvents events;
     
 	// Initialize ArrayList of Item object that contains all the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
@@ -38,9 +38,8 @@ public class Wagon {
 	private ArrayList<Destinations> destinations = new ArrayList<>();
 	
 	
-	public void Wagon(RandomEvents event)
+	public Wagon()
 	{
-		events = event;
 		InputStreamReader reader = null;
 		Scanner in = null;
 		String itemFile = "/csv/Destinations.csv";
@@ -75,6 +74,7 @@ public class Wagon {
 		}
 		
 		in.close();
+		events = new RandomEvents(this);
 	}
 
 	/**
