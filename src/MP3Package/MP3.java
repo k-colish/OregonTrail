@@ -264,7 +264,7 @@ public class MP3 {
 		StoreButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.err.println("BUY ITEMS!"); //tell if its doing anything
-	                    Forts fortsPanel = new Forts();
+	                    Forts fortsPanel = new Forts(wagon);
 	                    openPanel(fortsPanel);
 	                }
 	            });

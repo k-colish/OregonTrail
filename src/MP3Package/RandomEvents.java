@@ -157,7 +157,7 @@ public class RandomEvents {
         }
     }
 
-    private void loseTrial() // Make this higher due to diriy //2%
+    private void loseTrial() // Make this higher due to diriy // 2%
     {
 
         if (randomValue(10) == 1) {
@@ -218,11 +218,11 @@ public class RandomEvents {
 
     private void water() // 15% & lose few pounds of food
     {
-
         int rmd = randomValue(17);
-        if (rmd == 1 || rmd == 2 || rmd == 3)
+        if (rmd == 1 || rmd == 2 || rmd == 3) {
             wagonlist.changeTotalFood(-randomValue(20));
-        System.out.println("NEED WATER");
+            System.out.println("NEED WATER");
+        }
     }
 
     private void badGrass() // 20%
@@ -238,5 +238,4 @@ public class RandomEvents {
     {
         System.out.println("sick");
     }
-
 }
