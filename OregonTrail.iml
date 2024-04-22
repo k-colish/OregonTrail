@@ -9,5 +9,15 @@
     </content>
     <orderEntry type="jdk" jdkName="openjdk-22" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES />
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/JFormDesigner" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Downloads/JFormDesigner" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
