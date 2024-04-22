@@ -443,5 +443,8 @@ public class MP3 {
 		travelButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		travelButton.setBounds(525, 578, 89, 23);
 		loadWagonPanel.add(travelButton);
+		
+		
+		
 	}
 }

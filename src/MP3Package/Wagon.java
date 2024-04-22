@@ -81,6 +81,49 @@ public class Wagon {
 		in.close();
 	}
 	
+	// Initialize ArrayList of FoodItem objects that contains all of the FoodItems that have been added to the wagon
+	private ArrayList<FoodItem> food = new ArrayList<>();
+	
+	// Initialize ArrayList of Destinations objects that contains all of the Destinations that can be visited
+	private ArrayList<Destinations> destinations = new ArrayList<>();
+	
+	
+	public Wagon() {
+		InputStreamReader reader = null;
+		Scanner in = null;
+		String itemFile = "/csv/Destinations.csv";
+		
+		try {
+			reader = new InputStreamReader(this.getClass().getResourceAsStream(itemFile));
+		}
+		catch(Exception e) {
+			System.out.print("Could not open file ");
+		}
+		
+		// Create a InputStreamReader Scanner to read in the CSV file
+		in = new Scanner(reader);
+		
+		while(in.hasNext()) {
+			// Create a new Scanner with ", " as the delimiter
+			Scanner destData = new Scanner(in.nextLine());
+			destData.useDelimiter(",");
+			
+			String tempName = "";
+			int distance = 0;
+			boolean hasStore = false;
+			
+			tempName = destData.next();
+			distance = destData.nextInt();
+			if(destData.nextInt() == 1) {
+				hasStore = true;
+			}
+			
+			Destinations destination = new Destinations(distance, tempName, hasStore);
+			destinations.add(destination);
+		}
+		in.close();
+	}
+	
 	/**
 	 *  addItem - Takes an Item object and adds it to the ArrayList of items that are in the wagon.
 	 * @param item - the item to be added to the wagon.
