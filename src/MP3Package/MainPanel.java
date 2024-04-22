@@ -1,4 +1,5 @@
 package MP3Package;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,13 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
-
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Color;
-
-
 
 public class MainPanel extends JFrame{
 	
