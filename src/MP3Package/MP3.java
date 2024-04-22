@@ -173,38 +173,24 @@ public class MP3 {
 			itemData.useDelimiter(", ");
 			
 			// Instantiate temporary variables for item info
+			int tempAmmount;
 			String tempName = "";
-			int tempWeight = 0;
-			int isFood;
 			double tempPrice = 0;
 			
-			// Get the data from the CSV and assign to the temp values to make an Item object
-			tempWeight = itemData.nextInt();		
+			// Get the data from the CSV and assign to the temp values to make an Item object	
+			tempAmmount = itemData.nextInt();
 			tempName = itemData.next();
-			isFood = itemData.nextInt();
 			tempPrice = itemData.nextDouble();
 			
 			// Debugging messages
-			System.out.println("Weight: " + tempWeight);
+			System.out.print("Ammount: " + tempAmmount);
 			System.out.println("Name: " + tempName);
-			System.out.println("Is Food: " + isFood);
-			
-			if(isFood >= 1) {
-				FoodItem food = new FoodItem(tempWeight, tempName, tempPrice);
-				allItems.add(food);
-				food.setIsFood(isFood);
-			}
+			System.out.println("Price: " + tempPrice);
 			
 			// Create a new Item object with the new information from the CSV file
-			else {
-				Item item = new Item(tempWeight, tempName, tempPrice);
+				Item item = new Item(tempAmmount, tempName, tempPrice);
 				// Add the item to the ArrayList of all items
 				allItems.add(item);
-				
-				// Set whether the item is a food item
-				item.setIsFood(isFood);
-			}
-			
 		}
 		in.close();
 	}

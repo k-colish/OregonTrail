@@ -16,9 +16,8 @@ package MP3Package;
 
 public class Item {
 	// Initialize instance variables
-    private int weight;       // The weight of the item in pounds
+	private int ammount;	  // The ammount of Item 
     private String name;      // The name item
-    private boolean isFood;   // Indicates whether the item is a consumable food item
     private double price;     // The price or value of the item
 	
 	
@@ -28,27 +27,10 @@ public class Item {
 	 * @param name - the name of the item
 	 * @param price - the price of the item
 	 */
-	public Item(int weight, String name,double price) {
-		this.weight = weight;
+	public Item(int ammount, String name,double price) {
+		this.ammount = ammount;
 		this.name = name;
 		this.price = price;
-	}
-	
-	/**
-	 * setIsFood - sets whether the Item object is a food item
-	 * @param food - If food == 0, the Item is not a food. Any value greater than or equal to 1 will set the Item as a food item.
-	 */
-	public void setIsFood(int food) {
-		if(food >= 1) isFood = true;
-		else if(food == 0) isFood = false;
-	}
-	
-	/**
-	 * getWeight - gets the weight of the Item
-	 * @return weight - the weight of the Item
-	 */
-	public int getWeight() {
-		return weight;
 	}
 	
 	/**
@@ -68,10 +50,10 @@ public class Item {
 	}
 	
 	/**
-	 * getIsFood - gets whether the Item is a food or not
-	 * @return isFood - true if the Item is food, false if the the Item is not food
+	 * getAmmount - gets the ammount of an item you have
+	 * @returns ammount - the ammount of an item you have
 	 */
-	public boolean getIsFood() {
-		return isFood;
+	public int getAmmount() {
+		return ammount;
 	}
 }
