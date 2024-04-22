@@ -30,7 +30,7 @@ public class Wagon {
     private int milesTraveled = 0;         // Total miles traveled
 	RandomEvents events = null;
     
-	// Initialize ArrayList of Item object that contains all of the items that have been added to the wagon
+	// Initialize ArrayList of Item object that contains all the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
 
 

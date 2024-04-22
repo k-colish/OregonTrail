@@ -1,4 +1,5 @@
 package MP3Package;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,8 +10,6 @@ import java.util.Objects;
 import java.awt.*;
 
 import javax.swing.*;
-
-
 
 public class MainPanel extends JFrame{
 	
@@ -91,7 +90,5 @@ public class MainPanel extends JFrame{
 		Image img = backgroundImage.getImage();
 		Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		ImageJLabel.setIcon(new ImageIcon(newImg));
-		
 	}
-	
 }
