@@ -41,7 +41,6 @@ public class Forts extends JPanel {
         JButton buySelectedButton = new JButton("BUY");
         buySelectedButton.setBounds(150, 320, 100, 30);
         add(buySelectedButton);
-        //buySelectedButton.addActionListener(e -> buySelectedItems());
 
         loadItemsFromCSV();
     }
