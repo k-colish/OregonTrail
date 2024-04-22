@@ -122,6 +122,7 @@ public class MP3 {
 		ImageLabel.setBounds(0, 0, 734, 661);
 		loadWagonPanel.add(ImageLabel);
 		ImageLabel.setIcon(backgroundImage);
+
 	}
 	
 	public void openPanel(JPanel panelOpen) {

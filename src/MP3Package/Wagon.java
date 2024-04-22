@@ -141,6 +141,8 @@ public class Wagon {
 	public void death() {
 		numberOfPeople--;
 	}
+
+	public int addDays(int x) {return daysTraveled + x;}
 	
 	/**
 	 * travel - keeps track of the number of days the party has been traveling for. 
@@ -168,5 +170,4 @@ public class Wagon {
 		
 		return daysTraveled;
 	}
-	public int addDays(int x) {return daysTraveled + x;}
 }

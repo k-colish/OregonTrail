@@ -68,11 +68,11 @@ public class RandomEvents {
     private void Thief() //2% & lots of supplies lost
     {
         int food;
-        if (randomValue(50) == 1)
+        if (1 == randomValue(50))
         {
             food = rnd.nextInt(125) + 1;
-            String wagonItem = wagonlist.get(randomValue(wagonlist.size));
-            if (wagonItem == allItems.get(randomValue(allItems.size())))
+            //String wagonItem = wagonlist.get(randomValue(wagonItems));
+           // if (wagonItem == allItems.get(randomValue(allItems.size())))
             {
                 // add remove item method
             }
@@ -114,6 +114,9 @@ public class RandomEvents {
     private void deadOX() // 2.5%
     {
         if (randomValue(40) == 1)
+        {
+
+        }
             //add remove item method
     }
 
@@ -166,7 +169,7 @@ public class RandomEvents {
         {
             for (int i = 0; i <= randomValue(5); i++)
             {
-                wagonlist.addItem(); // add random item thing
+                //wagonlist.addItem(); // add random item thing
             }
         }
     }
