@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.awt.*;
 
 import javax.swing.*;
+import net.miginfocom.swing.MigLayout;
 
 public class MainPanel extends JFrame{
 	
@@ -37,35 +38,35 @@ public class MainPanel extends JFrame{
 		
 		JLabel lblNewLabel = new JLabel("Date: ");
 		lblNewLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(lblNewLabel, "cell 9 0,alignx right");
+		panel.add(lblNewLabel, "cell 9 0,alignx right,growy");
 		
 		JLabel Date = new JLabel(date);
 		Date.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(Date, "cell 10 0");
+		panel.add(Date, "cell 10 0,grow");
 		
 		JLabel lblNewLabel_1 = new JLabel("Food: ");
 		lblNewLabel_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(lblNewLabel_1, "cell 9 1,alignx right");
+		panel.add(lblNewLabel_1, "cell 9 1,alignx right,growy");
 		
 		JLabel TotalFood = new JLabel(Integer.toString(wagon.getTotalFood()));
 		TotalFood.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(TotalFood, "cell 10 1");
+		panel.add(TotalFood, "cell 10 1,grow");
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Next Landmark: ");
 		lblNewLabel_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(lblNewLabel_1_1, "cell 9 2,alignx right");
+		panel.add(lblNewLabel_1_1, "cell 9 2,grow");
 		
 		JLabel landmarkLabel = new JLabel(Integer.toString(wagon.milesToLandmark()) + " miles");
 		landmarkLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(landmarkLabel, "cell 10 2");
+		panel.add(landmarkLabel, "cell 10 2,grow");
 		
 		JLabel lblNewLabel_2 = new JLabel("Miles Traveled: ");
 		lblNewLabel_2.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(lblNewLabel_2, "cell 9 3,alignx right");
+		panel.add(lblNewLabel_2, "cell 9 3,alignx right,growy");
 		
 		JLabel milesLabel = new JLabel(Integer.toString(wagon.getMilesTraveled()) + " miles");
 		milesLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(milesLabel, "cell 10 3");
+		panel.add(milesLabel, "cell 10 3,grow");
 		
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.CENTER);
