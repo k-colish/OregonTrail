@@ -101,33 +101,25 @@ public class Wagon {
 		}
 	}
 
-	public ArrayList<Item> getItems(){
-		return Items;
-	}
+	public ArrayList<Item> getItems(){return Items;}
 	
 	/**
 	 * setMilesPerDay - sets the miles traveled per day for travel calculations
 	 * @param miles - the number of miles to be traveled each day
 	 */
-	public void setMilesPerDay(int miles) {
-		milesPerDay = miles;
-	}
+	public void setMilesPerDay(int miles) {milesPerDay = miles;}
 	
 	/**
 	 * getMilesPerDay - gets the number of miles traveled per day
 	 * @return - milesPerDay - the number of miles traveled per day as an int
 	 */
-	public int getMilesPerDay() {
-		return milesPerDay;
-	}
+	public int getMilesPerDay() {return milesPerDay;}
 	
 	/**
 	 * setFoodConsumption - sets the food consumption rate for travel calculations
 	 * @param food - the rate at which each person consumes food each day
 	 */
-	public void setFoodConsumption(int food) {
-		foodConsumption = food;
-	}
+	public void setFoodConsumption(int food) {foodConsumption = food;}
 	
 	/**
 	 * getFoodConsumption - gets the amount of food each person consumes each day
@@ -154,24 +146,18 @@ public class Wagon {
 	 * getTotalDays - calculates the total number of days it will take to reach Oregon
 	 * @return totalDays -  the number of days it takes to reach Oregon
 	 */
-	public int getTotalDaysTraveled() {
-		return daysTraveled;
-	}
+	public int getTotalDaysTraveled() {return daysTraveled;}
 	
 	/**
 	 * getMilesTraveled - gets the number of miles traveled. 
 	 * @return - the number of miles traveled. 
 	 */
-	public int getMilesTraveled() {
-		return milesTraveled;
-	}
+	public int getMilesTraveled() {return milesTraveled;}
 	
 	/**
 	 * death - removes 1 member of party when a person dies
 	 */
-	public void death() {
-		numberOfPeople--;
-	}
+	public void death() {numberOfPeople--;}
 
 	public int addDays(int x) {return daysTraveled + x;}
 	
