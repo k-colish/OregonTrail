@@ -69,9 +69,10 @@ public class RandomEvents {
     private void Thief() //2% & lots of supplies lost
     {
         int food;
-        System.out.println("Thief");
+
         if (1 == randomValue(50))
         {
+            System.out.println("Thief");
             food = rnd.nextInt(125) + 1;
             //String wagonItem = wagonlist.get(randomValue(wagonItems));
            // if (wagonItem == allItems.get(randomValue(allItems.size())))
@@ -83,105 +84,122 @@ public class RandomEvents {
 
     private void indiansHelp() // 5% chance to get 30 pounds of food
     {
-        System.out.println("indians");
-        if (randomValue(20) == 1)
+
+        if (randomValue(20) == 1) {
             wagonlist.changeTotalFood(30);
+            System.out.println("indians");
+        }
     }
 
     private void servereThunderstorm() // 15%
     {
-        System.out.println("thunderstorm");
+
         int rmd = randomValue(17);
-        if (rmd == 1 || rmd == 2 || rmd == 3)
+        if (rmd == 1 || rmd == 2 || rmd == 3) {
             wagonlist.addDays(1);
+            System.out.println("thunderstorm");
+        }
     }
 
     private void severeBlizzard() // 15%
     {
-        System.out.println("blizzard");
         int rmd = randomValue(17);
-        if (rmd == 1 || rmd == 2 || rmd == 3)
+        if (rmd == 1 || rmd == 2 || rmd == 3){
+            System.out.println("blizzard");
             wagonlist.addDays(1);
+        }
     }
 
     private void heavyFog() // 6% after fort Hall & 50% lose a day
     {
-        System.out.println("FOG");
-        if (randomValue(2) == 1 )
+        if (randomValue(2) == 1 ) {
+            System.out.println("FOG");
             wagonlist.addDays(1);
+        }
     }
 
     private void hailStorm() // 6% before fort Hall & 50% lose a day
     {
-        System.out.println("hail");
-        if (randomValue(2) == 1 )
+
+        if (randomValue(2) == 1 ) {
+            System.out.println("hail");
             wagonlist.addDays(1);
+        }
     }
 
     private void deadOX() // 2.5%
     {
-        System.out.println("RIP OX");
+
         if (randomValue(40) == 1)
         {
-
+            System.out.println("RIP OX");
         }
             //add remove item method
     }
 
     private void injuredMember() // 2.5%
     {
-        System.out.println("you hurt? :(");
         if (randomValue(40) == 1)
         {
             //add sick/injured method
+            System.out.println("you hurt? :(");
         }
     }
 
     private void snakeBite() // 0.7%
     {
-        System.out.println("SNAKE");
+
         int rmd = randomValue(1000);
         if (rmd == 1 || rmd == 2 || rmd == 3 || rmd == 4 || rmd == 5 || rmd == 6 || rmd == 7)
         {
             //add sick/injured method
+            System.out.println("SNAKE");
         }
     }
 
     private void loseTrial() // Make this higher due to diriy //2%
     {
-        System.out.println("JERRY WRONG WAY AGAIN");
-        if (randomValue(10) == 1)
+
+        if (randomValue(10) == 1) {
             wagonlist.addDays(randomValue(5));
+            System.out.println("JERRY WRONG WAY AGAIN");
+        }
     }
 
     private void fruit() // 4% & 20 pounds
     {
-        System.out.println("BERRIES!!!");
-        if (randomValue(25) == 1)
+
+        if (randomValue(25) == 1) {
             wagonlist.changeTotalFood(20);
+            System.out.println("BERRIES!!!");
+        }
     }
 
     private void wagonFire() // 2% & lost supplies
     {
-        System.out.println("FIRE");
+
         if (randomValue(50) == 1)
         {
             // add remove item method
+            System.out.println("FIRE");
         }
     }
 
     private void memberLost() // 1% & lose 5 days
     {
-        System.out.println("GONE AGAIN");
-        if (randomValue(25) == 1)
+
+        if (randomValue(25) == 1) {
             wagonlist.addDays(5);
+            System.out.println("GONE AGAIN");
+        }
     }
 
     private void findWagon() // 2% & gained supplies
     {
-        System.out.println("LOOT");
+
         if (randomValue(25) == 1)
         {
+            System.out.println("LOOT");
             for (int i = 0; i <= randomValue(5); i++)
             {
                 //wagonlist.addItem(); // add random item thing
@@ -191,24 +209,29 @@ public class RandomEvents {
 
     private void oxWanders() // 1% & lose 3 days
     {
-        System.out.println("WHERE IT GO");
-        if (randomValue(25) == 1)
+
+        if (randomValue(25) == 1) {
             wagonlist.addDays(3);
+            System.out.println("WHERE IT GO");
+        }
     }
 
     private void water() // 15% & lose few pounds of food
     {
-        System.out.println("NEED WATER");
+
         int rmd = randomValue(17);
         if (rmd == 1 || rmd == 2 || rmd == 3)
             wagonlist.changeTotalFood(-randomValue(20));
+        System.out.println("NEED WATER");
     }
 
     private void badGrass() // 20%
     {
-        System.out.println("What is this blue grass?");
-        if (randomValue(20) == 1)
+
+        if (randomValue(20) == 1) {
             wagonlist.changeTotalFood(-randomValue(10));
+            System.out.println("What is this blue grass?");
+        }
     }
 
     private void illness() //0-40% based on health, person & disease random

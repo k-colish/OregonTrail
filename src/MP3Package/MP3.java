@@ -15,34 +15,16 @@
 
 package MP3Package;
 
-import java.awt.EventQueue; 
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-
-import javax.swing.SwingConstants;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.JButton;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
 
 public class MP3 {
 
@@ -143,7 +125,7 @@ public class MP3 {
 		// Check for sentinel value, this is true when all the people in the wagon are dead.
 		if (wagon.travel() == -1) {
 
-			// Display a lose message
+            // Display a loose message
 			JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE);
 			clock.stop();
 		} else {
@@ -222,22 +204,22 @@ public class MP3 {
 			itemData.useDelimiter(", ");
 			
 			// Instantiate temporary variables for item info
-			int tempAmmount;
+			int tempAmount;
 			String tempName = "";
 			double tempPrice = 0;
 			
 			// Get the data from the CSV and assign to the temp values to make an Item object	
-			tempAmmount = itemData.nextInt();
+			tempAmount = itemData.nextInt();
 			tempName = itemData.next();
 			tempPrice = itemData.nextDouble();
 			
 			// Debugging messages
-			System.out.print("Ammount: " + tempAmmount);
+			System.out.print("Amount: " + tempAmount);
 			System.out.println("Name: " + tempName);
 			System.out.println("Price: " + tempPrice);
 			
 			// Create a new Item object with the new information from the CSV file
-				Item item = new Item(tempAmmount, tempName, tempPrice);
+				Item item = new Item(tempAmount, tempName, tempPrice);
 				// Add the item to the ArrayList of all items
 				allItems.add(item);
 		}
@@ -299,14 +281,14 @@ public class MP3 {
 			}
 		});
 		
-		// Displays the total ammount of food that is in the wagon. Initial value displayed is set to 0.
+		// Displays the total amount of food that is in the wagon. Initial value displayed is set to 0.
 		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.getTotalFood());
 		TotalFoodLabel.setForeground(Color.WHITE);
 		TotalFoodLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		TotalFoodLabel.setBounds(250, 550, 170, 16);
 		loadWagonPanel.add(TotalFoodLabel);
 		
-		// [1] R. P. Bouchard, "Building the Mathematical Models" in You Have Died of Dysentry, R. P. Bouchard, 2016, ch. 16
+		// [1] R. P. Bouchard, "Building the Mathematical Models" in You Have Died of Dysentery, R. P. Bouchard, 2016, ch. 16
 		// "Filling" button sets the food consumption for each person to 3 lbs per person.
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Filling");
 		rdbtnNewRadioButton.setForeground(Color.WHITE);
@@ -349,7 +331,7 @@ public class MP3 {
 		rdbtnBareBones.setBounds(264, 608, 100, 23);
 		loadWagonPanel.add(rdbtnBareBones);
 		
-		// An "easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
+		// An "Easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
 		JButton talkButton = new JButton("Talk to People");
 		talkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -408,7 +390,7 @@ public class MP3 {
 		
 		
 		/* 
-		 * JButton for the user to select that calculates whether or not the user will make it
+		 * JButton for the user to select that calculates whether the user will make it
 		 * to Oregon with the amount of food, food consumption, and miles per day that were selected
 		 */
 		JButton travelButton = new JButton("Travel!");
