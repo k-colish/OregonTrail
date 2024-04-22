@@ -121,7 +121,6 @@ public class MP3 {
 		JLabel ImageLabel = new JLabel("");
 		ImageLabel.setBounds(0, 0, 734, 661);
 		loadWagonPanel.add(ImageLabel);
-		ImageLabel.setIcon(backgroundImage);
 
 	}
 	
@@ -252,8 +251,7 @@ public class MP3 {
 		frame = new MainPanel(wagon);
 		frame.setBounds(100, 100, 750, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout());
-		loadWagonPanel.setLayout(null);
+		
 		
 		// Instantiate timer
 		clock = new javax.swing.Timer(1000, new ActionListener() {
