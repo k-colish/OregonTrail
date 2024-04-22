@@ -169,7 +169,7 @@ public class Wagon {
 	public int travel() {
 		// Calculate the food consumed per day, (4 people * consumption rate)
 		int foodPerDay = numberOfPeople * foodConsumption;
-
+		events.allEvents();
 
 		daysTraveled++;
 		
