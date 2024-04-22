@@ -93,7 +93,5 @@ public class MainPanel extends JFrame{
 		Image img = backgroundImage.getImage();
 		Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		ImageJLabel.setIcon(new ImageIcon(newImg));
-		
 	}
-	
 }
