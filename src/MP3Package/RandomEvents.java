@@ -96,15 +96,17 @@ public class RandomEvents {
 
     private void Thief() //2% & lots of supplies lost, does not currently work
     {
-       /* if (1 == randomValue(50))
+        /*
+        if (1 == randomValue(50))
         {
             System.out.println("Thief");
             int food = randomValue(125);
+            wagonlist.changeTotalFood(food);
             for (int i = 0; i < randomValue(5); i++)
             {
                 String userItem = String.valueOf(wagonlist.getItems());
             }
-            JOptionPane.showMessageDialog(null, "You made it to " + springfield.getName() + "!", "You made it!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You have lost: " + springfield.getName() + "!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
 
 
             String wagonItem = wagonlist.getItems(randomValue(wagonlist.getItems().size()));
@@ -112,8 +114,10 @@ public class RandomEvents {
             {
                 wagonlist.changeItemamounts(wagonItem, randomValue(4));
             }
+            wagonlist.changeItemamounts(String itemName, int amount)
         }
-        wagonlist.changeItemamounts(String itemName, int amount)*/
+
+             */
     }
 
     private void indiansHelp() // 5% chance to get 30 pounds of food
