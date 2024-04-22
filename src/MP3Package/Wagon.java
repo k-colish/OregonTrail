@@ -95,10 +95,14 @@ public class Wagon {
 
 	public void changeItemamounts(String itemName, int amount) {
 		for (int i = 0; i < Items.size(); i++) {
-			if (itemName.equals(Items.get(i).getName())) {
+			if (itemName.equals(Items.get(i).getName()))
+			{
 				Item item = Items.get(i);
 				int currentAmount = item.getAmount();
-				item.setAmount(currentAmount + amount);
+				if (item.setAmount(currentAmount + amount) < 0)
+					item.setAmount(0);
+				else
+					item.setAmount(currentAmount + amount);
 				break;
 			}
 		}
@@ -139,9 +143,7 @@ public class Wagon {
 		return totalFood - totalFoodUsed;
 	}
 
-	public int changeTotalFood(int x) {
-		return totalFood + x;
-	}
+	public int changeTotalFood(int x) {return totalFood + x;}
 	
 	/**
 	 * getTotalDays - calculates the total number of days it will take to reach Oregon
