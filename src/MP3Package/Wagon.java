@@ -75,8 +75,7 @@ public class Wagon {
 		}
 		in.close();
 	}
-	
-	
+
 	/**
 	 *  addItem - Takes an Item object and adds it to the ArrayList of items that are in the wagon.
 	 * @param item - the item to be added to the wagon.
@@ -86,40 +85,22 @@ public class Wagon {
 		Items.add(item);
 		System.out.println("Item added");
 
-		
-		
 		// Prints out the list of items in the wagon for debugging purposes
 		for(int i = 0; i < Items.size(); i++) {
 			System.out.print(Items.get(i).getName() + ", ");
 		}
 		System.out.println();
 	}
-	
-	/**
-	 * removeItem - Takes and item and finds the matching item that is in the wagon, and removes it from the ArrayList of
-	 * items in the wagon
-	 * @param item - the item to be removed from the wagon
-	 */
-	public void removeItem(Item item) {
-		for(int i = 0; i < Items.size(); i++) {
-			final int j = i; // Make compiler happy
 
-			// Loop through items that are in the wagon, comparing the name of each item with the item passed to find a match
-			if(item.getName() == Items.get(j).getName()) {
-				// When a match is found, remove the item from the ArrayList
-				Items.remove(j);
+	public void changeItemamounts(String itemName, int amount) {
+		for (int i = 0; i < Items.size(); i++) {
+			if(itemName == Items.get(i).getName())
+			{
+				Items.get(i).setAmount(amount);
 			}
 		}
-		System.out.println("Item removed");
-		
-		// Prints out the list of items in the wagon for debugging purposes
-		for(int i = 0; i < Items.size(); i++) {
-			System.out.print(Items.get(i).getName() + ", ");
-		}
-		System.out.println();
 	}
-	
-	
+
 	public ArrayList<Item> getItems(){
 		return Items;
 	}
