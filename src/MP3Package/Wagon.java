@@ -14,7 +14,9 @@
 
 package MP3Package;
 
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Wagon {
 	// Initialize instance variables
@@ -26,17 +28,68 @@ public class Wagon {
     private int numberOfPeople = 4;        // Number of people in the wagon party
     private int totalFoodUsed = 0;         // Total food consumed during travel
     private int milesTraveled = 0;         // Total miles traveled
+	RandomEvents events = null;
     
 	// Initialize ArrayList of Item object that contains all of the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
+
+	public void Wagon(RandomEvents event)
+	{
+		events = event;
+	}
+	
+	// Initialize ArrayList of FoodItem objects that contains all of the FoodItems that have been added to the wagon
+	private ArrayList<FoodItem> food = new ArrayList<>();
+	
+	// Initialize ArrayList of Destinations objects that contains all of the Destinations that can be visited
+	private ArrayList<Destinations> destinations = new ArrayList<>();
+	
+	
+	public Wagon() {
+		InputStreamReader reader = null;
+		Scanner in = null;
+		String itemFile = "/csv/Destinations.csv";
+		
+		try {
+			reader = new InputStreamReader(this.getClass().getResourceAsStream(itemFile));
+		}
+		catch(Exception e) {
+			System.out.print("Could not open file ");
+		}
+		
+		// Create a InputStreamReader Scanner to read in the CSV file
+		in = new Scanner(reader);
+		
+		while(in.hasNext()) {
+			// Create a new Scanner with ", " as the delimiter
+			Scanner destData = new Scanner(in.nextLine());
+			destData.useDelimiter(",");
+			
+			String tempName = "";
+			int distance = 0;
+			boolean hasStore = false;
+			
+			tempName = destData.next();
+			distance = destData.nextInt();
+			if(destData.nextInt() == 1) {
+				hasStore = true;
+			}
+			
+			Destinations destination = new Destinations(distance, tempName, hasStore);
+			destinations.add(destination);
+		}
+		in.close();
+	}
 	
 	/**
 	 *  addItem - Takes an Item object and adds it to the ArrayList of items that are in the wagon.
 	 * @param item - the item to be added to the wagon.
 	 */
-	public void addItem(Item item) {
+	public void addItem(Item item)
+	{
 		Items.add(item);
 		System.out.println("Item added");
+
 		
 		
 		// Prints out the list of items in the wagon for debugging purposes
@@ -69,6 +122,7 @@ public class Wagon {
 		}
 		System.out.println();
 	}
+	
 	
 	public ArrayList<Item> getItems(){
 		return Items;
@@ -152,7 +206,8 @@ public class Wagon {
 	public int travel() {
 		// Calculate the food consumed per day, (4 people * consumption rate)
 		int foodPerDay = numberOfPeople * foodConsumption;
-		
+
+
 		daysTraveled++;
 		
 		// Calculate the total food used using the food used per day times the number of days to travel.
@@ -169,5 +224,18 @@ public class Wagon {
 		milesTraveled += milesPerDay; // Update total miles traveled
 		
 		return daysTraveled;
+	}
+	
+	/**
+	 * milesToLandmark - calculates the miles to the next landmark
+	 * @return - the distance to the next landmark
+	 */
+	public int milesToLandmark() {
+		for(int i = 0; i < destinations.size(); i++) {
+			if(milesTraveled >= destinations.get(i).getDistance() && milesTraveled < destinations.get(i + 1).getDistance()) {
+				return destinations.get(i + 1).getDistance() - milesTraveled;
+			}
+		}
+		return 0;
 	}
 }
