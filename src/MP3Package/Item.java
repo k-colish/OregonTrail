@@ -16,7 +16,7 @@ package MP3Package;
 
 public class Item {
 	// Initialize instance variables
-	private int amount;	  // The ammount of Item
+	private int amount;	  // The amount of Item
     private String name;      // The name item
     private double price;     // The price or value of the item
 	
@@ -26,8 +26,8 @@ public class Item {
 	 * @param name - the name of the item
 	 * @param price - the price of the item
 	 */
-	public Item(int ammount, String name,double price) {
-		this.amount = ammount;
+	public Item(int amount, String name,double price) {
+		this.amount = amount;
 		this.name = name;
 		this.price = price;
 	}
@@ -49,8 +49,8 @@ public class Item {
 	}
 	
 	/**
-	 * getAmmount - gets the ammount of an item you have
-	 * @returns ammount - the ammount of an item you have
+	 * getAmount - gets the amount of an item you have
+	 * @returns amount - the amount of an item you have
 	 */
 	public int getAmount() {
 		return amount;
