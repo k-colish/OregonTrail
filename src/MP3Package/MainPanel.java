@@ -2,17 +2,13 @@ package MP3Package;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Rectangle;
+
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Objects;
-
+import java.awt.*;
 
 import javax.swing.*;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Color;
 
 
 

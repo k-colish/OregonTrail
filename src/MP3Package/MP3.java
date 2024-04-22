@@ -249,12 +249,11 @@ public class MP3 {
 	 */
 	private void initialize() {
 				
-		frame = new JFrame();
+		frame = new MainPanel(wagon);
 		frame.setBounds(100, 100, 750, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout());
 		loadWagonPanel.setLayout(null);
-		openPanel(loadWagonPanel);
 		
 		// Instantiate timer
 		clock = new javax.swing.Timer(1000, new ActionListener() {
