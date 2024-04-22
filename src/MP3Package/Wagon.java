@@ -76,8 +76,7 @@ public class Wagon {
 		
 		in.close();
 	}
-	
-	
+
 	/**
 	 *  addItem - Takes an Item object and adds it to the ArrayList of items that are in the wagon.
 	 * @param item - the item to be added to the wagon.
@@ -87,67 +86,41 @@ public class Wagon {
 		Items.add(item);
 		System.out.println("Item added");
 
-		
-		
 		// Prints out the list of items in the wagon for debugging purposes
 		for(int i = 0; i < Items.size(); i++) {
 			System.out.print(Items.get(i).getName() + ", ");
 		}
 		System.out.println();
 	}
-	
-	/**
-	 * removeItem - Takes and item and finds the matching item that is in the wagon, and removes it from the ArrayList of
-	 * items in the wagon
-	 * @param item - the item to be removed from the wagon
-	 */
-	public void removeItem(Item item) {
-		for(int i = 0; i < Items.size(); i++) {
-			final int j = i; // Make compiler happy
 
-			// Loop through items that are in the wagon, comparing the name of each item with the item passed to find a match
-			if(item.getName() == Items.get(j).getName()) {
-				// When a match is found, remove the item from the ArrayList
-				Items.remove(j);
+	public void changeItemamounts(String itemName, int amount) {
+		for (int i = 0; i < Items.size(); i++) {
+			if(itemName == Items.get(i).getName())
+			{
+				Items.get(i).setAmount(amount);
 			}
 		}
-		System.out.println("Item removed");
-		
-		// Prints out the list of items in the wagon for debugging purposes
-		for(int i = 0; i < Items.size(); i++) {
-			System.out.print(Items.get(i).getName() + ", ");
-		}
-		System.out.println();
 	}
-	
-	
-	public ArrayList<Item> getItems(){
-		return Items;
-	}
+
+	public ArrayList<Item> getItems(){return Items;}
 	
 	/**
 	 * setMilesPerDay - sets the miles traveled per day for travel calculations
 	 * @param miles - the number of miles to be traveled each day
 	 */
-	public void setMilesPerDay(int miles) {
-		milesPerDay = miles;
-	}
+	public void setMilesPerDay(int miles) {milesPerDay = miles;}
 	
 	/**
 	 * getMilesPerDay - gets the number of miles traveled per day
 	 * @return - milesPerDay - the number of miles traveled per day as an int
 	 */
-	public int getMilesPerDay() {
-		return milesPerDay;
-	}
+	public int getMilesPerDay() {return milesPerDay;}
 	
 	/**
 	 * setFoodConsumption - sets the food consumption rate for travel calculations
 	 * @param food - the rate at which each person consumes food each day
 	 */
-	public void setFoodConsumption(int food) {
-		foodConsumption = food;
-	}
+	public void setFoodConsumption(int food) {foodConsumption = food;}
 	
 	/**
 	 * getFoodConsumption - gets the amount of food each person consumes each day
@@ -174,17 +147,13 @@ public class Wagon {
 	 * getTotalDays - calculates the total number of days it will take to reach Oregon
 	 * @return totalDays -  the number of days it takes to reach Oregon
 	 */
-	public int getTotalDaysTraveled() {
-		return daysTraveled;
-	}
+	public int getTotalDaysTraveled() {return daysTraveled;}
 	
 	/**
 	 * getMilesTraveled - gets the number of miles traveled. 
 	 * @return - the number of miles traveled. 
 	 */
-	public int getMilesTraveled() {
-		return milesTraveled;
-	}
+	public int getMilesTraveled() {return milesTraveled;}
 	
 	public Destinations getNextLandmark() {
 		for(int i = 0; i < destinations.size(); i++) {
@@ -198,9 +167,7 @@ public class Wagon {
 	/**
 	 * death - removes 1 member of party when a person dies
 	 */
-	public void death() {
-		numberOfPeople--;
-	}
+	public void death() {numberOfPeople--;}
 
 	public int addDays(int x) {return daysTraveled + x;}
 	
@@ -212,7 +179,7 @@ public class Wagon {
 	public int travel() {
 		// Calculate the food consumed per day, (4 people * consumption rate)
 		int foodPerDay = numberOfPeople * foodConsumption;
-
+		events.allEvents();
 
 		daysTraveled++;
 		
