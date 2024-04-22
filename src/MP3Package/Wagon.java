@@ -34,7 +34,7 @@ public class Wagon {
 	private ArrayList<Item> Items = new ArrayList<Item>();
 
 
-	// Initialize ArrayList of Destinations objects that contains all of the Destinations that can be visited
+	// Initialize ArrayList of Destinations objects that contains all the Destinations that can be visited
 	private ArrayList<Destinations> destinations = new ArrayList<>();
 	
 	
@@ -126,13 +126,11 @@ public class Wagon {
 	 * getFoodConsumption - gets the amount of food each person consumes each day
 	 * @return -  foodConsumption - the rate at which food is consumed as an int
 	 */
-	public int getFoodConsumption() {
-		return foodConsumption;
-	}
+	public int getFoodConsumption() {return foodConsumption;}
 	
 	/**
-	 * getTotalFood - calculates the total ammount of food that has been added to the wagon
-	 * @return - totalFood - the total ammount of food that has been added to the wagon
+	 * getTotalFood - calculates the total amount of food that has been added to the wagon
+	 * @return - totalFood - the total amount of food that has been added to the wagon
 	 */
 	public int getTotalFood() {
 		totalFood = 100;
@@ -173,7 +171,7 @@ public class Wagon {
 	
 	/**
 	 * travel - keeps track of the number of days the party has been traveling for. 
-	 * Also determines the ammount of food consumed by the party and if the party has enough food to survive
+	 * Also determines the amount of food consumed by the party and if the party has enough food to survive
 	 * @return - the number of days traveled
 	 */
 	public int travel() {
@@ -183,7 +181,7 @@ public class Wagon {
 
 		daysTraveled++;
 		
-		// Calculate the total food used using the food used per day times the number of days to travel.
+		// Calculate the total food  using the food used per day times the number of days to travel.
 		totalFoodUsed = foodPerDay * daysTraveled;
 		if(this.getTotalFood() <= 0) {
 			this.death();

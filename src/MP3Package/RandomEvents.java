@@ -63,7 +63,6 @@ public class RandomEvents {
         int rmd = rnd.nextInt(x) + 1;
         System.out.println("randomValue");
         return rmd;
-
     }
 
 
