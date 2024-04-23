@@ -11,13 +11,12 @@ import java.awt.*;
 
 import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainPanel extends JFrame{
 	
-	private GregorianCalendar calendar = new GregorianCalendar(1850, 2, 30);
-	private String pattern = "MMMMM dd, yyyy";
-	private SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
-	private String date = dateFormatter.format(calendar.getTime());
+	
 	
 	// File name and JLabel for use with the background image
 	private String filename = "/Images/AshHollow.JPG";
@@ -26,7 +25,7 @@ public class MainPanel extends JFrame{
 	private ImageIcon backgroundImage = new ImageIcon(Objects.requireNonNull(this.getClass().getResource(filename)));
 
 	
-	public MainPanel(Wagon wagon) {
+	public MainPanel(Wagon wagon, String date) {
 		System.out.println(this.getBounds().toString());
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -72,12 +71,16 @@ public class MainPanel extends JFrame{
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_3 = new JLabel("Press 'ENTER' to size up the situation");
+		JButton lblNewLabel_3 = new JButton("Click to start travel!");
+		lblNewLabel_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		lblNewLabel_3.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setOpaque(true);
+		lblNewLabel_3.setForeground(Color.BLACK);
 		lblNewLabel_3.setBackground(Color.BLACK);
 		panel_1.add(lblNewLabel_3, BorderLayout.SOUTH);
 		
