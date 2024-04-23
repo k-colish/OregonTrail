@@ -1,18 +1,14 @@
 package MP3Package;
 
 import javax.swing.*;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class RandomEvents {
     Random rnd = new Random();
     private final ArrayList<String> allItems = new ArrayList<String>();
     Wagon wagonlist;
-    int wagonItems;
 
     public RandomEvents(Wagon wagon)
     {
@@ -22,14 +18,14 @@ public class RandomEvents {
 
     public void allItemsCSV()
     {
+        InputStreamReader reader = null;
         try {
-            List<String> lines = Files.readAllLines(Paths.get("/csv/AllItems.csv"));
-            String itemName = "";
-            System.out.println("Item: " + itemName);
-            allItems.add(itemName);
+            reader = new InputStreamReader(this.getClass().getResourceAsStream("/csv/AllItems.csv"));
+            System.out.println("Item: " + reader);
+            allItems.add(String.valueOf(reader));
         }
-        catch (IOException e) {
-        System.err.println("Error reading CSV file: " + e.getMessage());
+        catch(Exception e) {
+            System.err.println("Error reading CSV file: " + e.getMessage());
         }
     }
 
@@ -38,7 +34,7 @@ public class RandomEvents {
         switch(randomValue(18)) {
             case 1: Thief(); break;
             case 2: indiansHelp(); break;
-            case 3: servereThunderstorm(); break;
+            case 3: severeThunderstorm(); break;
             case 4: severeBlizzard(); break;
             case 5: heavyFog(); break;
             case 6: hailStorm(); break;
@@ -76,7 +72,7 @@ public class RandomEvents {
     public void environmentEvents()
     {
         switch(randomValue(6)) {
-            case 1: servereThunderstorm(); break;
+            case 1: severeThunderstorm(); break;
             case 2: severeBlizzard(); break;
             case 3: heavyFog(); break;
             case 4: hailStorm(); break;
@@ -88,7 +84,7 @@ public class RandomEvents {
 
     private int randomValue(int x) {
         int rmd = rnd.nextInt(x) + 1;
-        System.out.println("randomValue");
+        System.out.println("randomValue" + rmd);
         return rmd;
     }
 
@@ -101,13 +97,14 @@ public class RandomEvents {
         {
             System.out.println("Thief");
             int food = randomValue(125);
-            wagonlist.changeTotalFood(food);
+            wagonlist.changeTotalFood(-food);
             for (int i = 0; i < randomValue(5); i++)
             {
                 int j = randomValue(wagonlist.getItems().size());
                 lostItems = lostItems + ThiefItems.get(j) + "\n";
             }
-            JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + "and" + food  + "pounds of food!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + "and" + food  +
+                    "pounds of food!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
@@ -118,14 +115,19 @@ public class RandomEvents {
 
         if (randomValue(20) == 1) {
             wagonlist.changeTotalFood(30);
+            JOptionPane.showMessageDialog(null, "You have gained 30 pounds of food!",
+                    "Indians have come to help", JOptionPane.INFORMATION_MESSAGE);
+
             System.out.println("indians");
         }
     }
 
-    private void servereThunderstorm() // 15%
+    private void severeThunderstorm() // 15%
     {
         if (randomValue(17) <= 3) {
             wagonlist.addDays(1);
+            JOptionPane.showMessageDialog(null, "You got stuck in a thunderstorm and lost one day.",
+                    "Severe Thunderstorm", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("thunderstorm");
         }
     }
@@ -133,8 +135,10 @@ public class RandomEvents {
     private void severeBlizzard() // 15%
     {
         if (randomValue(17) <= 3){
-            System.out.println("blizzard");
             wagonlist.addDays(1);
+            JOptionPane.showMessageDialog(null, "You got stuck in a blizzard and lost one day.",
+                    "Severe Blizzard", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("blizzard");
         }
     }
 
@@ -143,6 +147,8 @@ public class RandomEvents {
         if (randomValue(2) == 1 ) {
             System.out.println("FOG");
             wagonlist.addDays(1);
+            JOptionPane.showMessageDialog(null, "You got stuck in heavy fog and lost one day.",
+                    "Heavy Fog", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -152,6 +158,8 @@ public class RandomEvents {
         if (randomValue(2) == 1 ) {
             System.out.println("hail");
             wagonlist.addDays(1);
+            JOptionPane.showMessageDialog(null, "You got stuck in a hail storm and lost one " +
+                            "day.", "Hail Storm", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -161,6 +169,9 @@ public class RandomEvents {
         if (randomValue(40) == 1)
         {
             System.out.println("RIP OX");
+            JOptionPane.showMessageDialog(null, "One of your oxen has died.", "Oxen died",
+                    JOptionPane.INFORMATION_MESSAGE);
+
         }
             //add remove item method
     }
@@ -187,8 +198,12 @@ public class RandomEvents {
     {
 
         if (randomValue(20) == 1) {
-            wagonlist.addDays(randomValue(5));
+            int rmd = randomValue(5);
+            wagonlist.addDays(rmd);
             System.out.println("JERRY WRONG WAY AGAIN");
+            JOptionPane.showMessageDialog(null, "You have gone the wrong way and lost " + rmd +
+                    " days.", "Wrong Way!", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 
@@ -198,6 +213,9 @@ public class RandomEvents {
         if (randomValue(25) == 1) {
             wagonlist.changeTotalFood(20);
             System.out.println("BERRIES!!!");
+            JOptionPane.showMessageDialog(null, "You have found berries and gained 20 pounds" +
+                    " of food. ", "BERRIES!!!", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 
@@ -239,22 +257,30 @@ public class RandomEvents {
         if (randomValue(25) == 1) {
             wagonlist.addDays(3);
             System.out.println("WHERE IT GO");
+            JOptionPane.showMessageDialog(null, "An ox wandered off and lost 3 days to find " +
+                    "it.", "Lost Ox", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     private void water() // 15% & lose few pounds of food
     {
         if (randomValue(17) <= 3) {
-            wagonlist.changeTotalFood(-randomValue(20));
+            int rmd = randomValue(20);
+            wagonlist.changeTotalFood(-rmd);
+            JOptionPane.showMessageDialog(null, "Your water got contaminated, you lost " +
+                    rmd + " pounds of food.", "Bad Water", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("NEED WATER");
         }
     }
 
-    private void badGrass() // 20%
+    private void badGrass() // 20% & lose few pounds of food
     {
 
         if (randomValue(20) == 1) {
-            wagonlist.changeTotalFood(-randomValue(10));
+            int rmd = randomValue(10);
+            wagonlist.changeTotalFood(-rmd);
+            JOptionPane.showMessageDialog(null, "The oxen got in your food due to little" +
+                    " grass, you lost " + rmd + " pounds of food.", "Bad Grass", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("What is this blue grass?");
         }
     }

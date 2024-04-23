@@ -145,7 +145,13 @@ public class Wagon {
 		return totalFood - totalFoodUsed;
 	}
 
-	public int changeTotalFood(int x) {return totalFood + x;}
+	public void changeTotalFood(int x)
+	{
+		if (totalFood + x < 0)
+			totalFood = 0;
+		else
+		 totalFood += x;
+	}
 	
 	/**
 	 * getTotalDays - calculates the total number of days it will take to reach Oregon
