@@ -15,7 +15,6 @@ import java.util.ArrayList;
  */
 public class Forts extends JPanel {
 
-    String itemFile = "/csv/FortStock.csv";
     private final ArrayList<JRadioButton> itemButtons = new ArrayList<>();
     private final JLabel moneyAmountLabel; // Label to display the current amount of money available
     private static double moneyTotal = 1000; // Total amount of money available to spend at start
@@ -38,13 +37,13 @@ public class Forts extends JPanel {
         buySelectedButton.setBounds(150, 320, 100, 30);
         add(buySelectedButton);
 
-        loadItemsFromCSV();
+        makeStoreFrame();
     }
 
     /**
-     * Loads items from a CSV file and displays them as checkboxes with associated costs.
+     * Sets up all of the buttons in the store frame
      */
-    private void loadItemsFromCSV() {
+    private void makeStoreFrame() {
                         JOptionPane pane = null;
                         
                         JRadioButton rbtnFood = new JRadioButton("Food" + " - $" + (0.40 + 0.4 * (wagon.getMilesTraveled() / 10000)));
