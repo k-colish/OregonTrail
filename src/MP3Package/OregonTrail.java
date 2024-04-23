@@ -22,11 +22,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class MP3 {
+public class OregonTrail {
 
 	private JFrame frame;
 	
@@ -74,6 +76,11 @@ public class MP3 {
 	// springfield is the second landmark (last for this version)
 	private Destinations springfield = new Destinations(280, "Springfield, Illinois", true);
 	private JPanel loadWagonPanel = new JPanel();
+	
+	private GregorianCalendar calendar = new GregorianCalendar(1850, 2, 30);
+	private String pattern = "MMMMM dd, yyyy";
+	private SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
+	private String date = dateFormatter.format(calendar.getTime());
 
 	/**
 	 * Launch the application.
@@ -83,7 +90,7 @@ public class MP3 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MP3 window = new MP3();
+					OregonTrail window = new OregonTrail();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -95,7 +102,7 @@ public class MP3 {
 	/**
 	 * Create the application.
 	 */
-	public MP3() {
+	public OregonTrail() {
 		readFile();
 		initialize();
 		
@@ -231,7 +238,7 @@ public class MP3 {
 	private void initialize() {
 				
 //		frame = new JFrame();
-		frame = new MainPanel(wagon);
+		frame = new MainPanel(wagon, date);
 		frame.setBounds(100, 100, 750, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		openPanel(loadWagonPanel);
