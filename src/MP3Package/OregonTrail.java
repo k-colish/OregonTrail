@@ -15,12 +15,9 @@
 
 package MP3Package;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -285,7 +282,7 @@ public class OregonTrail {
 		travelButton.setVerticalAlignment(SwingConstants.TOP);
 		travelButton.setHorizontalAlignment(SwingConstants.CENTER);
 		travelButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		travelButton.setForeground(Color.WHITE);
+		travelButton.setForeground(Color.BLACK); //gitignore
 		travelButton.setBackground(Color.BLACK);
 		travelButton.setOpaque(true);
 		panel_1.add(travelButton, BorderLayout.SOUTH);
