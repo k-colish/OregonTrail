@@ -296,27 +296,19 @@ public class RandomEvents {
     {
         System.out.println("sick");
     }
-    
-    
     /**
      * determines if you have successfully scavenged for food
      */
     private void scavenge() {
-    	int rnd = randomValue(100); 		// Range for seeing if you successfully get food
-    	int rand = randomValue(60)+20;		// Range of how much food you can get from a successful scavenging trip
-    	
-    	if (rnd<70) {
-    		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! You have gained " + rand + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-    		ArrayList<Item> items = wagonlist.getItems();
-    		for(int i = 0; i < items.size(); i++) {
-    			if(items.get(i).getName() == "Food") {
-    				wagonlist.addItemAmount(items.get(i), rand);
-    			}
-    		}
+        int rnd = randomValue(60)+19;
+    	if (randomValue(10) < 7) {
+    		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
+                    "You have gained " + rnd + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+    		wagonlist.changeTotalFood(rnd);
     	}
     	else {
-    		JOptionPane.showMessageDialog(null, "You did not find any food. Better luck next time...", "FAILED", JOptionPane.INFORMATION_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "You did not find any food. Better luck " +
+                    "next time...", "FAILED", JOptionPane.INFORMATION_MESSAGE);
     	}
-    	
     }
 }
