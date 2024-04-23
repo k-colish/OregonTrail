@@ -287,6 +287,7 @@ public class OregonTrail {
 		travelButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		travelButton.setForeground(Color.WHITE);
 		travelButton.setBackground(Color.BLACK);
+		travelButton.setOpaque(true);
 		panel_1.add(travelButton, BorderLayout.SOUTH);
 		
 		JLabel ImageJLabel = new JLabel("");
