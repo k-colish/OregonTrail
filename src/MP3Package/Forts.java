@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * The Forts class represents a GUI application for managing items with associated costs.
@@ -14,9 +13,6 @@ import java.util.ArrayList;
  * @version 1.0.0 - 4/16/24
  */
 public class Forts extends JPanel {
-
-    String itemFile = "/csv/FortStock.csv";
-    private final ArrayList<JRadioButton> itemButtons = new ArrayList<>();
     private final JLabel moneyAmountLabel; // Label to display the current amount of money available
     private static double moneyTotal = 1000; // Total amount of money available to spend at start
     private static Wagon wagon = null;
