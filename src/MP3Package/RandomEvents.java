@@ -1,7 +1,6 @@
 package MP3Package;
 
 import javax.swing.*;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,20 +12,6 @@ public class RandomEvents {
     public RandomEvents(Wagon wagon)
     {
         wagonlist = wagon;
-        allItemsCSV();
-    }
-
-    public void allItemsCSV()
-    {
-        InputStreamReader reader = null;
-        try {
-            reader = new InputStreamReader(this.getClass().getResourceAsStream("/csv/AllItems.csv"));
-            System.out.println("Item: " + reader);
-            allItems.add(String.valueOf(reader));
-        }
-        catch(Exception e) {
-            System.err.println("Error reading CSV file: " + e.getMessage());
-        }
     }
 
     public void allEvents()
@@ -92,8 +77,7 @@ public class RandomEvents {
     private void Thief() //2% & lots of supplies lost, does not currently work
     {
         String lostItems = "";
-        if (randomValue(50) == 1)
-        {
+        if (randomValue(50) == 1) {
             System.out.println("Thief");
             int food = randomValue(125);
             wagonlist.changeTotalFood(-food);
@@ -162,8 +146,7 @@ public class RandomEvents {
 
     private void deadOX() // 2.5%
     {
-        if (randomValue(40) == 1)
-        {
+        if (randomValue(40) == 1) {
             System.out.println("RIP OX");
             JOptionPane.showMessageDialog(null, "One of your oxen has died.", "Oxen died",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -172,8 +155,7 @@ public class RandomEvents {
 
     private void injuredMember() // 2.5%
     {
-        if (randomValue(40) == 1)
-        {
+        if (randomValue(40) == 1) {
             //add sick/injured method
             System.out.println("you hurt? :(");
         }
@@ -181,8 +163,7 @@ public class RandomEvents {
 
     private void snakeBite() // 0.7%
     {
-        if (randomValue(1000) <= 7)
-        {
+        if (randomValue(1000) <= 7) {
             //add sick/injured method
             System.out.println("SNAKE");
         }
@@ -212,8 +193,7 @@ public class RandomEvents {
     private void wagonFire() // 2% & lost supplies
     {
         String lostItems = "";
-        if (randomValue(50) == 1)
-        {
+        if (randomValue(50) == 1) {
             System.out.println("FIRE!");
             int food = randomValue(250);
             wagonlist.changeTotalFood(-food);
@@ -242,8 +222,7 @@ public class RandomEvents {
     private void findWagon() // 2% & gained supplies
     {
         String freeItems = "";
-        if (randomValue(25) == 1)
-        {
+        if (randomValue(25) == 1) {
             System.out.println("LOOT");
             int food = randomValue(125);
             wagonlist.changeTotalFood(food);
@@ -301,7 +280,7 @@ public class RandomEvents {
      */
     private void scavenge() {
         int rnd = randomValue(60)+19;
-    	if (randomValue(10) < 7) {
+    	if (randomValue(10) <= 7) {
     		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
                     "You have gained " + rnd + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
     		wagonlist.changeTotalFood(rnd);

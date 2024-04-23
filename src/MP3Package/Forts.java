@@ -43,118 +43,119 @@ public class Forts extends JPanel {
     /**
      * Sets up all of the buttons in the store frame
      */
-    private void makeStoreFrame() {
-                        JOptionPane pane = null;
-                        
-                        JRadioButton rbtnFood = new JRadioButton("Food" + " - $" + (0.40 + 0.4 * (wagon.getMilesTraveled() / 10000)));
-                        rbtnFood.setBounds(10, 50, 200, 30);
-                        add(rbtnFood);
-                        rbtnFood.addActionListener(new ActionListener() {
-                			public void actionPerformed(ActionEvent e) {
-                				double itemCost = (0.40 + 0.4 * (wagon.getMilesTraveled() / 10000));
-                				String input;
-                				double result;
-                				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
-                				result = Double.parseDouble(input);
-                				System.out.println(result);
-                				spendMoney(itemCost,result);
-                			}
-                		});
-                        
-                        JRadioButton rbtnOxen = new JRadioButton("Yoke of Oxen" + " - $" + (40.00 + 40.00 * (wagon.getMilesTraveled() / 10000)));
-                        rbtnOxen.setBounds(10, 90, 200, 30);
-                        add(rbtnOxen);
-                        rbtnOxen.addActionListener(new ActionListener() {
-                			public void actionPerformed(ActionEvent e) {
-                				double itemCost = (40.00 + 40.00 * (wagon.getMilesTraveled() / 10000));
-                				String input;
-                				double result1 = 0;
-                				double result;
-                				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
-                				result1 = Double.parseDouble(input);
-                				result = 2*result1;
-                				System.out.println(result);
-                				spendMoney(itemCost,result1);
-                			}
-                		});
-                        
-                        JRadioButton rbtnClothing = new JRadioButton("Clothing" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
-                        rbtnClothing.setBounds(10, 130, 200, 30);
-                        add(rbtnClothing);
-                        rbtnClothing.addActionListener(new ActionListener() {
-                			public void actionPerformed(ActionEvent e) {
-                				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
-                				String input;
-                				double result;
-                				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
-                				result = Double.parseDouble(input);
-                				System.out.println(result);
-                				spendMoney(itemCost,result);
-                			}
-                		});
-                        
-                        JRadioButton rbtnWagonWheel = new JRadioButton("Wagon Wheel" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
-                        rbtnWagonWheel.setBounds(10, 170, 200, 30);
-                        add(rbtnWagonWheel);
-                        rbtnWagonWheel.addActionListener(new ActionListener() {
-                			public void actionPerformed(ActionEvent e) {
-                				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
-                				String input;
-                				double result;
-                				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
-                				result = Double.parseDouble(input);
-                				System.out.println(result);
-                				spendMoney(itemCost,result);
-                			}
-                		});
-                        
-                        JRadioButton rbtnWagonTongue = new JRadioButton("Wagon Tongue" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
-                        rbtnWagonTongue.setBounds(10, 210, 200, 30);
-                        add(rbtnWagonTongue);
-                        rbtnWagonTongue.addActionListener(new ActionListener() {
-                			public void actionPerformed(ActionEvent e) {
-                				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
-                				String input;
-                				double result;
-                				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
-                				result = Double.parseDouble(input);
-                				System.out.println(result);
-                				spendMoney(itemCost,result);
-                			}
-                		});
-                        
-                        JRadioButton rbtnWagonAxle = new JRadioButton("Wagon Axle" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
-                        rbtnWagonAxle.setBounds(10, 250, 200, 30);
-                        add(rbtnWagonAxle);
-                        rbtnWagonAxle.addActionListener(new ActionListener() {
-                			public void actionPerformed(ActionEvent e) {
-                				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
-                				String input;
-                				double result;
-                				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
-                				result = Double.parseDouble(input);
-                				System.out.println(result);
-                				spendMoney(itemCost,result);
-                			}
-                		});
+    private void makeStoreFrame()
+	{
+		JOptionPane pane = null;
 
-                        
-                     // Initializing a button group, so only one radio button can be selected at one time
-                		ButtonGroup storeButtons = new ButtonGroup();
-                		storeButtons.add(rbtnFood);
-                		storeButtons.add(rbtnOxen);
-                		storeButtons.add(rbtnClothing);
-                		storeButtons.add(rbtnWagonWheel);
-                		storeButtons.add(rbtnWagonTongue);
-                		storeButtons.add(rbtnWagonAxle);
-                		
-                		
-                		// Update UI on the Event Dispatch Thread
-                        SwingUtilities.invokeLater(() -> {
-                            revalidate(); // Refresh the layout
-                            repaint();    // Repaint the JFrame
-                        });	
-                    }
+		JRadioButton rbtnFood = new JRadioButton("Food" + " - $" + (0.40 + 0.4 * (wagon.getMilesTraveled() / 10000)));
+		rbtnFood.setBounds(10, 50, 200, 30);
+		add(rbtnFood);
+		rbtnFood.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double itemCost = (0.40 + 0.4 * (wagon.getMilesTraveled() / 10000));
+				String input;
+				double result;
+				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
+				result = Double.parseDouble(input);
+				System.out.println(result);
+				spendMoney(itemCost, result);
+			}
+		});
+
+		JRadioButton rbtnOxen = new JRadioButton("Yoke of Oxen" + " - $" + (40.00 + 40.00 * (wagon.getMilesTraveled() / 10000)));
+		rbtnOxen.setBounds(10, 90, 200, 30);
+		add(rbtnOxen);
+		rbtnOxen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double itemCost = (40.00 + 40.00 * (wagon.getMilesTraveled() / 10000));
+				String input;
+				double result1 = 0;
+				double result;
+				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
+				result1 = Double.parseDouble(input);
+				result = 2 * result1;
+				System.out.println(result);
+				spendMoney(itemCost, result1);
+			}
+		});
+
+		JRadioButton rbtnClothing = new JRadioButton("Clothing" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
+		rbtnClothing.setBounds(10, 130, 200, 30);
+		add(rbtnClothing);
+		rbtnClothing.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
+				String input;
+				double result;
+				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
+				result = Double.parseDouble(input);
+				System.out.println(result);
+				spendMoney(itemCost, result);
+			}
+		});
+
+		JRadioButton rbtnWagonWheel = new JRadioButton("Wagon Wheel" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
+		rbtnWagonWheel.setBounds(10, 170, 200, 30);
+		add(rbtnWagonWheel);
+		rbtnWagonWheel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
+				String input;
+				double result;
+				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
+				result = Double.parseDouble(input);
+				System.out.println(result);
+				spendMoney(itemCost, result);
+			}
+		});
+
+		JRadioButton rbtnWagonTongue = new JRadioButton("Wagon Tongue" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
+		rbtnWagonTongue.setBounds(10, 210, 200, 30);
+		add(rbtnWagonTongue);
+		rbtnWagonTongue.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
+				String input;
+				double result;
+				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
+				result = Double.parseDouble(input);
+				System.out.println(result);
+				spendMoney(itemCost, result);
+			}
+		});
+
+		JRadioButton rbtnWagonAxle = new JRadioButton("Wagon Axle" + " - $" + (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
+		rbtnWagonAxle.setBounds(10, 250, 200, 30);
+		add(rbtnWagonAxle);
+		rbtnWagonAxle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
+				String input;
+				double result;
+				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
+				result = Double.parseDouble(input);
+				System.out.println(result);
+				spendMoney(itemCost, result);
+			}
+		});
+
+
+		// Initializing a button group, so only one radio button can be selected at one time
+		ButtonGroup storeButtons = new ButtonGroup();
+		storeButtons.add(rbtnFood);
+		storeButtons.add(rbtnOxen);
+		storeButtons.add(rbtnClothing);
+		storeButtons.add(rbtnWagonWheel);
+		storeButtons.add(rbtnWagonTongue);
+		storeButtons.add(rbtnWagonAxle);
+
+
+		// Update UI on the Event Dispatch Thread
+		SwingUtilities.invokeLater(() -> {
+			revalidate(); // Refresh the layout
+			repaint();    // Repaint the JFrame
+		});
+	}
     
     /**
      * Deducts the specified cost from the current money amount.
