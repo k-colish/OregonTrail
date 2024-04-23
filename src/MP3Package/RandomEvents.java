@@ -112,7 +112,6 @@ public class RandomEvents {
 
     private void indiansHelp() // 5% chance to get 30 pounds of food
     {
-
         if (randomValue(20) == 1) {
             wagonlist.changeTotalFood(30);
             JOptionPane.showMessageDialog(null, "You have gained 30 pounds of food!",
@@ -126,8 +125,8 @@ public class RandomEvents {
     {
         if (randomValue(17) <= 3) {
             wagonlist.addDays(1);
-            JOptionPane.showMessageDialog(null, "You got stuck in a thunderstorm and lost one day.",
-                    "Severe Thunderstorm", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You got stuck in a thunderstorm and" +
+                            " lost one day.","Severe Thunderstorm", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("thunderstorm");
         }
     }
@@ -165,13 +164,11 @@ public class RandomEvents {
 
     private void deadOX() // 2.5%
     {
-
         if (randomValue(40) == 1)
         {
             System.out.println("RIP OX");
             JOptionPane.showMessageDialog(null, "One of your oxen has died.", "Oxen died",
                     JOptionPane.INFORMATION_MESSAGE);
-
         }
             //add remove item method
     }
@@ -196,14 +193,12 @@ public class RandomEvents {
 
     private void loseTrial() // Make this higher due to diriy // 2% // set to 5%
     {
-
         if (randomValue(20) == 1) {
             int rmd = randomValue(5);
             wagonlist.addDays(rmd);
             System.out.println("JERRY WRONG WAY AGAIN");
             JOptionPane.showMessageDialog(null, "You have gone the wrong way and lost " + rmd +
                     " days.", "Wrong Way!", JOptionPane.INFORMATION_MESSAGE);
-
         }
     }
 
