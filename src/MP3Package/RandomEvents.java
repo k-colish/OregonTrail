@@ -91,7 +91,6 @@ public class RandomEvents {
 
     private void Thief() //2% & lots of supplies lost, does not currently work
     {
-        ArrayList<Item> ThiefItems = wagonlist.getItems();
         String lostItems = "";
         if (1 == randomValue(50))
         {
@@ -100,11 +99,13 @@ public class RandomEvents {
             wagonlist.changeTotalFood(-food);
             for (int i = 0; i < randomValue(5); i++)
             {
+                ArrayList<Item> ThiefItems = wagonlist.getItems();
                 int j = randomValue(wagonlist.getItems().size());
                 lostItems = lostItems + ThiefItems.get(j) + "\n";
+                wagonlist.changeItemamounts(ThiefItems.get(j), -1);
             }
-            JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + "and" + food  +
-                    "pounds of food!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + " and " + food
+                    + " pounds of food!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
@@ -235,14 +236,23 @@ public class RandomEvents {
 
     private void findWagon() // 2% & gained supplies
     {
-
+        String freeItems = "";
         if (randomValue(25) == 1)
         {
             System.out.println("LOOT");
-            for (int i = 0; i <= randomValue(5); i++)
+            int food = randomValue(125);
+            wagonlist.changeTotalFood(food);
+            for (int i = 0; i < randomValue(5); i++)
             {
-                //wagonlist.addItem(); // add random item thing
+                ArrayList<Item> LootItems = wagonlist.getItems();
+                int j = randomValue(wagonlist.getItems().size());
+                freeItems = freeItems + LootItems.get(j) + "\n";
+                wagonlist.changeItemamounts(LootItems.get(j), 1);
             }
+            JOptionPane.showMessageDialog(null, "You have found a deserted wagon it had: "
+                    + freeItems + " and " + food  + " pounds of food!", "FREE LOOT!",
+                    JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 

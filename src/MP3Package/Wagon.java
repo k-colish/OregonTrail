@@ -93,7 +93,7 @@ public class Wagon {
 		System.out.println();
 	}
 
-	public void changeItemamounts(String itemName, int amount) {
+	public void changeItemamounts(Item itemName, int amount) {
 		for (int i = 0; i < Items.size(); i++) {
 			if (itemName.equals(Items.get(i).getName()))
 			{
