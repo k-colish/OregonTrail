@@ -21,8 +21,8 @@ import java.util.Scanner;
 public class Wagon {
 	// Initialize instance variables
 	private int totalFood = 0;      	   // Total of all food in the wagon
-    private int foodConsumption;           // Food consumption rate per person per day
-    private int milesPerDay;               // Distance traveled per day in miles
+    private int foodConsumption = 3;           // Food consumption rate per person per day
+    private int milesPerDay = 20;               // Distance traveled per day in miles
     private int totalDays;                 // Total number of days required to reach the destination
     private int daysTraveled;              // Number of days the wagon has been traveling
     private int numberOfPeople = 4;        // Number of people in the wagon party
