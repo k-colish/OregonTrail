@@ -69,16 +69,6 @@ public class OregonTrail {
 	// Create a DestinationActivites object (Currently not used)
 	private DestinationActivities activity = new DestinationActivities();
 	
-	// Instantiate Destinations objects for each of the landmarks
-	// cheviot is the start location
-	private Destinations cheviot = new Destinations(0, "Cheviot, Ohio", true);
-	
-	// paris is the first landmark on the trail
-	private Destinations paris = new Destinations(180, "Paris, Illinois", true);
-	
-	// springfield is the second landmark (last for this version)
-	private Destinations springfield = new Destinations(280, "Springfield, Illinois", true);
-	private JPanel loadWagonPanel = new JPanel();
 	
 	private GregorianCalendar calendar = new GregorianCalendar(1850, 2, 30);
 	private String pattern = "MMMMM d, yyyy";
@@ -112,12 +102,6 @@ public class OregonTrail {
 	public OregonTrail() {
 		readFile();
 		initialize();
-		
-		// Sets a JLabel for the background image
-		JLabel ImageLabel = new JLabel("");
-		ImageLabel.setBounds(0, 0, 734, 661);
-		loadWagonPanel.add(ImageLabel);
-
 	}
 	
 	public void openPanel(JPanel panelOpen) {
@@ -185,20 +169,6 @@ public class OregonTrail {
 	}
 	
 	/**
-	 * milesToLandmark - calculates the miles to the next landmark
-	 * @return - the distance to the next landmark
-	 */
-	public int milesToLandmark() {
-		
-		// If travel distance is less than distance to paris from start, return the difference
-		if(paris.getDistance() > wagon.getMilesTraveled())
-			return paris.getDistance() - wagon.getMilesTraveled();
-		
-		// else return the difference between distance traveled and distance to Springfield from start
-		else return springfield.getDistance() - wagon.getMilesTraveled();
-	}
-	
-	/**
 	 * readFile - reads from a CSV file with a list of the items that can be added to the wagon,
 	 *  including their weight, name, and whether they are a food item. This method generates 
 	 *  an Item object for each line in the CSV file, and adds them to the ArrayList of all items.
@@ -255,11 +225,6 @@ public class OregonTrail {
 //		frame = new MainPanel(wagon, date);
 		frame.setBounds(100, 100, 750, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		openPanel(loadWagonPanel);
-		
-		
-		
-		
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -272,7 +237,7 @@ public class OregonTrail {
 		lblNewLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel, "cell 9 0,alignx right,growy");
 		
-		
+		// Formatting for Date JLabel
 		Date.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(Date, "cell 10 0,grow");
 		
@@ -280,7 +245,7 @@ public class OregonTrail {
 		lblNewLabel_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_1, "cell 9 1,alignx right,growy");
 		
-		
+		// Formatting for TotalFood JLabel
 		TotalFood.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(TotalFood, "cell 10 1,grow");
 		
@@ -288,7 +253,7 @@ public class OregonTrail {
 		lblNewLabel_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_1_1, "cell 9 2,grow");
 		
-		
+		// Formatting for landmarkLabel JLabel
 		landmarkLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(landmarkLabel, "cell 10 2,grow");
 		
@@ -296,7 +261,7 @@ public class OregonTrail {
 		lblNewLabel_2.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_2, "cell 9 3,alignx right,growy");
 		
-		
+		// Formatting for milesLabel JLabel
 		milesLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(milesLabel, "cell 10 3,grow");
 		

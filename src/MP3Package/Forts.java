@@ -18,8 +18,7 @@ public class Forts extends JPanel {
     String itemFile = "/csv/FortStock.csv";
     private final ArrayList<JRadioButton> itemButtons = new ArrayList<>();
     private final JLabel moneyAmountLabel; // Label to display the current amount of money available
-    private double moneyTotal = 1000; // Total amount of money available to spend at start
-    private final double fortcost = 6.5; // Multiplier to calculate item cost based on the base cost (e.g., fort cost)
+    private static double moneyTotal = 1000; // Total amount of money available to spend at start
     private static Wagon wagon = null;
 
     /**
@@ -33,7 +32,7 @@ public class Forts extends JPanel {
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         moneyAmountLabel.setBounds(10, 10, 300, 30);
         add(moneyAmountLabel);
-        this.wagon = wagon;
+        Forts.wagon = wagon;
 
         JButton buySelectedButton = new JButton("BUY");
         buySelectedButton.setBounds(150, 320, 100, 30);
