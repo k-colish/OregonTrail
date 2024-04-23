@@ -220,7 +220,7 @@ public class OregonTrail {
 				
 		frame = new JFrame();
 //		frame = new MainPanel(wagon, date);
-		frame.setBounds(100, 100, 750, 700);
+		frame.setBounds(100, 100, 836, 825);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		

@@ -55,6 +55,27 @@ public class Item {
 	public int getAmount() {
 		return amount;
 	}
-
-	public int setAmount(int x) {return amount + x;}
+	
+	/**
+	 * addAmount - adds an amount to the total number of the item
+	 * @param x - the amount being added
+	 * @return the new total of the item
+	 */
+	public int addAmount(int x) {
+		amount += x;
+		return amount;
+	}
+	
+	/**
+	 * removeAmount - removes an amount from the total number of the item
+	 * @param x - the amount being removed
+	 * @return the new total of the item
+	 */
+	public int removeAmount(int x) {
+		amount -= x;
+		if(amount < 0) {
+			amount = 0;
+		}
+		return amount;
+	}
 }

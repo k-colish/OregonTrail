@@ -93,17 +93,18 @@ public class Wagon {
 		System.out.println();
 	}
 
-	public void changeItemamounts(Item itemName, int amount) {
-		for (int i = 0; i < Items.size(); i++) {
-			if (itemName.equals(Items.get(i).getName()))
-			{
-				Item item = Items.get(i);
-				int currentAmount = item.getAmount();
-				if (item.setAmount(currentAmount + amount) < 0)
-					item.setAmount(0);
-				else
-					item.setAmount(currentAmount + amount);
-				break;
+	public void addItemAmount(Item itemName, int amount) {
+		for(int i = 0; i < Items.size(); i++) {
+			if(itemName.getName() == Items.get(i).getName()) {
+				Items.get(i).addAmount(amount);
+			}
+		}
+	}
+	
+	public void removeItemAmount(Item itemName, int amount) {
+		for(int i = 0; i < Items.size(); i++) {
+			if(itemName.getName() == Items.get(i).getName()) {
+				Items.get(i).removeAmount(amount);
 			}
 		}
 	}
