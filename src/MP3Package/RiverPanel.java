@@ -9,16 +9,11 @@
  */
 package MP3Package;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-
-import java.awt.Font;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.awt.event.ActionEvent;
 
 public class RiverPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
