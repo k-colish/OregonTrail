@@ -115,7 +115,6 @@ public class RandomEvents {
             wagonlist.changeTotalFood(30);
             JOptionPane.showMessageDialog(null, "You have gained 30 pounds of food!",
                     "Indians have come to help", JOptionPane.INFORMATION_MESSAGE);
-
             System.out.println("indians");
         }
     }
