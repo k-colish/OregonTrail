@@ -9,6 +9,8 @@
  */
 package MP3Package;
 
+import java.util.Random;
+
 public class River extends Destinations{
 	
 	// General Instance Variables
