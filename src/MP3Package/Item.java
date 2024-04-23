@@ -41,14 +41,6 @@ public class Item {
 	}
 	
 	/**
-	 * getPrice - gets the price of the Item
-	 * @return price - the price of the Item
-	 */
-	public double getPrice() {
-		return price;
-	}
-	
-	/**
 	 * getAmount - gets the amount of an item you have
 	 * @returns amount - the amount of an item you have
 	 */

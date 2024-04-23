@@ -19,18 +19,15 @@ public class Destinations {
 	//Initialize instance variables
 	private int distance;        // Distance from the starting point
     private String name;         // Name of the destination
-    private boolean hasStore;    // Indicates whether the destination has a store
 	
 	/**
 	 * Destinations - constructor for Destination objects. 
 	 * @param distance - the distance from the starting point. 
-	 * @param name - the name of the destination. 
-	 * @param hasStore - is true if the destination has a store, is false if destination does not have a store. 
+	 * @param name - the name of the destination.
 	 */
-	public Destinations(int distance, String name, boolean hasStore) {
+	public Destinations(int distance, String name) {
 		this.distance = distance;
 		this.name = name;
-		this.hasStore = hasStore;
 	}
 	
 	/**

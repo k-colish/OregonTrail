@@ -32,19 +32,12 @@ public class OregonTrail {
 
 	private JFrame frame;
 	
-	JButton StoreButton;
-	JButton TradeButton;
-	
 	// File name and JLabel for use with the background image
 	private String filename = "/Images/AshHollow.JPG";
-	private JLabel ImageLabel;
 	
 	// Initialization of an object of the Wagon class
 	private Wagon wagon = new Wagon();
-	
-	// ArrayList including all the JCheckBoxes of the items to be displayed
-	private ArrayList<JCheckBox> labels = new ArrayList<JCheckBox>(); 
-	
+
 	// ArrayList including all the items that can be added to the Wagon class object
 	private ArrayList<Item> allItems = new ArrayList<Item>();
 	
@@ -53,20 +46,7 @@ public class OregonTrail {
 	
 	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
-	
-	private RiverPanel panel = new RiverPanel(new River(200, "Kansas River", 3.5, 300, 2));;
-	
-	// Initialize a null OptionPane for use with the clock
-	private JOptionPane pane = null;
-	
-	// Initialize the labels for weight labels, so they can be updated after the user wants to stop traveling
-	private JLabel TotalFoodLabel = null;
-	private JLabel TotalWeightLabel = null;
-	
-	// Create a DestinationActivites object (Currently not used)
-	private DestinationActivities activity = new DestinationActivities();
-	
-	
+
 	private GregorianCalendar calendar = new GregorianCalendar(1850, 2, 30);
 	private String pattern = "MMMMM d, yyyy";
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
@@ -283,7 +263,7 @@ public class OregonTrail {
 		travelButton.setHorizontalAlignment(SwingConstants.CENTER);
 		travelButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		travelButton.setForeground(Color.BLACK); //gitignore
-		travelButton.setBackground(Color.BLACK);
+		travelButton.setBackground(Color.WHITE);
 		travelButton.setOpaque(true);
 		panel_1.add(travelButton, BorderLayout.SOUTH);
 		
@@ -297,25 +277,7 @@ public class OregonTrail {
 		Image img = backgroundImage.getImage();
 		Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		ImageJLabel.setIcon(new ImageIcon(newImg));
-		
-		
-		
-		
-		
-		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
+
 		// Instantiate timer
 		clock = new javax.swing.Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -503,8 +465,5 @@ public class OregonTrail {
 //		travelButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
 //		travelButton.setBounds(525, 578, 89, 23);
 //		loadWagonPanel.add(travelButton);
-		
-		
-		
 	}
 }
