@@ -283,7 +283,7 @@ public class OregonTrail {
 		travelButton.setHorizontalAlignment(SwingConstants.CENTER);
 		travelButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		travelButton.setForeground(Color.BLACK); //gitignore
-		travelButton.setBackground(Color.BLACK);
+		travelButton.setBackground(Color.WHITE);
 		travelButton.setOpaque(true);
 		panel_1.add(travelButton, BorderLayout.SOUTH);
 		
