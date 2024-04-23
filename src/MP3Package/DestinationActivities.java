@@ -12,11 +12,10 @@
 
 package MP3Package;
 
+import javax.swing.*;
 import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
 
 public class DestinationActivities{
 	

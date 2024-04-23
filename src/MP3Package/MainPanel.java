@@ -1,22 +1,14 @@
 package MP3Package;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-import java.util.Objects;
-import java.awt.*;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import net.miginfocom.swing.MigLayout;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class MainPanel extends JFrame{
-	
-	
 	
 	// File name and JLabel for use with the background image
 	private String filename = "/Images/AshHollow.JPG";
