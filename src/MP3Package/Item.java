@@ -55,5 +55,6 @@ public class Item {
 	public int getAmount() {
 		return amount;
 	}
+
 	public int setAmount(int x) {return amount + x;}
 }

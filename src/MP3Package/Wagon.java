@@ -108,6 +108,8 @@ public class Wagon {
 		}
 	}
 
+	public int sizeItems() {return Items.size();}
+
 	public ArrayList<Item> getItems(){return Items;}
 	
 	/**

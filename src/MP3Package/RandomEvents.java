@@ -18,7 +18,6 @@ public class RandomEvents {
     {
         wagonlist = wagon;
         allItemsCSV();
-        ArrayList<Item> wagonItems = wagonlist.getItems();
     }
 
     public void allItemsCSV()
@@ -96,7 +95,8 @@ public class RandomEvents {
 
     private void Thief() //2% & lots of supplies lost, does not currently work
     {
-        /*
+        ArrayList<Item> ThiefItems = wagonlist.getItems();
+        String lostItems = "";
         if (1 == randomValue(50))
         {
             System.out.println("Thief");
@@ -104,20 +104,13 @@ public class RandomEvents {
             wagonlist.changeTotalFood(food);
             for (int i = 0; i < randomValue(5); i++)
             {
-                String userItem = String.valueOf(wagonlist.getItems());
+                int j = randomValue(wagonlist.getItems().size());
+                lostItems = lostItems + ThiefItems.get(j) + "\n";
             }
-            JOptionPane.showMessageDialog(null, "You have lost: " + springfield.getName() + "!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + "and" + food  + "pounds of food!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
 
-
-            String wagonItem = wagonlist.getItems(randomValue(wagonlist.getItems().size()));
-            if (wagonItem == allItems.get(randomValue(allItems.size())))
-            {
-                wagonlist.changeItemamounts(wagonItem, randomValue(4));
-            }
-            wagonlist.changeItemamounts(String itemName, int amount)
         }
 
-             */
     }
 
     private void indiansHelp() // 5% chance to get 30 pounds of food
