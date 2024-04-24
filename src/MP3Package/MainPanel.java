@@ -66,9 +66,8 @@ public class MainPanel extends JFrame{
 		JButton lblNewLabel_3 = new JButton("Click to start travel!");
 		lblNewLabel_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+			}});
+
 		lblNewLabel_3.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Myanmar Text", Font.BOLD, 15));

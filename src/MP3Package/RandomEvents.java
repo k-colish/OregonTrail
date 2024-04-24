@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class RandomEvents {
     Random rnd = new Random();
-    private final ArrayList<String> allItems = new ArrayList<String>();
     Wagon wagonlist;
 
     public RandomEvents(Wagon wagon)
@@ -34,7 +33,7 @@ public class RandomEvents {
             case 15: oxWanders(); break;
             case 16: water(); break;
             case 17: badGrass(); break;
-            case 18: illness(); break;
+            case 18: illness(); break; // not included, just is called each day
             default: System.err.println("Error in allEvents");
         }
     }
@@ -250,6 +249,7 @@ public class RandomEvents {
     }
 
     private void water() // 15% & lose few pounds of food
+            //NEEDED - adds 10-20 to each person
     {
         if (randomValue(17) <= 3) {
             int rmd = randomValue(20);
@@ -272,6 +272,7 @@ public class RandomEvents {
     }
 
     private void illness() //0-40% based on health, person & disease random
+            //NEEDED - adds 20 to that person
     {
         System.out.println("sick");
     }
@@ -279,11 +280,11 @@ public class RandomEvents {
      * determines if you have successfully scavenged for food
      */
     private void scavenge() {
-        int rnd = randomValue(60)+19;
+        int food = randomValue(60)+19;
     	if (randomValue(10) <= 7) {
     		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
-                    "You have gained " + rnd + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
-    		wagonlist.changeTotalFood(rnd);
+                    "You have gained " + food + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+    		wagonlist.changeTotalFood(food);
     	}
     	else {
     		JOptionPane.showMessageDialog(null, "You did not find any food. Better luck " +
