@@ -27,7 +27,7 @@ public class Health {
                                 //70-104 = poor health, 105-139 = very poor health
     {
         int totalHealth;
-        int temp = totalHealth/getAmountPeople();
+        int temp = totalHealth/getPeopleAmount();
         if (temp >= 0 && temp <= 34) {return "Good health";}
         if (temp >= 35 && temp <= 65) {return "Fair Health";}
         else if (temp >= 70 && temp <= 104) {return "Poor Health";}
@@ -49,7 +49,7 @@ public class Health {
 
     }
 
-    private int getAmountPeople() //return the size of the array
+    private int getPeopleAmount() //return the size of the array
     {return Healths.size();}
 
     private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6
@@ -82,7 +82,7 @@ public class Health {
 
     public void addPoints(int points, int peopleAmount)
     {
-        for (int i = 1; i < peopleAmount; i++) {
+        for (int i = 0; i < peopleAmount; i++) {
             Healths.add(points, i);
             //you need to put a second argument, aka, what index you want to set healths at... i think
             //lol maybe add it instead of setting it??? lol why is healths an array? is it the health of every member in the family
