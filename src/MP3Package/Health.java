@@ -5,40 +5,52 @@ import java.util.ArrayList;
 public class Health {
 //Need, Wagon, Weather, random, river, people,
 
-    /*current idea is to set all 4 party members to 0 health then each method will be called that will check current
+    /*
+    current idea is to set all 4 party members to 0 health then each method will be called that will check current
     events of the game and then when a person gets to 140+ then that person dies
 
     make an array with all 4 player characters that will each method will alter with for loops
      */
+    private ArrayList<Integer> Healths = new ArrayList<Integer>();
+    Item item;
+    People names;
+    OregonTrail trial;
 
-    Health()
+    Health(Item items, People nams, OregonTrail oregeon)
     {
-
+        item = items;
+        names = nams;
+        trial = oregeon;
     }
 
     public String overallHealth() //going to return healthy, 0-34 = good health, 35-65 = fair health,
                                 //70-104 = poor health, 105-139 = very poor health
     {
-        int totalHealth = 0;
+        int totalHealth;
+        int temp = totalHealth/getAmountPeople();
+        if (temp >= 0 && temp <= 34) {return "Good health";}
+        if (temp >= 35 && temp <= 65) {return "Fair Health";}
+        else if (temp >= 70 && temp <= 104) {return "Poor Health";}
+        else if (temp >= 105 && temp <= 139) {return "Very poor health";}
+        else {return "No people exist";}
 
-        switch(totalHealth/getAmountPeople())
+    }
+
+    private void death() // displays that a person dies when they go 140+
+    {
+        for (int i = 0; i < Healths.size(); i ++)
         {
-        case 0-34: return "Good health"; break;
-        case 35-65: return "Fair Health"; break;
-        case 70-104: return "Poor Health"; break;
-        case 105-139: return "Very poor health";break;
-        default: return "No people exist";
+            if (Healths.get(i) > 140)
+            {
+                //add name thing to say which one died using massage dialog
+                Healths.remove(i);
+            }
         }
-    }
-
-    private void death() //displays that a person dies when they go 140+
-    {
 
     }
+
     private int getAmountPeople() //return the size of the array
-    {
-
-    }
+    {return Healths.size();}
 
     private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6
     {
@@ -62,13 +74,18 @@ public class Health {
     {
 
     }
-    private void  illness() //if sick/injured add an extra 1 per sick/injured person
+
+    private void  illness() //if sick/injured, add an extra 1 per sick/injured person
     {
 
     }
 
     public void addPoints(int points, int peopleAmount)
     {
-
+        for (int i = 1; i < peopleAmount; i++) {
+            Healths.add(points, i);
+            //you need to put a second argument, aka, what index you want to set healths at... i think
+            //lol maybe add it instead of setting it??? lol why is healths an array? is it the health of every member in the family
+        }
     }
 }
