@@ -276,8 +276,27 @@ public class RandomEvents {
         Health score = null;
         String disease = "";
         String name = "";
+        int rnd = 0;
+        if (score.healthScores() <= 15)
+            rnd = 10;
+        else if (score.healthScores() <= 30 && score.healthScores() > 15)
+            rnd = 9;
+        else if (score.healthScores() <= 45 && score.healthScores() > 30)
+            rnd = 8;
+        else if (score.healthScores() <= 60 && score.healthScores() > 45)
+            rnd = 7;
+        else if (score.healthScores() <= 75 && score.healthScores() > 60)
+            rnd = 6;
+        else if (score.healthScores() <= 90 && score.healthScores() > 75)
+            rnd = 5;
+        else if (score.healthScores() <= 105 && score.healthScores() > 90)
+            rnd = 4;
+        else if (score.healthScores() <= 130 && score.healthScores() > 105)
+            rnd = 3;
+        else if (score.healthScores() > 130)
+            rnd = 2;
 
-        if (rnd <= 4)
+        if (randomValue(rnd) == 1)
         {
             switch(randomValue(6)) {
                 case 1: disease = "Heat exhaustion"; break;
@@ -291,6 +310,7 @@ public class RandomEvents {
             //and name randomizer
             JOptionPane.showMessageDialog(null, name + "has contracted" + disease,
                     "Got an illness", JOptionPane.INFORMATION_MESSAGE);
+            score.addPoints(20, 1);
             System.out.println("sick");
             return true;
         }
