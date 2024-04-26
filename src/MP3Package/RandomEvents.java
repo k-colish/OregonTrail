@@ -33,7 +33,6 @@ public class RandomEvents {
             case 15: oxWanders(); break;
             case 16: water(); break;
             case 17: badGrass(); break;
-            case 18: illness(); break; // not included, just is called each day
             default: System.err.println("Error in allEvents");
         }
     }
@@ -271,10 +270,36 @@ public class RandomEvents {
         }
     }
 
-    private void illness() //0-40% based on health, person & disease random
+    public boolean illness() //0-40% based on health, person & disease random
             //NEEDED - adds 20 to that person
     {
-        System.out.println("sick");
+        Health chance = null;
+        String disease = "";
+        String name = "";
+        int rnd = randomValue(chance.healthScores()) % randomValue(chance.healthScores());
+
+        while(rnd > 40) {
+            rnd = randomValue(chance.healthScores()) % randomValue(chance.healthScores());
+        }
+
+        if (!(rnd >= 4))
+        {
+            switch(randomValue(6)) {
+                case 1: disease = "Heat exhaustion"; break;
+                case 2: disease = "Typhoid"; break;
+                case 3: disease = "Cholera"; break;
+                case 4: disease = "Measles"; break;
+                case 5: disease = "Dysentery"; break;
+                case 6: disease = "Mountain fever"; break;
+                default: System.err.println("Error in Health illness");
+            }
+            //and name randomizer
+            JOptionPane.showMessageDialog(null, name + "Has contracted" + disease, "Got an illness", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("sick");
+            return true;
+        }
+        else
+            return false;
     }
     /**
      * determines if you have successfully scavenged for food

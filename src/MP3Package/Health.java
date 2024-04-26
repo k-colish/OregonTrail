@@ -15,25 +15,36 @@ public class Health {
     Item item;
     People names;
     OregonTrail trial;
+    Wagon itemlist;
+    RandomEvents random;
 
-    Health(Item items, People nams, OregonTrail oregeon)
+    Health(Item items, People nams, OregonTrail oregeon, Wagon wlist, RandomEvents event)
     {
         item = items;
         names = nams;
         trial = oregeon;
+        itemlist = wlist;
+        random = event;
     }
 
     public String overallHealth() //going to return healthy, 0-34 = good health, 35-65 = fair health,
                                 //70-104 = poor health, 105-139 = very poor health
     {
         int totalHealth;
-        int temp = totalHealth/getPeopleAmount();
+        int temp = 0;// = totalHealth/getPeopleAmount();
         if (temp >= 0 && temp <= 34) {return "Good health";}
         if (temp >= 35 && temp <= 65) {return "Fair Health";}
         else if (temp >= 70 && temp <= 104) {return "Poor Health";}
         else if (temp >= 105 && temp <= 139) {return "Very poor health";}
         else {return "No people exist";}
 
+    }
+
+    public int healthScores()
+    {
+        int score = 0;
+        for (int i = 0; i < Healths.size(); i ++) {score += Healths.get(i);}
+        return score;
     }
 
     private void death() // displays that a person dies when they go 140+
@@ -54,38 +65,35 @@ public class Health {
 
     private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6
     {
-
-    }
-
-    private int checkClothing()
-    {
-
+        //if ()
     }
 
     private void weatherHealth()
             //very hot = 2, hot = 1, cold = 2 if no clothing & between 0-2 if clothing is 1 per person
             //cold = 4 if no clothing & between 0-4 if clothing is 1 per person
     {
-
+        //if (return itemlist.getItems().get(Integer.parseInt("Clothing")).getAmount(); < 2//4)
     }
 
     private void FoodHealth() // use this to increase health depending on how much food they get that day
             //Filling = 0, meager = 2, bare bones = 4, out of food = 6
     {
-
+        if (itemlist.getTotalFood() == 0) // out of food
+            addPoints(6, 4);
+        else if (itemlist.getFoodConsumption() == 1) // bare bones
+            addPoints(4, 4);
+        else if (itemlist.getFoodConsumption() == 2) // meager
+            addPoints(4, 2);
     }
 
     private void  illness() //if sick/injured, add an extra 1 per sick/injured person
     {
-
+        int illnessCount = 0;
+        if (random.illness())
+            illnessCount++;
+        addPoints(illnessCount, 4);
     }
 
     public void addPoints(int points, int peopleAmount)
-    {
-        for (int i = 0; i < peopleAmount; i++) {
-            Healths.add(points, i);
-            //you need to put a second argument, aka, what index you want to set healths at... i think
-            //lol maybe add it instead of setting it??? lol why is healths an array? is it the health of every member in the family
-        }
-    }
+    {for (int i = 0; i < peopleAmount; i++) {Healths.add(points, i);}}
 }
