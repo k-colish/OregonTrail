@@ -37,6 +37,8 @@ public class OregonTrail {
 	// Initialization of an object of the Wagon class
 	private Wagon wagon = new Wagon();
 	
+	private RandomEvents rndEvt = new RandomEvents(wagon);
+	
 	// ArrayList including all the items that can be added to the Wagon class object
 	private ArrayList<Item> allItems = new ArrayList<Item>();
 	
@@ -51,6 +53,7 @@ public class OregonTrail {
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 	private String date = dateFormatter.format(calendar.getTime());
 	private JLabel Date = new JLabel(date);
+	
 	private JLabel TotalFood = new JLabel(Integer.toString(wagon.getTotalFood()));
 	private JLabel landmarkLabel = new JLabel(Integer.toString(wagon.milesToLandmark()) + " miles");
 	private JLabel milesLabel = new JLabel(Integer.toString(wagon.getMilesTraveled()) + " miles");
@@ -96,6 +99,9 @@ public class OregonTrail {
 		calendar.add(GregorianCalendar.DATE, 1);
 		date = dateFormatter.format(calendar.getTime());
 		Date.setText(date);
+		
+		// Instantiate and update list in RandomEvents object
+		rndEvt = new RandomEvents(wagon);
 
 		// Print out for debugging
 		System.out.println("Clock Action Performed");
@@ -284,12 +290,25 @@ public class OregonTrail {
 		panel_2.setLayout(new GridLayout(0, 6, 0, 0));
 		
 		JButton scavengeButton = new JButton("Scavenge for Food");
+		scavengeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rndEvt.scavenge();
+			}
+		});
 		scavengeButton.setBackground(Color.WHITE);
 		scavengeButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		scavengeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel_2.add(scavengeButton);
 		
 		JButton restButton = new JButton("Rest");
+		restButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calendar.add(GregorianCalendar.DATE, wagon.rest());
+				date = dateFormatter.format(calendar.getTime());
+				Date.setText(date);
+				TotalFood.setText(Integer.toString(wagon.getTotalFood()));
+			}
+		});
 		restButton.setBackground(Color.WHITE);
 		restButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		restButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
@@ -328,25 +347,7 @@ public class OregonTrail {
 		
 		
 		
-		
-		/**
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 *
-		 */
-		// Instantiate timer
-		clock = new javax.swing.Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				clockActionPerformed( evt );
-				}});
+
 
 //		JLabel titleLabel = new JLabel("The Oregon Trail");
 //		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);

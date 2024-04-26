@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Wagon {
 	// Initialize instance variables
 	private int totalFood = 0;      	   // Total of all food in the wagon
@@ -25,7 +27,6 @@ public class Wagon {
     private int milesPerDay = 20;               // Distance traveled per day in miles
     private int totalDays;                 // Total number of days required to reach the destination
     private int daysTraveled;              // Number of days the wagon has been traveling
-    private int numberOfPeople = 4;        // Number of people in the wagon party
     private int totalFoodUsed = 0;         // Total food consumed during travel
     private int milesTraveled = 0;         // Total miles traveled
 	RandomEvents events;
@@ -179,7 +180,12 @@ public class Wagon {
 	 */
 	public void death() {numberOfPeople--;}
 
-	public int addDays(int x) {return daysTraveled + x;}
+	public int addDays(int x) {
+			
+			daysTraveled += x;
+			return daysTraveled;
+			
+		}
 	
 	/**
 	 * travel - keeps track of the number of days the party has been traveling for. 
@@ -195,15 +201,8 @@ public class Wagon {
 		
 		// Calculate the total food  using the food used per day times the number of days to travel.
 		totalFoodUsed += foodPerDay;
-		if(this.getTotalFood() <= 0) {
-			this.death();
-		}
 		System.out.println(numberOfPeople);
 		
-		// Return -1 if all party members have died
-		if(numberOfPeople == 0) {
-			return -1;
-		}
 		milesTraveled += milesPerDay; // Update total miles traveled
 		
 		return daysTraveled;
@@ -221,5 +220,12 @@ public class Wagon {
 			}
 		}
 		return 0;
+	}
+	
+	public int rest() {
+		int days = 0;
+		days = Integer.parseInt(JOptionPane.showInputDialog(null, "How many days would you like to rest?", "Resting"));
+		addDays(days);
+		return days;
 	}
 }
