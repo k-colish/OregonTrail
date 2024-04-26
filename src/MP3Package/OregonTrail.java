@@ -16,7 +16,6 @@
 package MP3Package;
 
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
