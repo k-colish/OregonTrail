@@ -57,6 +57,8 @@ public class OregonTrail {
 	private JLabel TotalFood = new JLabel(Integer.toString(wagon.getTotalFood()));
 	private JLabel landmarkLabel = new JLabel(Integer.toString(wagon.milesToLandmark()) + " miles");
 	private JLabel milesLabel = new JLabel(Integer.toString(wagon.getMilesTraveled()) + " miles");
+	private JPanel actionButtonPane = new JPanel();
+
 
 	/**
 	 * Launch the application.
@@ -195,6 +197,7 @@ public class OregonTrail {
 				Item item = new Item(tempAmount, tempName, tempPrice);
 				// Add the item to the ArrayList of all items
 				allItems.add(item);
+				wagon.addItem(item);
 		}
 		in.close();
 	}
@@ -258,6 +261,9 @@ public class OregonTrail {
 				if(!clock.isRunning()) {
 					clock.start();
 					travelButton.setText("Click to stop travel");
+					frame.getContentPane().remove(actionButtonPane);
+					frame.getContentPane().revalidate();
+					frame.getContentPane().repaint();
 				}
 				else {
 					clock.stop();
@@ -285,25 +291,26 @@ public class OregonTrail {
 		Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		ImageJLabel.setIcon(new ImageIcon(newImg));
 		
-		JPanel panel_2 = new JPanel();
-		panel_1.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 6, 0, 0));
+		panel_1.add(actionButtonPane, BorderLayout.CENTER);
+		actionButtonPane.setLayout(new GridLayout(0, 6, 0, 0));
 		
 		JButton scavengeButton = new JButton("Scavenge for Food");
 		scavengeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rndEvt.scavenge();
+				wagon.changeTotalFood(rndEvt.scavenge());
+				TotalFood.setText(Integer.toString(wagon.getTotalFood()));
 			}
 		});
 		scavengeButton.setBackground(Color.WHITE);
 		scavengeButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		scavengeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(scavengeButton);
+		actionButtonPane.add(scavengeButton);
 		
 		JButton restButton = new JButton("Rest");
 		restButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				calendar.add(GregorianCalendar.DATE, wagon.rest());
+				int days = wagon.rest();
+				calendar.add(GregorianCalendar.DATE, days);
 				date = dateFormatter.format(calendar.getTime());
 				Date.setText(date);
 				TotalFood.setText(Integer.toString(wagon.getTotalFood()));
@@ -312,31 +319,36 @@ public class OregonTrail {
 		restButton.setBackground(Color.WHITE);
 		restButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		restButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(restButton);
+		actionButtonPane.add(restButton);
 		
 		JButton tradeButton = new JButton("Trade");
+		tradeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Trading trade = new Trading(wagon);
+			}
+		});
 		tradeButton.setBackground(Color.WHITE);
 		tradeButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		tradeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(tradeButton);
+		actionButtonPane.add(tradeButton);
 		
 		JButton suppliesButton = new JButton("Check Supplies");
 		suppliesButton.setBackground(Color.WHITE);
 		suppliesButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		suppliesButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(suppliesButton);
+		actionButtonPane.add(suppliesButton);
 		
 		JButton paceButton = new JButton("Change Pace");
 		paceButton.setBackground(Color.WHITE);
 		paceButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		paceButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(paceButton);
+		actionButtonPane.add(paceButton);
 		
 		JButton rationsButton = new JButton("Change Rations");
 		rationsButton.setBackground(Color.WHITE);
 		rationsButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(rationsButton);
+		actionButtonPane.add(rationsButton);
 		
 		// Instantiate timer
 		clock = new javax.swing.Timer(1000, new ActionListener() {

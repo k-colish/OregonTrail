@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 
 public class Wagon {
 	// Initialize instance variables
-	private int totalFood = 0;      	   // Total of all food in the wagon
+	private int totalFood = 100;      	   // Total of all food in the wagon
     private int foodConsumption = 3;           // Food consumption rate per person per day
     private int milesPerDay = 20;               // Distance traveled per day in miles
     private int totalDays;                 // Total number of days required to reach the destination
@@ -94,17 +94,17 @@ public class Wagon {
 		System.out.println();
 	}
 
-	public void addItemAmount(Item itemName, int amount) {
+	public void addItemAmount(String itemName, int amount) {
 		for(int i = 0; i < Items.size(); i++) {
-			if(itemName.getName() == Items.get(i).getName()) {
+			if(itemName == Items.get(i).getName()) {
 				Items.get(i).addAmount(amount);
 			}
 		}
 	}
 	
-	public void removeItemAmount(Item itemName, int amount) {
+	public void removeItemAmount(String itemName, int amount) {
 		for(int i = 0; i < Items.size(); i++) {
-			if(itemName.getName() == Items.get(i).getName()) {
+			if(itemName == Items.get(i).getName()) {
 				Items.get(i).removeAmount(amount);
 			}
 		}
@@ -143,7 +143,6 @@ public class Wagon {
 	 * @return - totalFood - the total amount of food that has been added to the wagon
 	 */
 	public int getTotalFood() {
-		totalFood = 100;
 		return totalFood - totalFoodUsed;
 	}
 
@@ -179,6 +178,8 @@ public class Wagon {
 	public int addDays(int x) {
 			
 			daysTraveled += x;
+			totalFoodUsed += x * 4 * foodConsumption;
+			System.out.println("food used: " + totalFoodUsed);
 			return daysTraveled;
 			
 		}
@@ -219,8 +220,11 @@ public class Wagon {
 	
 	public int rest() {
 		int days = 0;
-		days = Integer.parseInt(JOptionPane.showInputDialog(null, "How many days would you like to rest?", "Resting"));
+		days = Integer.parseInt(JOptionPane.showInputDialog(null, "How many days would you like to rest?"));
 		addDays(days);
+		for(int i = 0; i < days; i++) {
+			events.restEvents();
+		}
 		return days;
 	}
 }

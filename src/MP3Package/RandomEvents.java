@@ -15,7 +15,7 @@ public class RandomEvents {
 
     public void allEvents()
     {
-        switch(randomValue(18)) {
+        switch(randomValue(17) + 1) {
             case 1: Thief(); break;
             case 2: indiansHelp(); break;
             case 3: severeThunderstorm(); break;
@@ -74,20 +74,26 @@ public class RandomEvents {
 
     private void Thief() //2% & lots of supplies lost, does not currently work
     {
+    	int food = 0;
         String lostItems = "";
         if (randomValue(50) == 1) {
             System.out.println("Thief");
-            int food = randomValue(125);
+            if(wagonlist.getTotalFood() > 0) {
+            	food = randomValue(wagonlist.getTotalFood());
+            }
             wagonlist.changeTotalFood(-food);
             for (int i = 0; i < randomValue(5); i++)
             {
                 ArrayList<Item> ThiefItems = wagonlist.getItems();
-                int j = randomValue(wagonlist.getItems().size());
-                lostItems = lostItems + ThiefItems.get(j) + "\n";
-                wagonlist.removeItemAmount(ThiefItems.get(j), 1);
+                int j = randomValue(ThiefItems.size());
+                lostItems += ThiefItems.get(j).getName();
+                wagonlist.removeItemAmount(ThiefItems.get(j).getName(), 1);
             }
-            JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + " and " + food
+            if(wagonlist.getTotalFood() > 0) {
+            	JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + " and " + food
                     + " pounds of food!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else JOptionPane.showMessageDialog(null, "You have lost: " + lostItems, "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -200,7 +206,7 @@ public class RandomEvents {
                 ArrayList<Item> ThiefItems = wagonlist.getItems();
                 int j = randomValue(wagonlist.getItems().size());
                 lostItems = lostItems + ThiefItems.get(j) + "\n";
-                wagonlist.removeItemAmount(ThiefItems.get(j), 1);
+                wagonlist.removeItemAmount(ThiefItems.get(j).getName(), 1);
             }
             JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + " and " + food
                     + " pounds of food!", "Wagon on fire", JOptionPane.INFORMATION_MESSAGE);
@@ -229,7 +235,7 @@ public class RandomEvents {
                 ArrayList<Item> LootItems = wagonlist.getItems();
                 int j = randomValue(wagonlist.getItems().size());
                 freeItems = freeItems + LootItems.get(j) + "\n";
-                wagonlist.addItemAmount(LootItems.get(j), 1);
+                wagonlist.addItemAmount(LootItems.get(j).getName(), 1);
             }
             JOptionPane.showMessageDialog(null, "You have found a deserted wagon it had: "
                     + freeItems + " and " + food  + " pounds of food!", "FREE LOOT!",
@@ -320,7 +326,7 @@ public class RandomEvents {
     /**
      * determines if you have successfully scavenged for food
      */
-    public void scavenge() {
+    public int scavenge() {
         int food = randomValue(60)+19;
     	if (randomValue(10) <= 7) {
     		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
@@ -331,5 +337,6 @@ public class RandomEvents {
     		JOptionPane.showMessageDialog(null, "You did not find any food. Better luck " +
                     "next time...", "FAILED", JOptionPane.INFORMATION_MESSAGE);
     	}
+    	return food;
     }
 }
