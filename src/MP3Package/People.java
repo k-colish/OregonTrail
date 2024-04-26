@@ -11,11 +11,8 @@ public class People {
 
     }
 
-    public ArrayList<String> getNames() {
-        return names;
-    }
+    public ArrayList<String> getNames() {return names;}
 
-    public void setNames(ArrayList<String> names) {
-        this.names = names;
-    }
+    public void setNames(ArrayList<String> names) {this.names = names;}
+
 }

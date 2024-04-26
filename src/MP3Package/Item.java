@@ -36,17 +36,13 @@ public class Item {
 	 * getName - gets the name of the Item
 	 * @return name - the name of the Item
 	 */
-	public String getName() {
-		return name;
-	}
+	public String getName() {return name;}
 	
 	/**
 	 * getPrice - gets the price of the Item
 	 * @return price - the price of the Item
 	 */
-	public double getPrice() {
-		return price;
-	}
+	public double getPrice() {return price;}
 	
 	/**
 	 * getAmount - gets the amount of an item you have

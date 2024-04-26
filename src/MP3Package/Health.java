@@ -10,7 +10,8 @@ public class Health {
     events of the game and then when a person gets to 140+ then that person dies
 
     make an array with all 4 player characters that will each method will alter with for loops
-     */
+    */
+
     private ArrayList<Integer> Healths = new ArrayList<Integer>();
     Item item;
     People names;
@@ -30,14 +31,13 @@ public class Health {
     public String overallHealth() //going to return healthy, 0-34 = good health, 35-65 = fair health,
                                 //70-104 = poor health, 105-139 = very poor health
     {
-        int totalHealth;
-        int temp = 0;// = totalHealth/getPeopleAmount();
-        if (temp >= 0 && temp <= 34) {return "Good health";}
-        if (temp >= 35 && temp <= 65) {return "Fair Health";}
-        else if (temp >= 70 && temp <= 104) {return "Poor Health";}
-        else if (temp >= 105 && temp <= 139) {return "Very poor health";}
+        death();
+        int score  = healthScores()/getPeopleAmount();
+        if (score >= 0 && score <= 34) {return "Good health";}
+        if (score >= 35 && score <= 65) {return "Fair Health";}
+        else if (score >= 70 && score <= 104) {return "Poor Health";}
+        else if (score >= 105 && score <= 139) {return "Very poor health";}
         else {return "No people exist";}
-
     }
 
     public int healthScores()
@@ -57,12 +57,11 @@ public class Health {
                 Healths.remove(i);
             }
         }
-
     }
 
     private int getPeopleAmount() {return Healths.size();} //return the size of the array
 
-    private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6
+    private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6 // needs changed for 12-20 miles
     {
         //if ()
     }

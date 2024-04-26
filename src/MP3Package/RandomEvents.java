@@ -273,16 +273,11 @@ public class RandomEvents {
     public boolean illness() //0-40% based on health, person & disease random
             //NEEDED - adds 20 to that person
     {
-        Health chance = null;
+        Health score = null;
         String disease = "";
         String name = "";
-        int rnd = randomValue(chance.healthScores()) % randomValue(chance.healthScores());
 
-        while(rnd > 40) {
-            rnd = randomValue(chance.healthScores()) % randomValue(chance.healthScores());
-        }
-
-        if (!(rnd >= 4))
+        if (rnd <= 4)
         {
             switch(randomValue(6)) {
                 case 1: disease = "Heat exhaustion"; break;
@@ -294,7 +289,8 @@ public class RandomEvents {
                 default: System.err.println("Error in Health illness");
             }
             //and name randomizer
-            JOptionPane.showMessageDialog(null, name + "Has contracted" + disease, "Got an illness", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, name + "has contracted" + disease,
+                    "Got an illness", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("sick");
             return true;
         }
