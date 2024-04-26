@@ -199,7 +199,7 @@ public class OregonTrail {
 
 		frame = new JFrame();
 //		frame = new MainPanel(wagon, date);
-		frame.setBounds(100, 100, 1100, 870);
+		frame.setBounds(100, 100, 1000, 775);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setResizable(false);
@@ -272,7 +272,7 @@ public class OregonTrail {
 		ImageJLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
 		ImageJLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		panel_1.add(ImageJLabel, BorderLayout.NORTH);
-		ImageJLabel.setBounds(new Rectangle(1100, 600));
+		ImageJLabel.setBounds(new Rectangle(frame.getWidth(), frame.getHeight() - 270));
 		int width = ImageJLabel.getWidth();
 		int height = ImageJLabel.getHeight();
 		Image img = backgroundImage.getImage();
@@ -283,41 +283,41 @@ public class OregonTrail {
 		panel_1.add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new GridLayout(0, 6, 0, 0));
 		
-		JButton btnNewButton = new JButton("Scavenge for Food");
-		btnNewButton.setBackground(Color.WHITE);
-		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(btnNewButton);
+		JButton scavengeButton = new JButton("Scavenge for Food");
+		scavengeButton.setBackground(Color.WHITE);
+		scavengeButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		scavengeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(scavengeButton);
 		
-		JButton btnNewButton_1 = new JButton("Rest");
-		btnNewButton_1.setBackground(Color.WHITE);
-		btnNewButton_1.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(btnNewButton_1);
+		JButton restButton = new JButton("Rest");
+		restButton.setBackground(Color.WHITE);
+		restButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		restButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(restButton);
 		
-		JButton btnNewButton_1_1 = new JButton("Trade");
-		btnNewButton_1_1.setBackground(Color.WHITE);
-		btnNewButton_1_1.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(btnNewButton_1_1);
+		JButton tradeButton = new JButton("Trade");
+		tradeButton.setBackground(Color.WHITE);
+		tradeButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		tradeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(tradeButton);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Check Supplies");
-		btnNewButton_1_1_1.setBackground(Color.WHITE);
-		btnNewButton_1_1_1.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton_1_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(btnNewButton_1_1_1);
+		JButton suppliesButton = new JButton("Check Supplies");
+		suppliesButton.setBackground(Color.WHITE);
+		suppliesButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		suppliesButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(suppliesButton);
 		
-		JButton btnNewButton_1_1_2 = new JButton("Change Pace");
-		btnNewButton_1_1_2.setBackground(Color.WHITE);
-		btnNewButton_1_1_2.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton_1_1_2.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(btnNewButton_1_1_2);
+		JButton paceButton = new JButton("Change Pace");
+		paceButton.setBackground(Color.WHITE);
+		paceButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		paceButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(paceButton);
 		
-		JButton btnNewButton_1_1_3 = new JButton("Change Rations");
-		btnNewButton_1_1_3.setBackground(Color.WHITE);
-		btnNewButton_1_1_3.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnNewButton_1_1_3.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel_2.add(btnNewButton_1_1_3);
+		JButton rationsButton = new JButton("Change Rations");
+		rationsButton.setBackground(Color.WHITE);
+		rationsButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(rationsButton);
 		
 		// Instantiate timer
 		clock = new javax.swing.Timer(1000, new ActionListener() {
