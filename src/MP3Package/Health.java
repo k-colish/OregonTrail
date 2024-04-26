@@ -60,8 +60,7 @@ public class Health {
 
     }
 
-    private int getPeopleAmount() //return the size of the array
-    {return Healths.size();}
+    private int getPeopleAmount() {return Healths.size();} //return the size of the array
 
     private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6
     {
