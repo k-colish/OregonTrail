@@ -139,7 +139,6 @@ public class RandomEvents {
 
     private void hailStorm() // 6% before fort Hall & 50% lose a day
     {
-
         if (randomValue(2) == 1 ) {
             System.out.println("hail");
             wagonlist.addDays(1);
@@ -148,7 +147,7 @@ public class RandomEvents {
         }
     }
 
-    private void deadOX() // 2.5%
+    private void deadOX() // 2.5% //Need to add to remove an OX
     {
         if (randomValue(40) == 1) {
             System.out.println("RIP OX");
@@ -157,17 +156,20 @@ public class RandomEvents {
         }
     }
 
-    private void injuredMember() // 2.5%
+    private void injuredMember() // 2.5% // 20 points
     {
+        Health score = null;
         if (randomValue(40) == 1) {
-            //add sick/injured method
+            score.addPoints(20, 1);
             System.out.println("you hurt? :(");
         }
     }
 
     private void snakeBite() // 0.7%
     {
+        Health score = null;
         if (randomValue(1000) <= 7) {
+            score.addPoints(40, 1);
             //add sick/injured method
             System.out.println("SNAKE");
         }
