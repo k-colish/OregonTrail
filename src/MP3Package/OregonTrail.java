@@ -16,7 +16,6 @@
 package MP3Package;
 
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -32,18 +31,11 @@ public class OregonTrail {
 
 	private JFrame frame;
 	
-	JButton StoreButton;
-	JButton TradeButton;
-	
 	// File name and JLabel for use with the background image
 	private String filename = "/Images/AshHollow.JPG";
-	private JLabel ImageLabel;
 	
 	// Initialization of an object of the Wagon class
 	private Wagon wagon = new Wagon();
-	
-	// ArrayList including all the JCheckBoxes of the items to be displayed
-	private ArrayList<JCheckBox> labels = new ArrayList<JCheckBox>(); 
 	
 	// ArrayList including all the items that can be added to the Wagon class object
 	private ArrayList<Item> allItems = new ArrayList<Item>();
@@ -53,19 +45,6 @@ public class OregonTrail {
 	
 	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
-	
-	private RiverPanel panel = new RiverPanel(new River(200, "Kansas River", 3.5, 300, 2));;
-	
-	// Initialize a null OptionPane for use with the clock
-	private JOptionPane pane = null;
-	
-	// Initialize the labels for weight labels, so they can be updated after the user wants to stop traveling
-	private JLabel TotalFoodLabel = null;
-	private JLabel TotalWeightLabel = null;
-	
-	// Create a DestinationActivites object (Currently not used)
-	private DestinationActivities activity = new DestinationActivities();
-	
 	
 	private GregorianCalendar calendar = new GregorianCalendar(1850, 2, 30);
 	private String pattern = "MMMMM d, yyyy";
@@ -117,7 +96,7 @@ public class OregonTrail {
 		calendar.add(GregorianCalendar.DATE, 1);
 		date = dateFormatter.format(calendar.getTime());
 		Date.setText(date);
-		
+
 		// Print out for debugging
 		System.out.println("Clock Action Performed");
 		int gameStatus = wagon.travel();
@@ -164,48 +143,48 @@ public class OregonTrail {
 			milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
 		}
 	}
-	
+
 	/**
 	 * readFile - reads from a CSV file with a list of the items that can be added to the wagon,
-	 *  including their weight, name, and whether they are a food item. This method generates 
+	 *  including their weight, name, and whether they are a food item. This method generates
 	 *  an Item object for each line in the CSV file, and adds them to the ArrayList of all items.
 	 */
 	public void readFile() {
 		InputStreamReader reader = null;
 		Scanner in = null;
 		String itemFile = "/csv/Items.csv";
-		
+
 		try {
 			reader = new InputStreamReader(this.getClass().getResourceAsStream(itemFile));
 		}
 		catch(Exception e) {
 			System.out.print("Could not open file ");
 		}
-		
+
 		// Create a InputStreamReader Scanner to read in the CSV file
 		in = new Scanner(reader);
-		
+
 		while(in.hasNext()) {
-			
+
 			// Create a new Scanner with ", " as the delimiter
 			Scanner itemData = new Scanner(in.nextLine());
 			itemData.useDelimiter(", ");
-			
+
 			// Instantiate temporary variables for item info
 			int tempAmount;
 			String tempName = "";
 			double tempPrice = 0;
-			
-			// Get the data from the CSV and assign to the temp values to make an Item object	
+
+			// Get the data from the CSV and assign to the temp values to make an Item object
 			tempAmount = itemData.nextInt();
 			tempName = itemData.next();
 			tempPrice = itemData.nextDouble();
-			
+
 			// Debugging messages
 			System.out.print("Amount: " + tempAmount);
 			System.out.println("Name: " + tempName);
 			System.out.println("Price: " + tempPrice);
-			
+
 			// Create a new Item object with the new information from the CSV file
 				Item item = new Item(tempAmount, tempName, tempPrice);
 				// Add the item to the ArrayList of all items
@@ -217,7 +196,7 @@ public class OregonTrail {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-				
+
 		frame = new JFrame();
 //		frame = new MainPanel(wagon, date);
 		frame.setBounds(100, 100, 1100, 870);
@@ -230,43 +209,43 @@ public class OregonTrail {
 		panel.setBounds(new Rectangle(0, 0, 0, 0));
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new MigLayout("align 50% 100%", "[][][][][][][][][][][][][][][][][][][][]", "[][][][]"));
-		
+
 		JLabel lblNewLabel = new JLabel("Date: ");
 		lblNewLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel, "cell 9 0,alignx right,growy");
-		
+
 		// Formatting for Date JLabel
 		Date.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(Date, "cell 10 0,grow");
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Food: ");
 		lblNewLabel_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_1, "cell 9 1,alignx right,growy");
-		
+
 		// Formatting for TotalFood JLabel
 		TotalFood.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(TotalFood, "cell 10 1,grow");
-		
+
 		JLabel lblNewLabel_1_1 = new JLabel("Next Landmark: ");
 		lblNewLabel_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_1_1, "cell 9 2,grow");
-		
+
 		// Formatting for landmarkLabel JLabel
 		landmarkLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(landmarkLabel, "cell 10 2,grow");
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Miles Traveled: ");
 		lblNewLabel_2.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_2, "cell 9 3,alignx right,growy");
-		
+
 		// Formatting for milesLabel JLabel
 		milesLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(milesLabel, "cell 10 3,grow");
-		
+
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		
+
 		JButton travelButton = new JButton("Click to start traveling!");
 		travelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -287,7 +266,7 @@ public class OregonTrail {
 		travelButton.setBackground(Color.WHITE);
 		travelButton.setOpaque(true);
 		panel_1.add(travelButton, BorderLayout.SOUTH);
-		
+
 		JLabel ImageJLabel = new JLabel("");
 		ImageJLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageJLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -351,19 +330,24 @@ public class OregonTrail {
 		
 		
 		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
+		 *
 		 */
-		
+		// Instantiate timer
+		clock = new javax.swing.Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				clockActionPerformed( evt );
+				}});
+
 //		JLabel titleLabel = new JLabel("The Oregon Trail");
 //		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 //		titleLabel.setFont(new Font("Vineta BT", Font.PLAIN, 17));
@@ -545,8 +529,8 @@ public class OregonTrail {
 //		travelButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
 //		travelButton.setBounds(525, 578, 89, 23);
 //		loadWagonPanel.add(travelButton);
-		
-		
-		
+
+
+
 	}
 }

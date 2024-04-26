@@ -97,11 +97,15 @@ public class RiverPanel extends JPanel{
 					JOptionPane pane = new JOptionPane();
 					
 					// Display the option to get user input on whether they want to pay for the ferry or not
-					int res = pane.showOptionDialog(null, "It will cost $" + river.takeFerry() + " to pay for the ferry. Do you still want to take the ferry?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {"Yes", "No"}, -1);
+					int res = pane.showOptionDialog(null, "It will cost $" + river.takeFerry() +
+							" to pay for the ferry. Do you still want to take the ferry?", "",
+							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+							new Object[] {"Yes", "No"}, -1);
 					
 					// If the user selects 'Yes' the user pays for the ferry and makes it across
 					if(res == JOptionPane.YES_OPTION) {
-						JOptionPane.showMessageDialog(null, "You made it across the river!", "", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "You made it across the river!",
+								"", JOptionPane.INFORMATION_MESSAGE);
 					}
 					// Otherwise, the pane closes and the user can input another selection
 					
@@ -115,7 +119,8 @@ public class RiverPanel extends JPanel{
 					if(river.floatRiver()) {
 						
 						// Display to the user that they made it across the river
-						JOptionPane.showMessageDialog(null, "You made it across the river!", "", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "You made it across the river!",
+								"", JOptionPane.INFORMATION_MESSAGE);
 					}
 					
 					// If here, the wagon did not make it across the river
@@ -127,14 +132,16 @@ public class RiverPanel extends JPanel{
 						
 						// Gives a 30% chance that one person will drown when the wagon does not make it across
 						if(drown <= 3) {
-							
 							// Tell the user that they did not make it and that one person has died
-							JOptionPane.showMessageDialog(null, "The river's current was too strong and one member of your party drowned!");
+							JOptionPane.showMessageDialog(null, "The river's current was " +
+									"too strong and one member of your party drowned!");
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
 						else {
-							JOptionPane.showMessageDialog(null, "The river's current was too strong, but your party made it across safely.", "", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "The river's current was " +
+									"too strong, but your party made it across safely.",
+									"", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				}
@@ -146,7 +153,8 @@ public class RiverPanel extends JPanel{
 					if(river.fordRiver()) {
 						
 						// Display message to the user that they made it across
-						JOptionPane.showMessageDialog(null, "You successfully forded the river!", "", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "You successfully forded the " +
+								"river!", "", JOptionPane.INFORMATION_MESSAGE);
 					}
 					
 					// Otherwise, the wagon did not make it across
@@ -160,12 +168,15 @@ public class RiverPanel extends JPanel{
 						if(drown <= 3) {
 							
 							// Tell the user that they did not make it and that one person has died
-							JOptionPane.showMessageDialog(null, "The river was too deep to ford and one member of your party drowned!");
+							JOptionPane.showMessageDialog(null, "The river was too deep" +
+									" to ford and one member of your party drowned!");
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
 						else {
-							JOptionPane.showMessageDialog(null, "The river was too deep to ford, but your party made it across safely.", "", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "The river was too deep" +
+									" to ford, but your party made it across safely.",
+									"", JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				}

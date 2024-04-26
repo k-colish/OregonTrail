@@ -10,10 +10,9 @@
 
 package MP3Package;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
-
-import javax.swing.JOptionPane;
 
 public class Trading {
 	private int tradingIndex;
@@ -36,7 +35,10 @@ public class Trading {
 		System.out.println("Trader has: " + items.get(tradingIndex).getName());
 		System.out.println("Trader wants: " + items.get(yourIndex).getName());
 		
-		JOptionPane.showOptionDialog(null, "Someone would like to trade " + items.get(tradingIndex).getName() + " for " + items.get(yourIndex).getName() + ". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[] {"Yes", "No"}, -1);
+		JOptionPane.showOptionDialog(null, "Someone would like to trade " +
+				items.get(tradingIndex).getName() + " for " + items.get(yourIndex).getName() +
+				". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+				null, new Object[] {"Yes", "No"}, -1);
 		
 	}
 

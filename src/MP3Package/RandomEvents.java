@@ -1,21 +1,17 @@
 package MP3Package;
 
 import javax.swing.*;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomEvents {
     Random rnd = new Random();
-    private final ArrayList<String> allItems = new ArrayList<String>();
     Wagon wagonlist;
 
     public RandomEvents(Wagon wagon)
     {
         wagonlist = wagon;
     }
-
-
 
     public void allEvents()
     {
@@ -37,7 +33,6 @@ public class RandomEvents {
             case 15: oxWanders(); break;
             case 16: water(); break;
             case 17: badGrass(); break;
-            case 18: illness(); break;
             default: System.err.println("Error in allEvents");
         }
     }
@@ -80,8 +75,7 @@ public class RandomEvents {
     private void Thief() //2% & lots of supplies lost, does not currently work
     {
         String lostItems = "";
-        if (randomValue(50) == 1)
-        {
+        if (randomValue(50) == 1) {
             System.out.println("Thief");
             int food = randomValue(125);
             wagonlist.changeTotalFood(-food);
@@ -103,7 +97,6 @@ public class RandomEvents {
             wagonlist.changeTotalFood(30);
             JOptionPane.showMessageDialog(null, "You have gained 30 pounds of food!",
                     "Indians have come to help", JOptionPane.INFORMATION_MESSAGE);
-
             System.out.println("indians");
         }
     }
@@ -151,8 +144,7 @@ public class RandomEvents {
 
     private void deadOX() // 2.5%
     {
-        if (randomValue(40) == 1)
-        {
+        if (randomValue(40) == 1) {
             System.out.println("RIP OX");
             JOptionPane.showMessageDialog(null, "One of your oxen has died.", "Oxen died",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -161,8 +153,7 @@ public class RandomEvents {
 
     private void injuredMember() // 2.5%
     {
-        if (randomValue(40) == 1)
-        {
+        if (randomValue(40) == 1) {
             //add sick/injured method
             System.out.println("you hurt? :(");
         }
@@ -170,8 +161,7 @@ public class RandomEvents {
 
     private void snakeBite() // 0.7%
     {
-        if (randomValue(1000) <= 7)
-        {
+        if (randomValue(1000) <= 7) {
             //add sick/injured method
             System.out.println("SNAKE");
         }
@@ -201,8 +191,7 @@ public class RandomEvents {
     private void wagonFire() // 2% & lost supplies
     {
         String lostItems = "";
-        if (randomValue(50) == 1)
-        {
+        if (randomValue(50) == 1) {
             System.out.println("FIRE!");
             int food = randomValue(250);
             wagonlist.changeTotalFood(-food);
@@ -231,8 +220,7 @@ public class RandomEvents {
     private void findWagon() // 2% & gained supplies
     {
         String freeItems = "";
-        if (randomValue(25) == 1)
-        {
+        if (randomValue(25) == 1) {
             System.out.println("LOOT");
             int food = randomValue(125);
             wagonlist.changeTotalFood(food);
@@ -260,6 +248,7 @@ public class RandomEvents {
     }
 
     private void water() // 15% & lose few pounds of food
+            //NEEDED - adds 10-20 to each person
     {
         if (randomValue(17) <= 3) {
             int rmd = randomValue(20);
@@ -281,8 +270,50 @@ public class RandomEvents {
         }
     }
 
-    private void illness() //0-40% based on health, person & disease random
+    public boolean illness() //0-40% based on health, person & disease random
+            //NEEDED - adds 20 to that person
     {
-        System.out.println("sick");
+        Health chance = null;
+        String disease = "";
+        String name = "";
+        int rnd = randomValue(chance.healthScores()) % randomValue(chance.healthScores());
+
+        while(rnd > 40) {
+            rnd = randomValue(chance.healthScores()) % randomValue(chance.healthScores());
+        }
+
+        if (!(rnd >= 4))
+        {
+            switch(randomValue(6)) {
+                case 1: disease = "Heat exhaustion"; break;
+                case 2: disease = "Typhoid"; break;
+                case 3: disease = "Cholera"; break;
+                case 4: disease = "Measles"; break;
+                case 5: disease = "Dysentery"; break;
+                case 6: disease = "Mountain fever"; break;
+                default: System.err.println("Error in Health illness");
+            }
+            //and name randomizer
+            JOptionPane.showMessageDialog(null, name + "Has contracted" + disease, "Got an illness", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("sick");
+            return true;
+        }
+        else
+            return false;
+    }
+    /**
+     * determines if you have successfully scavenged for food
+     */
+    private void scavenge() {
+        int food = randomValue(60)+19;
+    	if (randomValue(10) <= 7) {
+    		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
+                    "You have gained " + food + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
+    		wagonlist.changeTotalFood(food);
+    	}
+    	else {
+    		JOptionPane.showMessageDialog(null, "You did not find any food. Better luck " +
+                    "next time...", "FAILED", JOptionPane.INFORMATION_MESSAGE);
+    	}
     }
 }

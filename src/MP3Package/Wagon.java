@@ -168,9 +168,8 @@ public class Wagon {
 	
 	public Destinations getNextLandmark() {
 		for(int i = 0; i < destinations.size(); i++) {
-			if(milesTraveled >= destinations.get(i).getDistance() && milesTraveled < destinations.get(i + 1).getDistance()) {
-				return destinations.get(i + 1);
-			}
+			if(milesTraveled >= destinations.get(i).getDistance() &&
+					milesTraveled < destinations.get(i + 1).getDistance()) {return destinations.get(i + 1);}
 		}
 		return destinations.get(1);
 	}
@@ -216,7 +215,8 @@ public class Wagon {
 	 */
 	public int milesToLandmark() {
 		for(int i = 0; i < destinations.size(); i++) {
-			if(milesTraveled >= destinations.get(i).getDistance() && milesTraveled < destinations.get(i + 1).getDistance()) {
+			if(milesTraveled >= destinations.get(i).getDistance() && milesTraveled <
+					destinations.get(i + 1).getDistance()) {
 				return destinations.get(i + 1).getDistance() - milesTraveled;
 			}
 		}
