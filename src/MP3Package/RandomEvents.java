@@ -13,21 +13,9 @@ public class RandomEvents {
     public RandomEvents(Wagon wagon)
     {
         wagonlist = wagon;
-        allItemsCSV();
     }
 
-    public void allItemsCSV()
-    {
-        InputStreamReader reader = null;
-        try {
-            reader = new InputStreamReader(this.getClass().getResourceAsStream("/csv/AllItems.csv"));
-            System.out.println("Item: " + reader);
-            allItems.add(String.valueOf(reader));
-        }
-        catch(Exception e) {
-            System.err.println("Error reading CSV file: " + e.getMessage());
-        }
-    }
+
 
     public void allEvents()
     {

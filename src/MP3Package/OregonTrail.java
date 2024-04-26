@@ -220,9 +220,10 @@ public class OregonTrail {
 				
 		frame = new JFrame();
 //		frame = new MainPanel(wagon, date);
-		frame.setBounds(100, 100, 836, 825);
+		frame.setBounds(100, 100, 1100, 870);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.setResizable(false);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
@@ -288,16 +289,62 @@ public class OregonTrail {
 		panel_1.add(travelButton, BorderLayout.SOUTH);
 		
 		JLabel ImageJLabel = new JLabel("");
+		ImageJLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		ImageJLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
 		ImageJLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-		panel_1.add(ImageJLabel, BorderLayout.CENTER);
-		ImageJLabel.setBounds(new Rectangle(900, 600));
+		panel_1.add(ImageJLabel, BorderLayout.NORTH);
+		ImageJLabel.setBounds(new Rectangle(1100, 600));
 		int width = ImageJLabel.getWidth();
 		int height = ImageJLabel.getHeight();
 		Image img = backgroundImage.getImage();
 		Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		ImageJLabel.setIcon(new ImageIcon(newImg));
 		
+		JPanel panel_2 = new JPanel();
+		panel_1.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new GridLayout(0, 6, 0, 0));
+		
+		JButton btnNewButton = new JButton("Scavenge for Food");
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNewButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Rest");
+		btnNewButton_1.setBackground(Color.WHITE);
+		btnNewButton_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNewButton_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(btnNewButton_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Trade");
+		btnNewButton_1_1.setBackground(Color.WHITE);
+		btnNewButton_1_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNewButton_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_1_1_1 = new JButton("Check Supplies");
+		btnNewButton_1_1_1.setBackground(Color.WHITE);
+		btnNewButton_1_1_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNewButton_1_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(btnNewButton_1_1_1);
+		
+		JButton btnNewButton_1_1_2 = new JButton("Change Pace");
+		btnNewButton_1_1_2.setBackground(Color.WHITE);
+		btnNewButton_1_1_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNewButton_1_1_2.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(btnNewButton_1_1_2);
+		
+		JButton btnNewButton_1_1_3 = new JButton("Change Rations");
+		btnNewButton_1_1_3.setBackground(Color.WHITE);
+		btnNewButton_1_1_3.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNewButton_1_1_3.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel_2.add(btnNewButton_1_1_3);
+		
+		// Instantiate timer
+		clock = new javax.swing.Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				clockActionPerformed( evt );
+			}});
 		
 		
 		
@@ -316,11 +363,6 @@ public class OregonTrail {
 		 * 
 		 * 
 		 */
-		// Instantiate timer
-		clock = new javax.swing.Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				clockActionPerformed( evt );
-				}});
 		
 //		JLabel titleLabel = new JLabel("The Oregon Trail");
 //		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
