@@ -276,8 +276,19 @@ public class RandomEvents {
         Health score = null;
         String disease = "";
         String name = "";
+        boolean rnd = false;
 
-        if (rnd <= 4)
+        switch (score.healthScores())
+        {
+            case 1: disease = "Heat exhaustion"; break;
+            case 2: disease = "Typhoid"; break;
+            case 3: disease = "Cholera"; break;
+            case 4: disease = "Measles"; break;
+            case 5: disease = "Dysentery"; break;
+            case 6: disease = "Mountain fever"; break;
+        }
+
+        if (rnd)
         {
             switch(randomValue(6)) {
                 case 1: disease = "Heat exhaustion"; break;
