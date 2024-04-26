@@ -13,19 +13,16 @@ public class Health {
     */
 
     private ArrayList<Integer> Healths = new ArrayList<Integer>();
-    Item item;
-    People names;
-    OregonTrail trial;
-    Wagon itemlist;
-    RandomEvents random;
+    private ArrayList<People> people;
+    private People names;
+    private Wagon itemlist;
+    private RandomEvents random;
 
-    Health(Item items, People nams, OregonTrail oregeon, Wagon wlist, RandomEvents event)
+    Health(ArrayList<People> names, Wagon wlist, RandomEvents event)
     {
-        item = items;
-        names = nams;
-        trial = oregeon;
-        itemlist = wlist;
-        random = event;
+        this.people = names;
+        this.itemlist = wlist;
+        this.random = event;
     }
 
     public String overallHealth() //going to return healthy, 0-34 = good health, 35-65 = fair health,

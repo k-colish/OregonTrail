@@ -320,7 +320,7 @@ public class RandomEvents {
     /**
      * determines if you have successfully scavenged for food
      */
-    private void scavenge() {
+    public void scavenge() {
         int food = randomValue(60)+19;
     	if (randomValue(10) <= 7) {
     		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +

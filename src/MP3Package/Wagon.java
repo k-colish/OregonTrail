@@ -175,10 +175,6 @@ public class Wagon {
 		return destinations.get(1);
 	}
 	
-	/**
-	 * death - removes 1 member of party when a person dies
-	 */
-	public void death() {numberOfPeople--;}
 
 	public int addDays(int x) {
 			
@@ -194,14 +190,13 @@ public class Wagon {
 	 */
 	public int travel() {
 		// Calculate the food consumed per day, (4 people * consumption rate)
-		int foodPerDay = numberOfPeople * foodConsumption;
+		int foodPerDay = 4 * foodConsumption;
 		events.allEvents();
 
 		daysTraveled++;
 		
 		// Calculate the total food  using the food used per day times the number of days to travel.
 		totalFoodUsed += foodPerDay;
-		System.out.println(numberOfPeople);
 		
 		milesTraveled += milesPerDay; // Update total miles traveled
 		
