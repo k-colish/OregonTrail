@@ -13,6 +13,19 @@
  * @version - 1.0.0 - 3/25/24
  */
 
+/**
+* Notes from interview with Matt Valerio.
+*
+* make the CSV files more readable for others, layout how the SCV works.
+* input validation for each area, "Defensive programming".
+* Code maintenance, make sure the code is set-up correctly.
+* Think about changing the CSV code that makes it all into one method.
+* Couplings - what code needs changed if I change this code? Separate repeat activities to reduce coupling.
+* Keep in mind Time v.s Memory - how fast something happens vs how much it takes to run it.
+* Keep in mind hash maps for when we want data, such as our CSV file data.
+* Define coding standards. (BRACKETS!), syntax matters for the functionality too.
+*/
+
 package MP3Package;
 
 import net.miginfocom.swing.MigLayout;

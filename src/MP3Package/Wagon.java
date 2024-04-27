@@ -14,15 +14,14 @@
 
 package MP3Package;
 
+import javax.swing.*;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
-
 public class Wagon {
 	// Initialize instance variables
-	private int totalFood = 0;      	   // Total of all food in the wagon
+	private int totalFood = 100;      	   // Total of all food in the wagon
     private int foodConsumption = 3;           // Food consumption rate per person per day
     private int milesPerDay = 20;               // Distance traveled per day in miles
     private int totalDays;                 // Total number of days required to reach the destination
@@ -142,17 +141,17 @@ public class Wagon {
 	 * getTotalFood - calculates the total amount of food that has been added to the wagon
 	 * @return - totalFood - the total amount of food that has been added to the wagon
 	 */
-	public int getTotalFood() {
-		totalFood = 100;
+	public int getTotalFood()
+	{
 		return totalFood - totalFoodUsed;
 	}
 
-	public void changeTotalFood(int x)
+	public void changeTotalFood(int amount)
 	{
-		if (totalFood + x < 0)
+		if ((totalFood + amount )< 0)
 			totalFood = 0;
 		else
-		 totalFood += x;
+		 totalFood += amount;
 	}
 	
 	/**

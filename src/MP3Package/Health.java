@@ -29,11 +29,13 @@ public class Health {
                                 //70-104 = poor health, 105-139 = very poor health
     {
         death();
-        int score  = healthScores()/getPeopleAmount();
-        if (score >= 0 && score <= 34) {return "Good health";}
-        if (score >= 35 && score <= 65) {return "Fair Health";}
-        else if (score >= 70 && score <= 104) {return "Poor Health";}
-        else if (score >= 105 && score <= 139) {return "Very poor health";}
+        travelingPace();
+        FoodHealth();
+        illness();
+        if (healthScores()/getPeopleAmount() <= 34) {return "Good health";}
+        if (healthScores()/getPeopleAmount() >= 35 && healthScores()/getPeopleAmount() <= 65) {return "Fair Health";}
+        else if (healthScores()/getPeopleAmount() >= 70 && healthScores()/getPeopleAmount() <= 104) {return "Poor Health";}
+        else if (healthScores()/getPeopleAmount() >= 105) {return "Very poor health";}
         else {return "No people exist";}
     }
 
@@ -60,7 +62,12 @@ public class Health {
 
     private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6 // needs changed for 12-20 miles
     {
-        //if ()
+        if (itemlist.getMilesPerDay() <= 13)
+            addPoints(2, getPeopleAmount());
+        else if (itemlist.getMilesPerDay() > 13 && itemlist.getMilesPerDay() <= 16)
+            addPoints(4, getPeopleAmount());
+        else if (itemlist.getMilesPerDay() > 16)
+            addPoints(6, getPeopleAmount());
     }
 
     private void weatherHealth()
@@ -71,14 +78,14 @@ public class Health {
     }
 
     private void FoodHealth() // use this to increase health depending on how much food they get that day
-            //Filling = 0, meager = 2, bare bones = 4, out of food = 6
+                            //Filling = 0, meager = 2, bare bones = 4, out of food = 6
     {
         if (itemlist.getTotalFood() == 0) // out of food
-            addPoints(6, 4);
+            addPoints(6, getPeopleAmount());
         else if (itemlist.getFoodConsumption() == 1) // bare bones
-            addPoints(4, 4);
+            addPoints(4, getPeopleAmount());
         else if (itemlist.getFoodConsumption() == 2) // meager
-            addPoints(4, 2);
+            addPoints(2, getPeopleAmount());
     }
 
     private void  illness() //if sick/injured, add an extra 1 per sick/injured person
@@ -86,7 +93,7 @@ public class Health {
         int illnessCount = 0;
         if (random.illness())
             illnessCount++;
-        addPoints(illnessCount, 4);
+        addPoints(illnessCount, getPeopleAmount());
     }
 
     public void addPoints(int points, int peopleAmount)
