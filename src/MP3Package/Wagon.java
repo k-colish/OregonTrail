@@ -19,6 +19,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Wagon {
 	// Initialize instance variables
 	private int totalFood = 100;      	   // Total of all food in the wagon

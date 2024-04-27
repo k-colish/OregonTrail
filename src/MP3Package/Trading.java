@@ -23,20 +23,21 @@ public class Trading {
 	 * 			they want to trade.
 	 * @param items - The ArrayList of all items that can be put in the wagon. (Subject to change)
 	 */
-	public Trading(ArrayList<Item> items) {
+	public Trading(Wagon wagon) {
 		Random rnd = new Random();
 		
-		tradingIndex = rnd.nextInt(items.size());
-		yourIndex = rnd.nextInt(items.size());
+		System.out.println(wagon.getItems().size());
+		tradingIndex = rnd.nextInt(wagon.getItems().size());
+		yourIndex = rnd.nextInt(wagon.getItems().size());
 		 
-		Item traderItem = items.get(tradingIndex);
-		Item yourItem = items.get(yourIndex);
+		Item traderItem = wagon.getItems().get(tradingIndex);
+		Item yourItem = wagon.getItems().get(yourIndex);
 		
-		System.out.println("Trader has: " + items.get(tradingIndex).getName());
-		System.out.println("Trader wants: " + items.get(yourIndex).getName());
+		System.out.println("Trader has: " + wagon.getItems().get(tradingIndex).getName());
+		System.out.println("Trader wants: " + wagon.getItems().get(yourIndex).getName());
 		
 		JOptionPane.showOptionDialog(null, "Someone would like to trade " +
-				items.get(tradingIndex).getName() + " for " + items.get(yourIndex).getName() +
+				wagon.getItems().get(tradingIndex).getName() + " for " + wagon.getItems().get(yourIndex).getName() +
 				". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
 				null, new Object[] {"Yes", "No"}, -1);
 		
