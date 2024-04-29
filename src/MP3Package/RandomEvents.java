@@ -118,7 +118,7 @@ public class RandomEvents {
         }
     }
 
-    private void severeThunderstorm() // 15%
+    private void severeThunderstorm() // 15% & lose a day
     {
         if (randomValue(17) <= 3) {
             wagonlist.addDays(1);
@@ -128,7 +128,7 @@ public class RandomEvents {
         }
     }
 
-    private void severeBlizzard() // 15%
+    private void severeBlizzard() // 15% & lose a day
     {
         if (randomValue(17) <= 3){
             wagonlist.addDays(1);
@@ -150,6 +150,7 @@ public class RandomEvents {
 
     private void hailStorm() // 6% before fort Hall & 50% lose a day
     {
+
         if (randomValue(2) == 1 ) {
             System.out.println("hail");
             wagonlist.addDays(1);
@@ -268,7 +269,6 @@ public class RandomEvents {
     }
 
     private void water() // 15% & lose few pounds of food
-            //NEEDED - adds 10-20 to each person
     {
         People names = new People();
         Health score = new Health(names, wagonlist, this);
@@ -294,7 +294,6 @@ public class RandomEvents {
     }
 
     public boolean illness() //0-40% based on health, person & disease random
-            //NEEDED - adds 20 to that person
     {
         People names = new People();
         Health score = new Health(names, wagonlist, this);
