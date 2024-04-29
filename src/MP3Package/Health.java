@@ -1,6 +1,7 @@
 package MP3Package;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Health {
 //Need, Wagon, Weather, random, river, people,
@@ -13,14 +14,14 @@ public class Health {
     */
 
     private ArrayList<Integer> Healths = new ArrayList<Integer>();
-    private ArrayList<People> people;
-    private People names;
+    private People name;
     private Wagon itemlist;
     private RandomEvents random;
+    int illnessCount = 0;
 
-    Health(ArrayList<People> names, Wagon wlist, RandomEvents event)
+    Health(People names, Wagon wlist, RandomEvents event)
     {
-        this.people = names;
+        this.name = names;
         this.itemlist = wlist;
         this.random = event;
     }
@@ -47,6 +48,7 @@ public class Health {
     {
         death();
         FoodHealth();
+        restImprovement();
         illness();
     }
 
@@ -65,6 +67,7 @@ public class Health {
             {
                 //add name thing to say which one died using massage dialog
                 Healths.remove(i);
+                System.out.println("DEAD");
             }
         }
     }
@@ -101,10 +104,16 @@ public class Health {
 
     private void  illness() //if sick/injured, add an extra 1 per sick/injured person
     {
-        int illnessCount = 0;
         if (random.illness())
             illnessCount++;
         addPoints(illnessCount, getPeopleAmount());
+    }
+
+    private void restImprovement()
+    {
+        Random rnd = new Random();
+        int rmd = rnd.nextInt(10) + 1;
+        addPoints(rmd, getPeopleAmount());
     }
 
     public void addPoints(int points, int peopleAmount)

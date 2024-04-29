@@ -169,7 +169,8 @@ public class RandomEvents {
 
     private void injuredMember() // 2.5% // 20 points
     {
-        Health score = null;
+        People names = new People();
+        Health score = new Health(names, wagonlist, this);
         if (randomValue(40) == 1) {
             score.addPoints(20, 1);
             System.out.println("you hurt? :(");
@@ -178,7 +179,8 @@ public class RandomEvents {
 
     private void snakeBite() // 0.7%
     {
-        Health score = null;
+        People names = new People();
+        Health score = new Health(names, wagonlist, this);
         if (randomValue(1000) <= 7) {
             score.addPoints(40, 1); // adds 40 points to the person that got bit
             System.out.println("SNAKE");
@@ -246,7 +248,7 @@ public class RandomEvents {
             {
                 ArrayList<Item> LootItems = wagonlist.getItems();
                 int j = randomValue(wagonlist.getItems().size());
-                freeItems = freeItems + LootItems.get(j) + "\n";
+                freeItems = freeItems + LootItems.get(j).getName() + "\n";
                 wagonlist.addItemAmount(LootItems.get(j).getName(), 1);
             }
             JOptionPane.showMessageDialog(null, "You have found a deserted wagon it had: "
@@ -268,13 +270,14 @@ public class RandomEvents {
     private void water() // 15% & lose few pounds of food
             //NEEDED - adds 10-20 to each person
     {
-        Health score = null;
+        People names = new People();
+        Health score = new Health(names, wagonlist, this);
         if (randomValue(17) <= 3) {
             int rmd = randomValue(20);
             wagonlist.changeTotalFood(-rmd);
             JOptionPane.showMessageDialog(null, "Your water got contaminated, you lost " +
                     rmd + " pounds of food.", "Bad Water", JOptionPane.INFORMATION_MESSAGE);
-            score.addPoints(randomValue(10)+10, score.getPeopleAmount());
+            score.addPoints(randomValue(10)+9, score.getPeopleAmount());
             System.out.println("NEED WATER");
         }
     }
@@ -293,7 +296,8 @@ public class RandomEvents {
     public boolean illness() //0-40% based on health, person & disease random
             //NEEDED - adds 20 to that person
     {
-        Health score = null;
+        People names = new People();
+        Health score = new Health(names, wagonlist, this);
         String disease = "";
         String name = "";
         int rnd = 0;
@@ -328,7 +332,7 @@ public class RandomEvents {
                 default: System.err.println("Error in Health illness");
             }
             //and name randomizer
-            JOptionPane.showMessageDialog(null, name + "has contracted" + disease,
+            JOptionPane.showMessageDialog(null, name + "has contracted " + disease,
                     "Got an illness", JOptionPane.INFORMATION_MESSAGE);
             score.addPoints(20, 1);
             System.out.println("sick");

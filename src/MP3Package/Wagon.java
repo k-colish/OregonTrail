@@ -221,9 +221,17 @@ public class Wagon {
 	}
 	
 	public int rest() {
+		People names = new People();
+		Health med = new Health(names, this, events);
+		RandomEvents rnd = new RandomEvents(this);
 		int days = 0;
 		days = Integer.parseInt(JOptionPane.showInputDialog(null, "How many days would you like to rest?"));
 		addDays(days);
+		for (int i = 1; i < days; i++)
+		{
+			med.restNeeds();
+			rnd.restEvents();
+		}
 		return days;
 	}
 	
