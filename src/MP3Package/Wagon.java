@@ -93,17 +93,17 @@ public class Wagon {
 		System.out.println();
 	}
 
-	public void addItemAmount(Item itemName, int amount) {
+	public void addItemAmount(String itemName, int amount) {
 		for(int i = 0; i < Items.size(); i++) {
-			if(itemName.getName() == Items.get(i).getName()) {
+			if(itemName == Items.get(i).getName()) {
 				Items.get(i).addAmount(amount);
 			}
 		}
 	}
 	
-	public void removeItemAmount(Item itemName, int amount) {
+	public void removeItemAmount(String itemName, int amount) {
 		for(int i = 0; i < Items.size(); i++) {
-			if(itemName.getName() == Items.get(i).getName()) {
+			if(itemName == Items.get(i).getName()) {
 				Items.get(i).removeAmount(amount);
 			}
 		}
