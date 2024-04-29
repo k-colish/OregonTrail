@@ -143,6 +143,10 @@ public class Wagon {
 	 */
 	public int getTotalFood()
 	{
+		if(totalFood < totalFoodUsed) {
+			totalFoodUsed = totalFood;
+		}
+		System.out.println(totalFoodUsed);
 		return totalFood - totalFoodUsed;
 	}
 
@@ -218,8 +222,20 @@ public class Wagon {
 	
 	public int rest() {
 		int days = 0;
-		days = Integer.parseInt(JOptionPane.showInputDialog(null, "How many days would you like to rest?", "Resting"));
+		days = Integer.parseInt(JOptionPane.showInputDialog(null, "How many days would you like to rest?"));
 		addDays(days);
 		return days;
+	}
+	
+	public Destinations atDestination() {
+		int nextMiles = milesTraveled + milesPerDay;
+		Destinations dest = null;
+		for(int i = 0; i < destinations.size(); i++) {
+			if(nextMiles >= destinations.get(i).getDistance() && nextMiles < destinations.get(i).getDistance() + 19) {
+				milesTraveled = destinations.get(i).getDistance();
+				dest = destinations.get(i);
+			}
+		}
+		return dest;
 	}
 }

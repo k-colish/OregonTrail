@@ -25,7 +25,7 @@ public class RandomEvents {
      */
     public void allEvents()
     {
-        switch(randomValue(17) + 1) {
+        switch(randomValue(17)) {
             case 1: Thief(); break;
             case 2: indiansHelp(); break;
             case 3: severeThunderstorm(); break;

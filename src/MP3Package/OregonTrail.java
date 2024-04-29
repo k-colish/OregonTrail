@@ -72,6 +72,7 @@ public class OregonTrail {
 	private JLabel milesLabel = new JLabel(Integer.toString(wagon.getMilesTraveled()) + " miles");
 	private JPanel actionButtonPane = new JPanel();
 
+	
 
 	/**
 	 * Launch the application.
@@ -117,6 +118,14 @@ public class OregonTrail {
 		
 		// Instantiate and update list in RandomEvents object
 		rndEvt = new RandomEvents(wagon);
+		
+		Destinations dest = wagon.atDestination();
+		if(dest != null) {
+			System.out.println(dest.getName());
+			RiverPanel river = new RiverPanel((River) dest);
+			frame.add(river);
+			frame.setComponentZOrder(river, 0);
+		}
 
 		// Print out for debugging
 		System.out.println("Clock Action Performed");
@@ -160,7 +169,7 @@ public class OregonTrail {
 //				System.out.println("No selected");
 //			}
 			TotalFood.setText(Integer.toString(wagon.getTotalFood()));
-			landmarkLabel.setText(wagon.getNextLandmark().getName());
+			landmarkLabel.setText(Integer.toString(wagon.milesToLandmark()));
 			milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
 		}
 	}
@@ -274,13 +283,14 @@ public class OregonTrail {
 				if(!clock.isRunning()) {
 					clock.start();
 					travelButton.setText("Click to stop travel");
-					frame.getContentPane().remove(actionButtonPane);
-					frame.getContentPane().revalidate();
+//					actionButtonPane.setEnabled(false);
+					actionButtonPane.setVisible(false);
 					frame.getContentPane().repaint();
 				}
 				else {
 					clock.stop();
 					travelButton.setText("Click to start traveling!");
+					actionButtonPane.setVisible(true);
 				}
 			}
 		});
@@ -310,7 +320,7 @@ public class OregonTrail {
 		JButton scavengeButton = new JButton("Scavenge for Food");
 		scavengeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				wagon.changeTotalFood(rndEvt.scavenge());
+				rndEvt.scavenge();
 				TotalFood.setText(Integer.toString(wagon.getTotalFood()));
 			}
 		});
