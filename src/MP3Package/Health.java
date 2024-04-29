@@ -67,6 +67,7 @@ public class Health {
             {
                 //add name thing to say which one died using massage dialog
                 Healths.remove(i);
+                System.out.println("DEAD");
             }
         }
     }

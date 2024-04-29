@@ -277,7 +277,7 @@ public class RandomEvents {
             wagonlist.changeTotalFood(-rmd);
             JOptionPane.showMessageDialog(null, "Your water got contaminated, you lost " +
                     rmd + " pounds of food.", "Bad Water", JOptionPane.INFORMATION_MESSAGE);
-            score.addPoints(randomValue(10)+10, score.getPeopleAmount());
+            score.addPoints(randomValue(10)+9, score.getPeopleAmount());
             System.out.println("NEED WATER");
         }
     }
