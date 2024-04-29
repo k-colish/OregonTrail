@@ -28,15 +28,26 @@ public class Health {
     public String overallHealth() //going to return healthy, 0-34 = good health, 35-65 = fair health,
                                 //70-104 = poor health, 105-139 = very poor health
     {
+        if (healthScores()/getPeopleAmount() <= 34) {return "Good health";}
+        else if (healthScores()/getPeopleAmount() >= 35 && healthScores()/getPeopleAmount() <= 65) {return "Fair Health";}
+        else if (healthScores()/getPeopleAmount() >= 70 && healthScores()/getPeopleAmount() <= 104) {return "Poor Health";}
+        else if (healthScores()/getPeopleAmount() >= 105) {return "Very poor health";}
+        else {return "No people exist";}
+    }
+
+    public void travelNeeds() // Used when the player travels
+    {
         death();
         travelingPace();
         FoodHealth();
         illness();
-        if (healthScores()/getPeopleAmount() <= 34) {return "Good health";}
-        if (healthScores()/getPeopleAmount() >= 35 && healthScores()/getPeopleAmount() <= 65) {return "Fair Health";}
-        else if (healthScores()/getPeopleAmount() >= 70 && healthScores()/getPeopleAmount() <= 104) {return "Poor Health";}
-        else if (healthScores()/getPeopleAmount() >= 105) {return "Very poor health";}
-        else {return "No people exist";}
+    }
+
+    public void restNeeds() // Used when the player rests
+    {
+        death();
+        FoodHealth();
+        illness();
     }
 
     public int healthScores()
@@ -58,7 +69,7 @@ public class Health {
         }
     }
 
-    private int getPeopleAmount() {return Healths.size();} //return the size of the array
+    public int getPeopleAmount() {return Healths.size();} //return the size of the array
 
     private void travelingPace() //Steady = 2, Strenuous = 4, grueling = 6 // needs changed for 12-20 miles
     {
@@ -80,7 +91,7 @@ public class Health {
     private void FoodHealth() // use this to increase health depending on how much food they get that day
                             //Filling = 0, meager = 2, bare bones = 4, out of food = 6
     {
-        if (itemlist.getTotalFood() == 0) // out of food
+        if (itemlist.getTotalFood() <= 0) // out of food
             addPoints(6, getPeopleAmount());
         else if (itemlist.getFoodConsumption() == 1) // bare bones
             addPoints(4, getPeopleAmount());
