@@ -13,16 +13,18 @@ public class Health {
     make an array with all 4 player characters that will each method will alter with for loops
     */
 
-    private ArrayList<Integer> Healths = new ArrayList<Integer>();
+    private ArrayList<Integer> Healths = new ArrayList<>(4);
     private People name;
     private Wagon itemlist;
     private RandomEvents random;
     int illnessCount = 0;
 
     Health(People names, Wagon wlist, RandomEvents event) {
+        int peopleStartnumber = 4;
         this.name = names;
         this.itemlist = wlist;
         this.random = event;
+        for (int j = 0; j < peopleStartnumber; j++) {Healths.add(j, 0);}
     }
 
     public String overallHealth() {
@@ -96,7 +98,7 @@ public class Health {
             addPoints(2, getPeopleAmount());
     }
 
-    private void  illness() { //if sick/injured, add an extra 1 per sick/injured person
+    private void illness() { //if sick/injured, add an extra 1 per sick/injured person
         if (random.illness())
             illnessCount++;
         addPoints(illnessCount, getPeopleAmount());
@@ -109,8 +111,5 @@ public class Health {
     }
 
     public void addPoints(int points, int peopleAmount)
-    {
-        for (int i = 0; i < peopleAmount; i++)
-            Healths.set(i, Healths.get(i)+points);
-    }
+    {for (int i = 0; i < peopleAmount; i++) {Healths.set(i, Healths.get(i) + points);}}
 }

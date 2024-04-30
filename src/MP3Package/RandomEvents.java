@@ -74,7 +74,7 @@ public class RandomEvents {
 
     private int randomValue(int x) {
         int rmd = rnd.nextInt(x) + 1;
-        System.out.println("randomValue" + rmd);
+        System.out.println("randomValue: " + rmd);
         return rmd;
     }
 
@@ -90,8 +90,9 @@ public class RandomEvents {
             wagonlist.changeTotalFood(-food);
             for (int i = 0; i < randomValue(5); i++) {
                 ArrayList<Item> ThiefItems = wagonlist.getItems();
-                int j = randomValue(ThiefItems.size());
-                lostItems += ThiefItems.get(j).getName();
+                int j = randomValue(ThiefItems.size()) - 1;
+                lostItems += ThiefItems.get(j).getName()+"\n";
+                System.out.println(lostItems);
                 wagonlist.removeItemAmount(ThiefItems.get(j).getName(), 1);
             }
             if(wagonlist.getTotalFood() > 0) {
@@ -202,8 +203,8 @@ public class RandomEvents {
             wagonlist.changeTotalFood(-food);
             for (int i = 0; i < randomValue(10); i++) {
                 ArrayList<Item> ThiefItems = wagonlist.getItems();
-                int j = randomValue(wagonlist.getItems().size());
-                lostItems = lostItems + ThiefItems.get(j) + "\n";
+                int j = randomValue(wagonlist.getItems().size()) - 1;
+                lostItems = lostItems + ThiefItems.get(j).getName() + "\n";
                 wagonlist.removeItemAmount(ThiefItems.get(j).getName(), 1);
             }
             JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + " and " + food
@@ -228,7 +229,7 @@ public class RandomEvents {
             wagonlist.changeTotalFood(food);
             for (int i = 0; i < randomValue(5); i++) {
                 ArrayList<Item> LootItems = wagonlist.getItems();
-                int j = randomValue(wagonlist.getItems().size());
+                int j = randomValue(wagonlist.getItems().size()) - 1;
                 freeItems = freeItems + LootItems.get(j).getName() + "\n";
                 wagonlist.addItemAmount(LootItems.get(j).getName(), 1);
             }
@@ -242,8 +243,8 @@ public class RandomEvents {
         if (randomValue(100) == 1) {
             wagonlist.addDays(3);
             System.out.println("WHERE IT GO");
-            JOptionPane.showMessageDialog(null, "An ox wandered off and lost 3 days to find " +
-                    "it.", "Lost Ox", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "An ox wandered off and you lost 3 days to find" 
+                    + "it.", "Lost Ox", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -251,10 +252,10 @@ public class RandomEvents {
         People names = new People();
         Health score = new Health(names, wagonlist, this);
         if (randomValue(17) <= 3) {
-            int rmd = randomValue(20);
-            wagonlist.changeTotalFood(-rmd);
+            int food = randomValue(20);
+            wagonlist.changeTotalFood(-food);
             JOptionPane.showMessageDialog(null, "Your water got contaminated, you lost " +
-                    rmd + " pounds of food.", "Bad Water", JOptionPane.INFORMATION_MESSAGE);
+                    food + " pounds of food.", "Bad Water", JOptionPane.INFORMATION_MESSAGE);
             score.addPoints(randomValue(10)+9, score.getPeopleAmount());
             System.out.println("NEED WATER");
         }

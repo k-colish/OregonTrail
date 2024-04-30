@@ -22,8 +22,8 @@ import java.util.Scanner;
 public class Wagon {
 	// Initialize instance variables
 	private int totalFood = 100;      	   // Total of all food in the wagon
-    private int foodConsumption = 3;           // Food consumption rate per person per day
-    private int milesPerDay = 20;               // Distance traveled per day in miles
+    private int foodConsumption = 3;       // Food consumption rate per person per day
+    private int milesPerDay = 20;          // Distance traveled per day in miles
     private int totalDays;                 // Total number of days required to reach the destination
     private int daysTraveled;              // Number of days the wagon has been traveling
     private int totalFoodUsed = 0;         // Total food consumed during travel
@@ -225,7 +225,7 @@ public class Wagon {
 		Health med = new Health(names, this, events);
 		RandomEvents rnd = new RandomEvents(this);
 		int days = 0;
-		Integer[] options = {0,1,2,3,4,5,6,7,8,9,10};
+		Integer[] options = {0,1,2,3,4,5,6,7,8,9,10,1000};
 		
 		days = (int) JOptionPane.showInputDialog(null, "How many days would you like to rest?", "Resting", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 		
