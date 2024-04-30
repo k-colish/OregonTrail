@@ -18,6 +18,7 @@ public class River extends Destinations{
 	private double width;
 	private double lossSeverity;
 	private int flow;
+	private Random rnd = new Random();
 	
 	
 	/**
@@ -28,11 +29,11 @@ public class River extends Destinations{
 	 * @param width - the width of the river
 	 * @param flow - the speed of the current of the river
 	 */
-	public River(int distance, String name, double depth, double width, int flow) {
+	public River(int distance, String name) {
 		super(distance, name, false);
-		this.depth = depth;
-		this.width = width;
-		this.flow = flow;
+		this.depth = rnd.nextDouble(1, 6);
+		this.width = rnd.nextDouble(300, 700);
+		this.flow = rnd.nextInt(1, 3);
 	}
 	
 	/**

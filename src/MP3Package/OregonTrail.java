@@ -71,6 +71,8 @@ public class OregonTrail {
 	private JLabel landmarkLabel = new JLabel(Integer.toString(wagon.milesToLandmark()) + " miles");
 	private JLabel milesLabel = new JLabel(Integer.toString(wagon.getMilesTraveled()) + " miles");
 	private JPanel actionButtonPane = new JPanel();
+	private JButton travelButton = new JButton("Click to start traveling!");
+	private JPanel panel = new JPanel();
 
 	
 
@@ -122,9 +124,21 @@ public class OregonTrail {
 		Destinations dest = wagon.atDestination();
 		if(dest != null) {
 			System.out.println(dest.getName());
-			RiverPanel river = new RiverPanel((River) dest);
-			frame.add(river);
-			frame.setComponentZOrder(river, 0);
+			System.out.println(panel.getHeight());
+			System.out.println(frame.getHeight());
+			System.out.println(frame.getContentPane().getHeight());
+			clock.stop();
+			travelButton.setVisible(false);
+			
+			if(dest.getName().contains("River")) {
+				River river = new River(dest.getDistance(), dest.getName());
+				RiverPanel riverPanel = new RiverPanel(river);
+				frame.getContentPane().add(riverPanel, BorderLayout.CENTER);
+				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
+				
+				
+//				frame.setComponentZOrder(riverPanel, 3);
+			}
 		}
 
 		// Print out for debugging
@@ -230,12 +244,12 @@ public class OregonTrail {
 
 		frame = new JFrame();
 //		frame = new MainPanel(wagon, date);
-		frame.setBounds(100, 100, 1000, 775);
+		frame.setBounds(100, 100, 900, 775);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setResizable(false);
 		
-		JPanel panel = new JPanel();
+		
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBounds(new Rectangle(0, 0, 0, 0));
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
@@ -277,7 +291,7 @@ public class OregonTrail {
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
 
-		JButton travelButton = new JButton("Click to start traveling!");
+		
 		travelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!clock.isRunning()) {
@@ -326,10 +340,11 @@ public class OregonTrail {
 		});
 		scavengeButton.setBackground(Color.WHITE);
 		scavengeButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		scavengeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		scavengeButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(scavengeButton);
 		
 		JButton restButton = new JButton("Rest");
+		restButton.setMargin(new Insets(2, 12, 2, 12));
 		restButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int days = wagon.rest();
@@ -341,7 +356,7 @@ public class OregonTrail {
 		});
 		restButton.setBackground(Color.WHITE);
 		restButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		restButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		restButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(restButton);
 		
 		JButton tradeButton = new JButton("Trade");
@@ -352,25 +367,26 @@ public class OregonTrail {
 		});
 		tradeButton.setBackground(Color.WHITE);
 		tradeButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		tradeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		tradeButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(tradeButton);
 		
 		JButton suppliesButton = new JButton("Check Supplies");
+		suppliesButton.setMargin(new Insets(2, 10, 2, 10));
 		suppliesButton.setBackground(Color.WHITE);
 		suppliesButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		suppliesButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		suppliesButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(suppliesButton);
 		
 		JButton paceButton = new JButton("Change Pace");
 		paceButton.setBackground(Color.WHITE);
 		paceButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		paceButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		paceButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(paceButton);
 		
 		JButton rationsButton = new JButton("Change Rations");
 		rationsButton.setBackground(Color.WHITE);
 		rationsButton.setHorizontalTextPosition(SwingConstants.CENTER);
-		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(rationsButton);
 		
 		// Instantiate timer

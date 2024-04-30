@@ -14,35 +14,36 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import net.miginfocom.swing.MigLayout;
 
 public class RiverPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
+	private int status = 0;
 	
 	public RiverPanel(River river) {
-		setLayout(null);
+		setLayout(new MigLayout("", "[300px][4px][400px]", "[18px][18px][18px][18px][18px][18px][20px][]"));
 		
 		// General Label creation
 		// Text include the passed river's name
 		JLabel RiverName = new JLabel("You made it to " + river.getName() + "!");
-		RiverName.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		RiverName.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		RiverName.setHorizontalAlignment(SwingConstants.CENTER);
-		RiverName.setBounds(125, 11, 244, 18);
-		add(RiverName);
+		add(RiverName, "cell 1 0 2 1,alignx left,growy");
 		
 		// Label's text includes the passed river's depth
-		JLabel RiverDepth = new JLabel("The river is " + river.getDepth() + " feet deep.");
-		RiverDepth.setHorizontalAlignment(SwingConstants.LEFT);
-		RiverDepth.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		RiverDepth.setBounds(36, 108, 238, 18);
-		add(RiverDepth);
+		String depthMsg = String.format("The river is %.2f feet deep.", river.getDepth());
+		JLabel RiverDepth = new JLabel(depthMsg);
+		RiverDepth.setHorizontalAlignment(SwingConstants.CENTER);
+		RiverDepth.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(RiverDepth, "cell 1 1 2 1,alignx left,growy");
 		
 		// Label's text includes the passed river's width
-		JLabel RiverWidth = new JLabel("The river is " + river.getWidth() + " feet wide.");
-		RiverWidth.setHorizontalAlignment(SwingConstants.LEFT);
-		RiverWidth.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		RiverWidth.setBounds(36, 137, 213, 18);
-		add(RiverWidth);
+		String widthMsg = String.format("The river is %.2f feet wide.", river.getWidth());
+		JLabel RiverWidth = new JLabel(widthMsg);
+		RiverWidth.setHorizontalAlignment(SwingConstants.CENTER);
+		RiverWidth.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(RiverWidth, "cell 1 2 2 1,alignx left,growy");
 		
 		// Label's text is set based on the passed river's flow value (1 for slowest flow, 3 for the fastest).
 		JLabel RiverFlow = new JLabel("");
@@ -51,36 +52,9 @@ public class RiverPanel extends JPanel{
 		case 2: RiverFlow.setText("The river's current is steady"); break;
 		case 3: RiverFlow.setText("The river's current is fast"); break;
 		}
-		RiverFlow.setHorizontalAlignment(SwingConstants.LEFT);
-		RiverFlow.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		RiverFlow.setBounds(36, 171, 300, 18);
-		add(RiverFlow);
-		
-		JLabel lblWhatWouldYou = new JLabel("What would you like to do?");
-		lblWhatWouldYou.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWhatWouldYou.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblWhatWouldYou.setBounds(179, 255, 160, 18);
-		add(lblWhatWouldYou);
-		
-		
-		// Display the options for the user
-		JLabel lblFordTheRiver = new JLabel("Ford the river: Enter 1");
-		lblFordTheRiver.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFordTheRiver.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblFordTheRiver.setBounds(36, 289, 130, 18);
-		add(lblFordTheRiver);
-		
-		JLabel lblFloatAcrossThe = new JLabel("Float across the river: Enter 2");
-		lblFloatAcrossThe.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFloatAcrossThe.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblFloatAcrossThe.setBounds(36, 318, 174, 18);
-		add(lblFloatAcrossThe);
-		
-		JLabel lblFordTheRiver_1_1 = new JLabel("Pay for a Ferry: Enter 3");
-		lblFordTheRiver_1_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFordTheRiver_1_1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblFordTheRiver_1_1.setBounds(36, 347, 141, 18);
-		add(lblFordTheRiver_1_1);
+		RiverFlow.setHorizontalAlignment(SwingConstants.CENTER);
+		RiverFlow.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(RiverFlow, "cell 1 3 2 1,alignx left,growy");
 		
 		// Create textField for user input
 		textField = new JTextField();
@@ -98,7 +72,7 @@ public class RiverPanel extends JPanel{
 					
 					// Display the option to get user input on whether they want to pay for the ferry or not
 					int res = pane.showOptionDialog(null, "It will cost $" + river.takeFerry() +
-							" to pay for the ferry. Do you still want to take the ferry?", "",
+							"0 to pay for the ferry. Do you still want to take the ferry?", "",
 							JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
 							new Object[] {"Yes", "No"}, -1);
 					
@@ -106,6 +80,7 @@ public class RiverPanel extends JPanel{
 					if(res == JOptionPane.YES_OPTION) {
 						JOptionPane.showMessageDialog(null, "You made it across the river!",
 								"", JOptionPane.INFORMATION_MESSAGE);
+						status = 1;
 					}
 					// Otherwise, the pane closes and the user can input another selection
 					
@@ -121,6 +96,7 @@ public class RiverPanel extends JPanel{
 						// Display to the user that they made it across the river
 						JOptionPane.showMessageDialog(null, "You made it across the river!",
 								"", JOptionPane.INFORMATION_MESSAGE);
+						status = 1;
 					}
 					
 					// If here, the wagon did not make it across the river
@@ -135,6 +111,7 @@ public class RiverPanel extends JPanel{
 							// Tell the user that they did not make it and that one person has died
 							JOptionPane.showMessageDialog(null, "The river's current was " +
 									"too strong and one member of your party drowned!");
+							status = 2;
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -142,6 +119,7 @@ public class RiverPanel extends JPanel{
 							JOptionPane.showMessageDialog(null, "The river's current was " +
 									"too strong, but your party made it across safely.",
 									"", JOptionPane.INFORMATION_MESSAGE);
+							status = 3;
 						}
 					}
 				}
@@ -153,8 +131,9 @@ public class RiverPanel extends JPanel{
 					if(river.fordRiver()) {
 						
 						// Display message to the user that they made it across
-						JOptionPane.showMessageDialog(null, "You successfully forded the " +
-								"river!", "", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "You successfully forded the river!", "", JOptionPane.INFORMATION_MESSAGE);
+						
+						status = 1;
 					}
 					
 					// Otherwise, the wagon did not make it across
@@ -170,6 +149,7 @@ public class RiverPanel extends JPanel{
 							// Tell the user that they did not make it and that one person has died
 							JOptionPane.showMessageDialog(null, "The river was too deep" +
 									" to ford and one member of your party drowned!");
+							status = 2;
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -177,6 +157,7 @@ public class RiverPanel extends JPanel{
 							JOptionPane.showMessageDialog(null, "The river was too deep" +
 									" to ford, but your party made it across safely.",
 									"", JOptionPane.INFORMATION_MESSAGE);
+							status = 3;
 						}
 					}
 				}
@@ -185,13 +166,44 @@ public class RiverPanel extends JPanel{
 				}
 			}
 		});
-		textField.setBounds(225, 376, 86, 20);
-		add(textField);
-		textField.setColumns(10);
+		
+		JLabel lblWhatWouldYou = new JLabel("What would you like to do?");
+		lblWhatWouldYou.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWhatWouldYou.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(lblWhatWouldYou, "cell 0 7 3 1,alignx center,growy");
+		
+		
+		// Display the options for the user
+		JLabel lblFordTheRiver = new JLabel("Ford the river: Enter 1");
+		lblFordTheRiver.setHorizontalAlignment(SwingConstants.LEFT);
+		lblFordTheRiver.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(lblFordTheRiver, "cell 0 8 3 1,alignx center,growy");
+		
+		JLabel lblFloatAcrossThe = new JLabel("Caulk the wagon and float across: Enter 2");
+		lblFloatAcrossThe.setHorizontalAlignment(SwingConstants.LEFT);
+		lblFloatAcrossThe.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(lblFloatAcrossThe, "cell 0 9 3 1,alignx center,growy");
+		
+		JLabel lblFordTheRiver_1_1 = new JLabel("Take a Ferry: Enter 3");
+		lblFordTheRiver_1_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblFordTheRiver_1_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(lblFordTheRiver_1_1, "cell 0 10 3 1,alignx center,growy");
 		
 		JLabel lblNewLabel = new JLabel("Enter Your Decision:");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblNewLabel.setBounds(97, 376, 124, 18);
-		add(lblNewLabel);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(lblNewLabel, "cell 0 11,alignx right,growy");
+		add(textField, "cell 2 11,alignx left,aligny top");
+		textField.setColumns(10);
+	}
+	
+	
+	/**
+	 * getStatus - returns the status from crossing the river
+	 * @return the status from crossing the river (1: made it across river safely, 2: failed to make it across + party member died, 
+	 * 3: failed to cross, but everyone is safe 
+	 */
+	public int getStatus() {
+		return status;
 	}
 }
