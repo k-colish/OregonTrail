@@ -56,6 +56,7 @@ public class RiverPanel extends JPanel{
 		RiverFlow.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		add(RiverFlow, "cell 1 3 2 1,alignx left,growy");
 		
+		RiverPanel panel = this;
 		// Create textField for user input
 		textField = new JTextField();
 		textField.addActionListener(new ActionListener() {
@@ -81,6 +82,10 @@ public class RiverPanel extends JPanel{
 						JOptionPane.showMessageDialog(null, "You made it across the river!",
 								"", JOptionPane.INFORMATION_MESSAGE);
 						status = 4;
+						JComponent comp = (JComponent) e.getSource();
+						Window win = SwingUtilities.getWindowAncestor(comp);
+						win.remove(panel);
+						win.repaint();
 					}
 					// Otherwise, the pane closes and the user can input another selection
 					
@@ -97,6 +102,10 @@ public class RiverPanel extends JPanel{
 						JOptionPane.showMessageDialog(null, "You made it across the river!",
 								"", JOptionPane.INFORMATION_MESSAGE);
 						status = 1;
+						JComponent comp = (JComponent) e.getSource();
+						Window win = SwingUtilities.getWindowAncestor(comp);
+						win.remove(panel);
+						win.repaint();
 					}
 					
 					// If here, the wagon did not make it across the river
@@ -112,6 +121,10 @@ public class RiverPanel extends JPanel{
 							JOptionPane.showMessageDialog(null, "The river's current was " +
 									"too strong and one member of your party drowned!");
 							status = 2;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.remove(panel);
+							win.repaint();
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -120,6 +133,10 @@ public class RiverPanel extends JPanel{
 									"too strong, but your party made it across safely.",
 									"", JOptionPane.INFORMATION_MESSAGE);
 							status = 3;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.remove(panel);
+							win.repaint();
 						}
 					}
 				}
@@ -134,6 +151,10 @@ public class RiverPanel extends JPanel{
 						JOptionPane.showMessageDialog(null, "You successfully forded the river!", "", JOptionPane.INFORMATION_MESSAGE);
 						
 						status = 1;
+						JComponent comp = (JComponent) e.getSource();
+						Window win = SwingUtilities.getWindowAncestor(comp);
+						win.remove(panel);
+						win.repaint();
 					}
 					
 					// Otherwise, the wagon did not make it across
@@ -150,6 +171,10 @@ public class RiverPanel extends JPanel{
 							JOptionPane.showMessageDialog(null, "The river was too deep" +
 									" to ford and one member of your party drowned!");
 							status = 2;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.remove(panel);
+							win.repaint();
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -158,12 +183,17 @@ public class RiverPanel extends JPanel{
 									" to ford, but your party made it across safely.",
 									"", JOptionPane.INFORMATION_MESSAGE);
 							status = 3;
+							JComponent comp = (JComponent) e.getSource();
+							Window win = SwingUtilities.getWindowAncestor(comp);
+							win.remove(panel);
+							win.repaint();
 						}
 					}
 				}
 				else {
 					System.out.println(textField.getText());
 				}
+				
 			}
 		});
 		
