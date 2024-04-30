@@ -16,7 +16,12 @@ public class Weather {
 	private String weatherStatus = "Cool";
 	private boolean isRainy, heavyRain, lightRain, keepWeather, isDrought, isSevereDrought,
 					snowyTerrain;
-	
+	private OregonTrail oregon;
+
+	Weather(OregonTrail trail)
+	{
+		this.oregon = trail;
+	}
 	
 	/**
 	 * getWeather - calculates and determines the weather conditions
@@ -30,7 +35,6 @@ public class Weather {
 		//implements 50% chance that weather stays the same
 		if (Math.random() < 0.5)
 			keepWeather = true;
-		
 	
 		//updates the rain or snow on the ground for the given weather conditions
 		//particularly if the 50% chance to keep the same weather was true
@@ -119,13 +123,11 @@ public class Weather {
 				snowOnGround += 2;
 		
 		//updates the snow and rain on the ground
-			if(weatherStatus == "Very Cold" || weatherStatus == "Cold" || weatherStatus == "Cool" &&
-			   heavyRain == false) {
+			if(weatherStatus == "Very Cold" || weatherStatus == "Cold" || weatherStatus == "Cool" && heavyRain == false){
 					snowOnGround -= snowOnGround * .03;
 				}
 			
-			if (weatherStatus == "Warm" || weatherStatus == "Hot" || weatherStatus == "Very Hot" ||
-				heavyRain == true){
+			if (weatherStatus == "Warm" || weatherStatus == "Hot" || weatherStatus == "Very Hot" || heavyRain == true){
 					snowOnGround -= 5;
 					rainOnGround += 0.5;
 			}
@@ -151,15 +153,15 @@ public class Weather {
 		
 		//player is supposed to be given drought messages ("insufficient grass",
 		//inadequate water", "bad water"). if this occurs
-		if (rainOnGround < 0.1 && snowOnGround < 1)
+		if (rainOnGround < 0.1 && snowOnGround < 1) {
 			isSevereDrought = true;
 			isDrought = false;
+		}
 		
 		//terrain is painted white if there is at least 1 inch of snow on the ground
 		if (snowOnGround >= 1)
 			snowyTerrain = true;
-			
-		
+
 		return weatherStatus;
 	}
 	
