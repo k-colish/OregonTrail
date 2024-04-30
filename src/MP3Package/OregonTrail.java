@@ -50,6 +50,7 @@ public class OregonTrail {
 	// Initialization of an object of the Wagon class
 	private Wagon wagon = new Wagon();
 	
+	// Initialize RandomEvents object
 	private RandomEvents rndEvt = new RandomEvents(wagon);
 	
 	// ArrayList including all the items that can be added to the Wagon class object
@@ -61,18 +62,25 @@ public class OregonTrail {
 	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
 	
+	
+	// Variable for the date
 	private GregorianCalendar calendar = new GregorianCalendar(1850, 2, 30);
 	private String pattern = "MMMMM d, yyyy";
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 	private String date = dateFormatter.format(calendar.getTime());
-	private JLabel Date = new JLabel(date);
+	private JLabel DateLabel = new JLabel(date);
 	
+	// Instantiating labels, buttons, and panels
 	private JLabel TotalFood = new JLabel(Integer.toString(wagon.getTotalFood()));
 	private JLabel landmarkLabel = new JLabel(Integer.toString(wagon.milesToLandmark()) + " miles");
 	private JLabel milesLabel = new JLabel(Integer.toString(wagon.getMilesTraveled()) + " miles");
 	private JPanel actionButtonPane = new JPanel();
 	private JButton travelButton = new JButton("Click to start traveling!");
 	private JPanel panel = new JPanel();
+	
+	// Initialize objects for people and their healths
+	private People people = new People();
+	private Health healths = new Health(people, wagon, rndEvt);
 
 	
 
@@ -116,7 +124,7 @@ public class OregonTrail {
 
 		calendar.add(GregorianCalendar.DATE, 1);
 		date = dateFormatter.format(calendar.getTime());
-		Date.setText(date);
+		DateLabel.setText(date);
 		
 		// Instantiate and update list in RandomEvents object
 		rndEvt = new RandomEvents(wagon);
@@ -136,8 +144,13 @@ public class OregonTrail {
 				frame.getContentPane().add(riverPanel, BorderLayout.CENTER);
 				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
 				
-				
-//				frame.setComponentZOrder(riverPanel, 3);
+				switch(riverPanel.getStatus()) {
+				case 1: break;
+				case 2: 
+				case 3: 
+				case 4: 
+				}
+
 			}
 		}
 
@@ -260,8 +273,8 @@ public class OregonTrail {
 		panel.add(lblNewLabel, "cell 9 0,alignx right,growy");
 
 		// Formatting for Date JLabel
-		Date.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		panel.add(Date, "cell 10 0,grow");
+		DateLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		panel.add(DateLabel, "cell 10 0,grow");
 
 		JLabel lblNewLabel_1 = new JLabel("Food: ");
 		lblNewLabel_1.setFont(new Font("Myanmar Text", Font.BOLD, 15));
@@ -336,6 +349,10 @@ public class OregonTrail {
 			public void actionPerformed(ActionEvent e) {
 				rndEvt.scavenge();
 				TotalFood.setText(Integer.toString(wagon.getTotalFood()));
+				calendar.add(GregorianCalendar.DATE, 1);
+				date = dateFormatter.format(calendar.getTime());
+				DateLabel.setText(date);
+				wagon.changeTotalFood(healths.getPeopleAmount() * wagon.getFoodConsumption());
 			}
 		});
 		scavengeButton.setBackground(Color.WHITE);
@@ -350,7 +367,7 @@ public class OregonTrail {
 				int days = wagon.rest();
 				calendar.add(GregorianCalendar.DATE, days);
 				date = dateFormatter.format(calendar.getTime());
-				Date.setText(date);
+				DateLabel.setText(date);
 				TotalFood.setText(Integer.toString(wagon.getTotalFood()));
 			}
 		});

@@ -80,7 +80,7 @@ public class RiverPanel extends JPanel{
 					if(res == JOptionPane.YES_OPTION) {
 						JOptionPane.showMessageDialog(null, "You made it across the river!",
 								"", JOptionPane.INFORMATION_MESSAGE);
-						status = 1;
+						status = 4;
 					}
 					// Otherwise, the pane closes and the user can input another selection
 					
@@ -201,7 +201,7 @@ public class RiverPanel extends JPanel{
 	/**
 	 * getStatus - returns the status from crossing the river
 	 * @return the status from crossing the river (1: made it across river safely, 2: failed to make it across + party member died, 
-	 * 3: failed to cross, but everyone is safe 
+	 * 3: failed to cross, but everyone is safe, 4: took the ferry across)
 	 */
 	public int getStatus() {
 		return status;
