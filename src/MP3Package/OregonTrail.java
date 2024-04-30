@@ -56,6 +56,8 @@ public class OregonTrail {
 	
 	private Random rnd = new Random();
 	
+	private boolean statusChecked;
+	
 	// ArrayList including all the items that can be added to the Wagon class object
 	private ArrayList<Item> allItems = new ArrayList<Item>();
 	
@@ -81,6 +83,7 @@ public class OregonTrail {
 	private JPanel actionButtonPane = new JPanel();
 	private JButton travelButton = new JButton("Click to start traveling!");
 	private JPanel panel = new JPanel();
+	private RiverPanel riverPanel = null;
 	
 	// Initialize objects for people and their healths
 	private People people = new People();
@@ -125,14 +128,25 @@ public class OregonTrail {
 	 * @param e - ActionEvent
 	 */
 	public void clockActionPerformed(ActionEvent e) {
-
+		
+		
+		if(riverPanel != null && !statusChecked) {
+			switch(riverPanel.getStatus()) {
+			case 1: System.out.println("Crossed: 1"); break;
+			case 2: System.out.println("Crossed: 2"); break;
+			case 3: System.out.println("Crossed: 3"); break;
+			case 4: System.out.println("Crossed: 4"); break;
+			}
+			statusChecked = true;
+		}
+		travelButton.setVisible(true);
 		calendar.add(GregorianCalendar.DATE, 1);
 		date = dateFormatter.format(calendar.getTime());
 		dateLabel.setText(date);
 		
 		// Instantiate and update list in RandomEvents object
 		rndEvt = new RandomEvents(wagon);
-		RiverPanel riverPanel = null;
+		
 		
 		Destinations dest = wagon.atDestination();
 		if(dest != null) {
@@ -141,25 +155,17 @@ public class OregonTrail {
 			System.out.println(frame.getHeight());
 			System.out.println(frame.getContentPane().getHeight());
 			clock.stop();
-			travelButton.setText("Click to start traveling!");
 			travelButton.setVisible(false);
 			
 			if(dest.getName().contains("River")) {
+				statusChecked = false;
 				River river = new River(dest.getDistance(), dest.getName());
-				riverPanel = new RiverPanel(river);
+				riverPanel = new RiverPanel(river, clock);
 				frame.getContentPane().add(riverPanel, BorderLayout.CENTER);
 				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
 				
-				switch(riverPanel.getStatus()) {
-					case 1: break;
-					case 2: healths.addPoints(140, 1); 
-					case 3: 
-					case 4: 
-				}
 
 			}
-			travelButton.setEnabled(false);
-			travelButton.setVisible(true);
 		}
 		
 		

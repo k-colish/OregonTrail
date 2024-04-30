@@ -21,7 +21,7 @@ public class RiverPanel extends JPanel{
 	private JTextField textField;
 	private int status = 0;
 	
-	public RiverPanel(River river) {
+	public RiverPanel(River river, javax.swing.Timer clock) {
 		setLayout(new MigLayout("", "[300px][4px][400px]", "[18px][18px][18px][18px][18px][18px][20px][]"));
 		
 		// General Label creation
@@ -86,6 +86,7 @@ public class RiverPanel extends JPanel{
 						Window win = SwingUtilities.getWindowAncestor(comp);
 						win.remove(panel);
 						win.repaint();
+						clock.start();
 					}
 					// Otherwise, the pane closes and the user can input another selection
 					
@@ -106,6 +107,7 @@ public class RiverPanel extends JPanel{
 						Window win = SwingUtilities.getWindowAncestor(comp);
 						win.remove(panel);
 						win.repaint();
+						clock.start();
 					}
 					
 					// If here, the wagon did not make it across the river
@@ -125,6 +127,7 @@ public class RiverPanel extends JPanel{
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
+							clock.start();
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -137,6 +140,7 @@ public class RiverPanel extends JPanel{
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
+							clock.start();
 						}
 					}
 				}
@@ -155,6 +159,7 @@ public class RiverPanel extends JPanel{
 						Window win = SwingUtilities.getWindowAncestor(comp);
 						win.remove(panel);
 						win.repaint();
+						clock.start();
 					}
 					
 					// Otherwise, the wagon did not make it across
@@ -175,6 +180,7 @@ public class RiverPanel extends JPanel{
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
+							clock.start();
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -187,6 +193,7 @@ public class RiverPanel extends JPanel{
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
+							clock.start();
 						}
 					}
 				}
