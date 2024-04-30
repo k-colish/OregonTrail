@@ -13,7 +13,7 @@ public class Health {
     make an array with all 4 player characters that will each method will alter with for loops
     */
 
-    private ArrayList<Integer> Healths = new ArrayList<>(4);
+    private ArrayList<Integer> healths = new ArrayList<>(4);
     private People name;
     private Wagon itemlist;
     private RandomEvents random;
@@ -24,7 +24,7 @@ public class Health {
         this.name = names;
         this.itemlist = wlist;
         this.random = event;
-        for (int j = 0; j < peopleStartnumber; j++) {Healths.add(j, 0);}
+        for (int j = 0; j < peopleStartnumber; j++) {healths.add(j, 0);}
     }
 
     public String overallHealth() {
@@ -35,7 +35,7 @@ public class Health {
         else if (healthTotalScore()/getPeopleAmount() >= 35 && healthTotalScore()/getPeopleAmount() <= 65) {return "Fair Health";}
         else if (healthTotalScore()/getPeopleAmount() >= 70 && healthTotalScore()/getPeopleAmount() <= 104) {return "Poor Health";}
         else if (healthTotalScore()/getPeopleAmount() >= 105) {return "Very poor health";}
-        else {return "No people exist";}
+        else {return "No people exist, its all in your mind. HA HA HA";}
     }
 
     public void travelNeeds() { // Used when the player travels
@@ -54,21 +54,21 @@ public class Health {
 
     public int healthTotalScore() { //used to get the total score of all group members combined
         int score = 0;
-        for (int i = 0; i < getPeopleAmount(); i ++) {score += Healths.get(i);}
+        for (int i = 0; i < getPeopleAmount(); i ++) {score += healths.get(i);}
         return score;
     }
 
     private void death() { // displays that a person dies when they go 140+
         for (int i = 0; i < getPeopleAmount(); i ++) {
-            if (Healths.get(i) > 140) {
+            if (healths.get(i) > 140) {
                 //add name thing to say which one died using massage dialog
-                Healths.remove(i);
+                healths.remove(i);
                 System.out.println("DEAD");
             }
         }
     }
 
-    public int getPeopleAmount() {return Healths.size();} //return the size of the array
+    public int getPeopleAmount() {return healths.size();} //return the size of the array
 
     private void travelingPace() { //Steady = 2, Strenuous = 4, grueling = 6 // needs changed for 12-20 miles
         if (itemlist.getMilesPerDay() <= 13)
@@ -111,5 +111,5 @@ public class Health {
     }
 
     public void addPoints(int points, int peopleAmount)
-    {for (int i = 0; i < peopleAmount; i++) {Healths.set(i, Healths.get(i) + points);}}
+    {for (int i = 0; i < peopleAmount; i++) {healths.set(i, healths.get(i) + points);}}
 }
