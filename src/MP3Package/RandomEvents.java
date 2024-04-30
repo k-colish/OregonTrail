@@ -23,8 +23,7 @@ public class RandomEvents {
     /**
      *
      */
-    public void allEvents()
-    {
+    public void allEvents() {
         switch(randomValue(17)) {
             case 1: Thief(); break;
             case 2: indiansHelp(); break;
@@ -47,8 +46,7 @@ public class RandomEvents {
         }
     }
 
-    public void restEvents() //used for the player decides to rest for the day
-    {
+    public void restEvents() { //used for the player decides to rest for the day
         switch(randomValue(8)) {
             case 1: Thief(); break;
             case 2: indiansHelp(); break;
@@ -62,8 +60,7 @@ public class RandomEvents {
         }
     }
 
-    public void environmentEvents()
-    {
+    public void environmentEvents() {
         switch(randomValue(6)) {
             case 1: severeThunderstorm(); break;
             case 2: severeBlizzard(); break;
@@ -82,8 +79,7 @@ public class RandomEvents {
     }
 
 
-    private void Thief() //2% & lots of supplies lost, does not currently work
-    {
+    private void Thief() { //2% & lots of supplies lost, does not currently work
     	int food = 0;
         String lostItems = "";
         if (randomValue(50) == 1) {
@@ -92,8 +88,7 @@ public class RandomEvents {
             	food = randomValue(wagonlist.getTotalFood());
             }
             wagonlist.changeTotalFood(-food);
-            for (int i = 0; i < randomValue(5); i++)
-            {
+            for (int i = 0; i < randomValue(5); i++) {
                 ArrayList<Item> ThiefItems = wagonlist.getItems();
                 int j = randomValue(ThiefItems.size());
                 lostItems += ThiefItems.get(j).getName();
@@ -108,8 +103,7 @@ public class RandomEvents {
         }
     }
 
-    private void indiansHelp() // 5% chance to get 30 pounds of food
-    {
+    private void indiansHelp() { // 5% chance to get 30 pounds of food
         if (randomValue(20) == 1) {
             wagonlist.changeTotalFood(30);
             JOptionPane.showMessageDialog(null, "You have gained 30 pounds of food!",
@@ -118,8 +112,7 @@ public class RandomEvents {
         }
     }
 
-    private void severeThunderstorm() // 15% & lose a day
-    {
+    private void severeThunderstorm() { // 15% & lose a day
         if (randomValue(17) <= 3) {
             wagonlist.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in a thunderstorm and" +
@@ -128,8 +121,7 @@ public class RandomEvents {
         }
     }
 
-    private void severeBlizzard() // 15% & lose a day
-    {
+    private void severeBlizzard() { // 15% & lose a day
         if (randomValue(17) <= 3){
             wagonlist.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in a blizzard and lost one day.",
@@ -138,8 +130,7 @@ public class RandomEvents {
         }
     }
 
-    private void heavyFog() // 6% after fort Hall & 50% lose a day
-    {
+    private void heavyFog() { // 6% after fort Hall & 50% lose a day
         if (randomValue(2) == 1 ) {
             System.out.println("FOG");
             wagonlist.addDays(1);
@@ -148,8 +139,7 @@ public class RandomEvents {
         }
     }
 
-    private void hailStorm() // 6% before fort Hall & 50% lose a day
-    {
+    private void hailStorm() { // 6% before fort Hall & 50% lose a day
 
         if (randomValue(2) == 1 ) {
             System.out.println("hail");
@@ -159,8 +149,7 @@ public class RandomEvents {
         }
     }
 
-    private void deadOX() // 2.5% //Need to add to remove an OX
-    {
+    private void deadOX() { // 2.5% //Need to add to remove an OX
         if (randomValue(40) == 1) {
             System.out.println("RIP OX");
             JOptionPane.showMessageDialog(null, "One of your oxen has died.", "Oxen died",
@@ -168,8 +157,7 @@ public class RandomEvents {
         }
     }
 
-    private void injuredMember() // 2.5% // 20 points
-    {
+    private void injuredMember() { // 2.5% & gain 20 points
         People names = new People();
         Health score = new Health(names, wagonlist, this);
         if (randomValue(40) == 1) {
@@ -178,8 +166,7 @@ public class RandomEvents {
         }
     }
 
-    private void snakeBite() // 0.7%
-    {
+    private void snakeBite() { // 0.7%
         People names = new People();
         Health score = new Health(names, wagonlist, this);
         if (randomValue(1000) <= 7) {
@@ -188,8 +175,7 @@ public class RandomEvents {
         }
     }
 
-    private void loseTrial() // Make this higher due to diriy // 2% // set to 5%
-    {
+    private void loseTrial() { // Make this higher due to diriy // 2% // set to 5%
         if (randomValue(20) == 1) {
             int rmd = randomValue(5);
             wagonlist.addDays(rmd);
@@ -199,8 +185,7 @@ public class RandomEvents {
         }
     }
 
-    private void fruit() // 4% & 20 pounds
-    {
+    private void fruit() { // 4% & gain 20 pounds of food
         if (randomValue(25) == 1) {
             wagonlist.changeTotalFood(20);
             System.out.println("BERRIES!!!");
@@ -209,15 +194,13 @@ public class RandomEvents {
         }
     }
 
-    private void wagonFire() // 2% & lost supplies
-    {
+    private void wagonFire() { // 2% & lost supplies
         String lostItems = "";
         if (randomValue(50) == 1) {
             System.out.println("FIRE!");
             int food = randomValue(250);
             wagonlist.changeTotalFood(-food);
-            for (int i = 0; i < randomValue(10); i++)
-            {
+            for (int i = 0; i < randomValue(10); i++) {
                 ArrayList<Item> ThiefItems = wagonlist.getItems();
                 int j = randomValue(wagonlist.getItems().size());
                 lostItems = lostItems + ThiefItems.get(j) + "\n";
@@ -228,8 +211,7 @@ public class RandomEvents {
         }
     }
 
-    private void memberLost() // 1% & lose 5 days
-    {
+    private void memberLost() { // 1% & lose 5 days
         if (randomValue(100) == 1) {
             wagonlist.addDays(5);
             JOptionPane.showMessageDialog(null, "NAME! wondered off", "Lost + NAME!",
@@ -238,15 +220,13 @@ public class RandomEvents {
         }
     }
 
-    private void findWagon() // 2% & gained supplies
-    {
+    private void findWagon() { // 2% & gained supplies
         String freeItems = "";
         if (randomValue(50) == 1) {
             System.out.println("LOOT");
             int food = randomValue(125);
             wagonlist.changeTotalFood(food);
-            for (int i = 0; i < randomValue(5); i++)
-            {
+            for (int i = 0; i < randomValue(5); i++) {
                 ArrayList<Item> LootItems = wagonlist.getItems();
                 int j = randomValue(wagonlist.getItems().size());
                 freeItems = freeItems + LootItems.get(j).getName() + "\n";
@@ -258,8 +238,7 @@ public class RandomEvents {
         }
     }
 
-    private void oxWanders() // 1% & lose 3 days
-    {
+    private void oxWanders() { // 1% & lose 3 days
         if (randomValue(100) == 1) {
             wagonlist.addDays(3);
             System.out.println("WHERE IT GO");
@@ -268,8 +247,7 @@ public class RandomEvents {
         }
     }
 
-    private void water() // 15% & lose few pounds of food
-    {
+    private void water() { // 15% & lose few pounds of food
         People names = new People();
         Health score = new Health(names, wagonlist, this);
         if (randomValue(17) <= 3) {
@@ -282,8 +260,7 @@ public class RandomEvents {
         }
     }
 
-    private void badGrass() // 20% & lose few pounds of food
-    {
+    private void badGrass() { // 20% & lose few pounds of food
         if (randomValue(5) == 1) {
             int rmd = randomValue(10);
             wagonlist.changeTotalFood(-rmd);
@@ -293,34 +270,32 @@ public class RandomEvents {
         }
     }
 
-    public boolean illness() //0-40% based on health, person & disease random
-    {
+    public boolean illness() { //0-40% based on health, person & disease random
         People names = new People();
         Health score = new Health(names, wagonlist, this);
         String disease = "";
         String name = "";
         int rnd = 0;
-        if (score.healthScores() <= 15)
+        if (score.healthTotalScore() <= 15)
             rnd = 10;
-        else if (score.healthScores() <= 30 && score.healthScores() > 15)
+        else if (score.healthTotalScore() <= 30 && score.healthTotalScore() > 15)
             rnd = 9;
-        else if (score.healthScores() <= 45 && score.healthScores() > 30)
+        else if (score.healthTotalScore() <= 45 && score.healthTotalScore() > 30)
             rnd = 8;
-        else if (score.healthScores() <= 60 && score.healthScores() > 45)
+        else if (score.healthTotalScore() <= 60 && score.healthTotalScore() > 45)
             rnd = 7;
-        else if (score.healthScores() <= 75 && score.healthScores() > 60)
+        else if (score.healthTotalScore() <= 75 && score.healthTotalScore() > 60)
             rnd = 6;
-        else if (score.healthScores() <= 90 && score.healthScores() > 75)
+        else if (score.healthTotalScore() <= 90 && score.healthTotalScore() > 75)
             rnd = 5;
-        else if (score.healthScores() <= 105 && score.healthScores() > 90)
+        else if (score.healthTotalScore() <= 105 && score.healthTotalScore() > 90)
             rnd = 4;
-        else if (score.healthScores() <= 130 && score.healthScores() > 105)
+        else if (score.healthTotalScore() <= 130 && score.healthTotalScore() > 105)
             rnd = 3;
-        else if (score.healthScores() > 130)
+        else if (score.healthTotalScore() > 130)
             rnd = 2;
 
-        if (randomValue(rnd) == 1)
-        {
+        if (randomValue(rnd) == 1) {
             switch(randomValue(6)) {
                 case 1: disease = "Heat exhaustion"; break;
                 case 2: disease = "Typhoid"; break;
@@ -340,10 +315,11 @@ public class RandomEvents {
         else
             return false;
     }
+
     /**
      * determines if you have successfully scavenged for food
      */
-    public int scavenge() {
+    public void scavenge() {
         int food = randomValue(60)+19;
     	if (randomValue(10) <= 7) {
     		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
@@ -354,6 +330,5 @@ public class RandomEvents {
     		JOptionPane.showMessageDialog(null, "You did not find any food. Better luck " +
                     "next time...", "FAILED", JOptionPane.INFORMATION_MESSAGE);
     	}
-    	return food;
     }
 }

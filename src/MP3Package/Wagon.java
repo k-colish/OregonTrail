@@ -198,7 +198,7 @@ public class Wagon {
 
 		daysTraveled++;
 		
-		// Calculate the total food  using the food used per day times the number of days to travel.
+		// Calculate the total food using the food used per day times the number of days to travel.
 		totalFoodUsed += foodPerDay;
 		
 		milesTraveled += milesPerDay; // Update total miles traveled
