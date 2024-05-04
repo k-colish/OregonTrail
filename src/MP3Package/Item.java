@@ -26,7 +26,7 @@ public class Item {
 	 * @param name - the name of the item
 	 * @param price - the price of the item
 	 */
-	public Item(int amount, String name,double price) {
+	public Item(int amount, String name, double price) {
 		this.amount = amount;
 		this.name = name;
 		this.price = price;

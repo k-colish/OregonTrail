@@ -10,21 +10,23 @@ import java.util.Random;
 public class RandomEvents {
     Random rnd = new Random();
     Wagon wagonlist;
+    People people;
 
     /**
      * Constructor for RandomEvents class.
      * @param wagon The wagon object for which events are generated.
      */
-    public RandomEvents(Wagon wagon)
+    public RandomEvents(Wagon wagon, People list)
     {
-        wagonlist = wagon;
+        this.wagonlist = wagon;
+        this.people = list;
     }
 
     /**
      *
      */
     public void allEvents() {
-        switch(randomValue(17)) {
+        switch(randomValue(18)) {
             case 1: Thief(); break;
             case 2: indiansHelp(); break;
             case 3: severeThunderstorm(); break;
@@ -42,12 +44,13 @@ public class RandomEvents {
             case 15: oxWanders(); break;
             case 16: water(); break;
             case 17: badGrass(); break;
+            case 18: clothingHealth(); break;
             default: System.err.println("Error in allEvents");
         }
     }
 
     public void restEvents() { //used for the player decides to rest for the day
-        switch(randomValue(8)) {
+        switch(randomValue(9)) {
             case 1: Thief(); break;
             case 2: indiansHelp(); break;
             case 3: injuredMember(); break;
@@ -56,6 +59,7 @@ public class RandomEvents {
             case 6: wagonFire(); break;
             case 7: memberLost(); break;
             case 8: oxWanders(); break;
+            case 9: clothingHealth(); break;
             default: System.err.println("Error in restEvents");
         }
     }
@@ -72,9 +76,8 @@ public class RandomEvents {
         }
     }
 
-    private int randomValue(int x) {
+    public int randomValue(int x) {
         int rmd = rnd.nextInt(x) + 1;
-        System.out.println("randomValue: " + rmd);
         return rmd;
     }
 
@@ -84,18 +87,15 @@ public class RandomEvents {
         String lostItems = "";
         if (randomValue(50) == 1) {
             System.out.println("Thief");
-            if(wagonlist.getTotalFood() > 0) {
-            	food = randomValue(wagonlist.getTotalFood());
-            }
-            wagonlist.changeTotalFood(-food);
             for (int i = 0; i < randomValue(5); i++) {
                 ArrayList<Item> ThiefItems = wagonlist.getItems();
                 int j = randomValue(ThiefItems.size()) - 1;
                 lostItems += ThiefItems.get(j).getName()+"\n";
-                System.out.println(lostItems);
                 wagonlist.removeItemAmount(ThiefItems.get(j).getName(), 1);
             }
             if(wagonlist.getTotalFood() > 0) {
+                food = randomValue(wagonlist.getTotalFood());
+                wagonlist.changeTotalFood(-food);
             	JOptionPane.showMessageDialog(null, "You have lost: " + lostItems + " and " + 
                         food + " pounds of food!", "Thief came during the night", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -113,7 +113,7 @@ public class RandomEvents {
         }
     }
 
-    private void severeThunderstorm() { // 15% & lose a day
+    private void severeThunderstorm() { // 15% & lose a day // Need to implement weather
         if (randomValue(17) <= 3) {
             wagonlist.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in a thunderstorm and" +
@@ -122,7 +122,7 @@ public class RandomEvents {
         }
     }
 
-    private void severeBlizzard() { // 15% & lose a day
+    private void severeBlizzard() { // 15% & lose a day // Need to implement weather
         if (randomValue(17) <= 3){
             wagonlist.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in a blizzard and lost one day.",
@@ -132,7 +132,10 @@ public class RandomEvents {
     }
 
     private void heavyFog() { // 6% after fort Hall & 50% lose a day
-        if (randomValue(2) == 1 ) {
+        // Need to implement weather
+        // using salt lake city instead of fot Hall, which is 1235 miles from the start.
+
+        if (wagonlist.getMilesTraveled() > 1235 && randomValue(2) == 1) {
             System.out.println("FOG");
             wagonlist.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in heavy fog and lost one day.",
@@ -141,37 +144,55 @@ public class RandomEvents {
     }
 
     private void hailStorm() { // 6% before fort Hall & 50% lose a day
+        // Need to implement weather
+        // using salt lake city instead of fot Hall, which is 1235 miles from the start.
 
-        if (randomValue(2) == 1 ) {
+        if (wagonlist.getMilesTraveled() < 1235 && randomValue(2) == 1) {
             System.out.println("hail");
             wagonlist.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in a hail storm and lost one " +
-                            "day.", "Hail Storm", JOptionPane.INFORMATION_MESSAGE);
+                    "day.", "Hail Storm", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    private void deadOX() { // 2.5% //Need to add to remove an OX
+    private void deadOX() { // 2.5%
         if (randomValue(40) == 1) {
             System.out.println("RIP OX");
+            wagonlist.removeItemAmount("Oxen", 1);
             JOptionPane.showMessageDialog(null, "One of your oxen has died.", "Oxen died",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     private void injuredMember() { // 2.5% & gain 20 points
-        People names = new People();
-        Health score = new Health(names, wagonlist, this);
+        Health healths = new Health(people, wagonlist, this);
+        String part = "";
         if (randomValue(40) == 1) {
-            score.addPoints(20, 1);
+            switch(randomValue(6)) {
+                case 1: part = "arm"; break;
+                case 2: part = "leg"; break;
+                case 3: part = "foot"; break;
+                case 4: part = "hand"; break;
+                case 5: part = "neck"; break;
+                case 6: part = "head"; break;
+                default: System.err.println("Error in injured Member");
+            }
+            System.out.println("list" + people.getNames());
+            String person = people.getNames().get(randomValue(healths.getPeopleAmount()) - 1);
+            JOptionPane.showMessageDialog(null, person + " has hurt their " + part +".",
+                    "A party member has been injured!", JOptionPane.INFORMATION_MESSAGE);
+            healths.addPoints(20, 1);
             System.out.println("you hurt? :(");
         }
     }
 
     private void snakeBite() { // 0.7%
-        People names = new People();
-        Health score = new Health(names, wagonlist, this);
+        Health healths = new Health(people, wagonlist, this);
         if (randomValue(1000) <= 7) {
-            score.addPoints(40, 1); // adds 40 points to the person that got bit
+            String person = people.getNames().get(randomValue(healths.getPeopleAmount())-1);
+            JOptionPane.showMessageDialog(null, person + " got bit by a snake.",
+                    "A party member has been bit!", JOptionPane.INFORMATION_MESSAGE);
+            healths.addPoints(40, 1); // adds 40 points to the person that got bit
             System.out.println("SNAKE");
         }
     }
@@ -213,10 +234,12 @@ public class RandomEvents {
     }
 
     private void memberLost() { // 1% & lose 5 days
+        Health healths = new Health(people, wagonlist, this);
         if (randomValue(100) == 1) {
             wagonlist.addDays(5);
-            JOptionPane.showMessageDialog(null, "NAME! wondered off", "Lost + NAME!",
-                    JOptionPane.INFORMATION_MESSAGE);
+            String person = people.getNames().get(randomValue(healths.getPeopleAmount())-1);
+            JOptionPane.showMessageDialog(null, person +" wondered off and it lost 5 days to" +
+                    " find them", "Lost "+ person +"!", JOptionPane.INFORMATION_MESSAGE);
             System.out.println("GONE AGAIN");
         }
     }
@@ -244,19 +267,18 @@ public class RandomEvents {
             wagonlist.addDays(3);
             System.out.println("WHERE IT GO");
             JOptionPane.showMessageDialog(null, "An ox wandered off and you lost 3 days to find" 
-                    + "it.", "Lost Ox", JOptionPane.INFORMATION_MESSAGE);
+                    + " it.", "Lost Ox", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     private void water() { // 15% & lose few pounds of food
-        People names = new People();
-        Health score = new Health(names, wagonlist, this);
+        Health healths = new Health(people, wagonlist, this);
         if (randomValue(17) <= 3) {
             int food = randomValue(20);
             wagonlist.changeTotalFood(-food);
             JOptionPane.showMessageDialog(null, "Your water got contaminated, you lost " +
                     food + " pounds of food.", "Bad Water", JOptionPane.INFORMATION_MESSAGE);
-            score.addPoints(randomValue(10)+9, score.getPeopleAmount());
+            healths.addPoints(randomValue(10)+9, healths.getPeopleAmount());
             System.out.println("NEED WATER");
         }
     }
@@ -271,30 +293,28 @@ public class RandomEvents {
         }
     }
 
-    public boolean illness() { //0-40% based on health, person & disease random
-        People names = new People();
-        Health score = new Health(names, wagonlist, this);
+    public boolean isillness() { //0-40% based on health, person & disease random
+        Health healths = new Health(people, wagonlist, this);
         String disease = "";
-        String name = "";
         int rnd = 0;
-        if (score.healthTotalScore() <= 15)
+        if (healths.healthTotalScore() <= 15)
+            return false;
+        else if (healths.healthTotalScore() <= 30 && healths.healthTotalScore() > 15)
             rnd = 10;
-        else if (score.healthTotalScore() <= 30 && score.healthTotalScore() > 15)
+        else if (healths.healthTotalScore() <= 45 && healths.healthTotalScore() > 30)
             rnd = 9;
-        else if (score.healthTotalScore() <= 45 && score.healthTotalScore() > 30)
+        else if (healths.healthTotalScore() <= 60 && healths.healthTotalScore() > 45)
             rnd = 8;
-        else if (score.healthTotalScore() <= 60 && score.healthTotalScore() > 45)
+        else if (healths.healthTotalScore() <= 75 && healths.healthTotalScore() > 60)
             rnd = 7;
-        else if (score.healthTotalScore() <= 75 && score.healthTotalScore() > 60)
+        else if (healths.healthTotalScore() <= 90 && healths.healthTotalScore() > 75)
             rnd = 6;
-        else if (score.healthTotalScore() <= 90 && score.healthTotalScore() > 75)
+        else if (healths.healthTotalScore() <= 105 && healths.healthTotalScore() > 90)
             rnd = 5;
-        else if (score.healthTotalScore() <= 105 && score.healthTotalScore() > 90)
+        else if (healths.healthTotalScore() <= 130 && healths.healthTotalScore() > 105)
             rnd = 4;
-        else if (score.healthTotalScore() <= 130 && score.healthTotalScore() > 105)
+        else if (healths.healthTotalScore() > 130)
             rnd = 3;
-        else if (score.healthTotalScore() > 130)
-            rnd = 2;
 
         if (randomValue(rnd) == 1) {
             switch(randomValue(6)) {
@@ -306,15 +326,23 @@ public class RandomEvents {
                 case 6: disease = "Mountain fever"; break;
                 default: System.err.println("Error in Health illness");
             }
-            //and name randomizer
-            JOptionPane.showMessageDialog(null, name + "has contracted " + disease,
-                    "Got an illness", JOptionPane.INFORMATION_MESSAGE);
-            score.addPoints(20, 1);
+            String person = people.getNames().get(randomValue(healths.getPeopleAmount())-1);
+            JOptionPane.showMessageDialog(null, person + "has contracted " + disease + ".",
+                    "A party member got an illness!", JOptionPane.INFORMATION_MESSAGE);
+            healths.addPoints(20, 1);
             System.out.println("sick");
             return true;
         }
         else
             return false;
+    }
+
+    private void clothingHealth() {
+        if (wagonlist.getMilesTraveled() > 100 && wagonlist.getMilesTraveled() % 10 > 6 && randomValue(100) == 1) {
+            wagonlist.removeItemAmount("Clothing", 1);
+            JOptionPane.showMessageDialog(null, "You lost one pair of clothing",
+                    "Clothing ripped", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**

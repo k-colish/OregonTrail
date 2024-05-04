@@ -28,7 +28,8 @@ public class Wagon {
     private int daysTraveled;              // Number of days the wagon has been traveling
     private int totalFoodUsed = 0;         // Total food consumed during travel
     private int milesTraveled = 0;         // Total miles traveled
-	RandomEvents events;
+	private People people;
+	private RandomEvents events;
     
 	// Initialize ArrayList of Item object that contains all the items that have been added to the wagon
 	private ArrayList<Item> Items = new ArrayList<Item>();
@@ -38,7 +39,7 @@ public class Wagon {
 	private ArrayList<Destinations> destinations = new ArrayList<>();
 
 
-	public Wagon()
+	public Wagon(People pop)
 	{
 		InputStreamReader reader = null;
 		Scanner in = null;
@@ -74,15 +75,15 @@ public class Wagon {
 		}
 
 		in.close();
-		events = new RandomEvents(this);
+		this.people = pop;
+		events = new RandomEvents(this, people);
 	}
 
 	/**
 	 *  addItem - Takes an Item object and adds it to the ArrayList of items that are in the wagon.
 	 * @param item - the item to be added to the wagon.
 	 */
-	public void addItem(Item item)
-	{
+	public void addItem(Item item) {
 		Items.add(item);
 		System.out.println("Item added");
 
@@ -152,7 +153,7 @@ public class Wagon {
 
 	public void changeTotalFood(int amount)
 	{
-		if ((totalFood + amount )< 0)
+		if ((totalFood + amount ) < 0)
 			totalFood = 0;
 		else
 		 totalFood += amount;
@@ -179,12 +180,7 @@ public class Wagon {
 	}
 	
 
-	public int addDays(int x) {
-			
-			daysTraveled += x;
-			return daysTraveled;
-			
-		}
+	public void addDays(int days) {daysTraveled += days;}
 	
 	/**
 	 * travel - keeps track of the number of days the party has been traveling for. 
@@ -221,13 +217,13 @@ public class Wagon {
 	}
 	
 	public int rest() {
-		People names = new People();
-		Health med = new Health(names, this, events);
-		RandomEvents rnd = new RandomEvents(this);
+		Health med = new Health(people, this, events);
+		RandomEvents rnd = new RandomEvents(this, people);
 		int days = 0;
-		Integer[] options = {0,1,2,3,4,5,6,7,8,9,10,1000};
+		Integer[] options = {0,1,2,3,4,5,6,7,8,9,10,100,200,500,1000,10000};
 		
-		days = (int) JOptionPane.showInputDialog(null, "How many days would you like to rest?", "Resting", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+		days = (int) JOptionPane.showInputDialog(null, "How many days would you like to rest?",
+				"Resting", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 		
 		addDays(days);
 		for (int i = 0; i < days; i++)

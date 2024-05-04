@@ -1,7 +1,7 @@
 package MP3Package;
 
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Health {
 //Need, Wagon, Weather, random, river, people,
@@ -14,25 +14,26 @@ public class Health {
     */
 
     private ArrayList<Integer> healths = new ArrayList<>(4);
-    private People name;
+    private People people;
     private Wagon itemlist;
     private RandomEvents random;
     int illnessCount = 0;
 
     Health(People names, Wagon wlist, RandomEvents event) {
         int peopleStartnumber = 4;
-        this.name = names;
+        this.people = names;
         this.itemlist = wlist;
         this.random = event;
-        for (int j = 0; j < peopleStartnumber; j++) {healths.add(j, 0);}
+        for (int j = 0; j < peopleStartnumber; j++) {healths.add(j, 1);}
     }
 
     public String overallHealth() {
         //going to return healthy, 0-34 = good health, 35-65 = fair health,
         // 70-104 = poor health, 105-139 = very poor health
 
+        System.out.println("Healths: " + healthTotalScore()/getPeopleAmount());
         if (healthTotalScore()/getPeopleAmount() <= 34) {return "Good health";}
-        else if (healthTotalScore()/getPeopleAmount() >= 35 && healthTotalScore()/getPeopleAmount() <= 65) {return "Fair Health";}
+        else if (healthTotalScore()/getPeopleAmount() >= 35 && healthTotalScore()/getPeopleAmount() <= 69) {return "Fair Health";}
         else if (healthTotalScore()/getPeopleAmount() >= 70 && healthTotalScore()/getPeopleAmount() <= 104) {return "Poor Health";}
         else if (healthTotalScore()/getPeopleAmount() >= 105) {return "Very poor health";}
         else {return "No people exist, its all in your mind. HA HA HA";}
@@ -61,7 +62,10 @@ public class Health {
     private void death() { // displays that a person dies when they go 140+
         for (int i = 0; i < getPeopleAmount(); i ++) {
             if (healths.get(i) > 140) {
-                //add name thing to say which one died using massage dialog
+                String person = people.getNames().get(random.randomValue(getPeopleAmount())-1);
+                JOptionPane.showMessageDialog(null, person + " has died.",
+                        "A party member has died!", JOptionPane.INFORMATION_MESSAGE);
+                people.removeName(person);
                 healths.remove(i);
                 System.out.println("DEAD");
             }
@@ -83,7 +87,10 @@ public class Health {
         //very hot = 2, hot = 1, cold = 2 if no clothing & between 0-2 if clothing is 1 per person
         // cold = 4 if no clothing & between 0-4 if clothing is 1 per person
 
-        //if (return itemlist.getItems().get(Integer.parseInt("Clothing")).getAmount(); < 2//4)
+//        Item item = new Item(1, "clothing", 0);
+//        if (weather thing && item.getAmount()/getPeopleAmount() < 2) {addPoints(2, getPeopleAmount());}
+//        else if (weather thing && item.getAmount()/getPeopleAmount() < 4) {addPoints(4, getPeopleAmount());}
+//        else if (//add that if its bad weather they still get 1 point and have clothing) {addPoints(1, getPeopleAmount());}
     }
 
     private void FoodHealth() {
@@ -99,14 +106,14 @@ public class Health {
     }
 
     private void illness() { //if sick/injured, add an extra 1 per sick/injured person
-        if (random.illness())
+        if (random.isillness()) {
             illnessCount++;
+        }
         addPoints(illnessCount, getPeopleAmount());
     }
 
     private void restImprovement() { // when the player stops to rest each player losses some points
-        Random rnd = new Random();
-        int rmd = rnd.nextInt(10) + 1;
+        int rmd = random.randomValue(10);
         addPoints(-rmd, getPeopleAmount());
     }
 

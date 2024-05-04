@@ -16,8 +16,8 @@
 /**
 * Notes from interview with Matt Valerio.
 *
-* make the CSV files more readable for others, layout how the SCV works.
-* input validation for each area, "Defensive programming".
+* Make the CSV files more readable for others, layout how the SCV works.
+* Input validation for each area, "Defensive programming".
 * Code maintenance, make sure the code is set-up correctly.
 * Think about changing the CSV code that makes it all into one method.
 * Couplings - what code needs changed if I change this code? Separate repeat activities to reduce coupling.
@@ -29,6 +29,7 @@
 package MP3Package;
 
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -38,7 +39,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Objects;
-import java.util.Random;
 import java.util.Scanner;
 
 public class OregonTrail {
@@ -49,12 +49,11 @@ public class OregonTrail {
 	private String filename = "/Images/AshHollow.JPG";
 	
 	// Initialization of an object of the Wagon class
-	private Wagon wagon = new Wagon();
-	
+	private People people = new People();
+	private Wagon wagon = new Wagon(people);
+
 	// Initialize RandomEvents object
-	private RandomEvents rndEvt = new RandomEvents(wagon);
-	
-	private Random rnd = new Random();
+	private RandomEvents rndEvt = new RandomEvents(wagon, people);
 	
 	// ArrayList including all the items that can be added to the Wagon class object
 	private ArrayList<Item> allItems = new ArrayList<Item>();
@@ -72,7 +71,7 @@ public class OregonTrail {
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 	private String date = dateFormatter.format(calendar.getTime());
 	private JLabel dateLabel = new JLabel(date);
-	
+	private JLabel healthLabel;
 	
 	// Instantiating labels, buttons, and panels
 	private JLabel totalFood = new JLabel(Integer.toString(wagon.getTotalFood()));
@@ -83,7 +82,6 @@ public class OregonTrail {
 	private JPanel panel = new JPanel();
 	
 	// Initialize objects for people and their healths
-	private People people = new People();
 	private Health healths = new Health(people, wagon, rndEvt);
 
 	
@@ -111,6 +109,7 @@ public class OregonTrail {
 	public OregonTrail() {
 		readFile();
 		initialize();
+		//people.setNames();
 	}
 	
 	public void openPanel(JPanel panelOpen) {
@@ -131,7 +130,7 @@ public class OregonTrail {
 		dateLabel.setText(date);
 		
 		// Instantiate and update list in RandomEvents object
-		rndEvt = new RandomEvents(wagon);
+		rndEvt = new RandomEvents(wagon, people);
 		RiverPanel riverPanel = null;
 		
 		Destinations dest = wagon.atDestination();
@@ -156,7 +155,6 @@ public class OregonTrail {
 					case 3: 
 					case 4: 
 				}
-
 			}
 			travelButton.setEnabled(false);
 			travelButton.setVisible(true);
@@ -174,7 +172,7 @@ public class OregonTrail {
 			JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE);
 			clock.stop();
 		} else {
-
+			healths.travelNeeds();
 //			// Checks to see if the player has made it to Paris, IL
 //			if (wagon.getMilesTraveled() >= paris.getDistance() && (paris.getDistance() - wagon.getMilesTraveled() > -20)) {
 //
@@ -208,6 +206,7 @@ public class OregonTrail {
 			totalFood.setText(Integer.toString(wagon.getTotalFood()));
 			landmarkLabel.setText(Integer.toString(wagon.milesToLandmark()));
 			milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
+			healthLabel.setText(healths.overallHealth());
 		}
 	}
 
@@ -314,7 +313,7 @@ public class OregonTrail {
 		lblNewLabel_4.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_4, "cell 9 4,alignx right");
 		
-		JLabel healthLabel = new JLabel("Good Health");
+		healthLabel = new JLabel("Good Health");
 		healthLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(healthLabel, "cell 10 4");
 		
@@ -329,7 +328,6 @@ public class OregonTrail {
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new BorderLayout(0, 0));
-
 		
 		travelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -431,15 +429,11 @@ public class OregonTrail {
 		rationsButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(rationsButton);
-		
 		// Instantiate timer
 		clock = new javax.swing.Timer(300, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				clockActionPerformed( evt );
 			}});
-		
-		
-		
 		
 
 
