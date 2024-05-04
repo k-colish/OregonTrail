@@ -108,7 +108,7 @@ public class OregonTrail {
 	public OregonTrail() {
 		readFile();
 		initialize();
-		people.setNames();
+		//people.setNames();
 	}
 	
 	public void openPanel(JPanel panelOpen) {

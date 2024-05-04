@@ -7,7 +7,10 @@ public class People {
 
     private ArrayList<String> names = new ArrayList<>();
 
-    People(){}
+    People()
+    {
+        for (int j = 0; j < 4; j++) {names.add(j, ""+j);}
+    }
 
     public void setNames() {
         for (int i = 1; i < 5; i++) {
