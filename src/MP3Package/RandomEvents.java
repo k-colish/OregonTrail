@@ -123,7 +123,7 @@ public class RandomEvents {
     }
 
     private void severeBlizzard() { // 15% & lose a day // Need to implement weather
-        if (randomValue(17) <= 3){
+        if (randomValue(17) <= 3 || wagon.getMilesTraveled() > 1650 && wagon.getMilesTraveled() < 1750){
             wagon.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in a blizzard and lost one day.",
                     "Severe Blizzard", JOptionPane.INFORMATION_MESSAGE);
