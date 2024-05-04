@@ -13,7 +13,10 @@ public class GameEnd {
 
     public void outCome()
     {
-        if (wagon.getMilesTraveled() == )
+        if (wagon.getMilesTraveled() == 1)
+        {
+            
+        }
     }
 
 }
