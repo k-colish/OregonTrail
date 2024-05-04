@@ -145,7 +145,7 @@ public class OregonTrail {
 			
 			if(dest.getName().contains("River")) {
 				River river = new River(dest.getDistance(), dest.getName());
-				riverPanel = new RiverPanel(river);
+				riverPanel = new RiverPanel(river, clock);
 				frame.getContentPane().add(riverPanel, BorderLayout.CENTER);
 				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
 				
