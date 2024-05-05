@@ -1,7 +1,7 @@
 /** 
  * MP3.java 
  *
- * Simple educational Oregon Trail game, to test if you will be able to make it 
+ * Simple educational Oregon Trail game, to test if you are able to make it
  * to Oregon, depending on the amount of food and other items are
  * added to the wagon. User is able to click check boxes to add items to the wagon, 
  * set the amount of food that is consumed by each of the 4 people, and then 

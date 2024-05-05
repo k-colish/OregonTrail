@@ -38,7 +38,12 @@ public class Wagon {
 	// Initialize ArrayList of Destinations objects that contains all the Destinations that can be visited
 	private ArrayList<Destinations> destinations = new ArrayList<>();
 
-
+	/**
+	 * Constructor for the Wagon class.
+	 * Initializes the wagon with people and loads destinations from a CSV file.
+	 *
+	 * @param pop The People object representing the people in the wagon.
+	 */
 	public Wagon(People pop)
 	{
 		InputStreamReader reader = null;
@@ -80,8 +85,9 @@ public class Wagon {
 	}
 
 	/**
-	 *  addItem - Takes an Item object and adds it to the ArrayList of items that are in the wagon.
-	 * @param item - the item to be added to the wagon.
+	 * Adds an item to the wagon.
+	 *
+	 * @param item The Item object to be added to the wagon.
 	 */
 	public void addItem(Item item) {
 		Items.add(item);
@@ -94,14 +100,27 @@ public class Wagon {
 		System.out.println();
 	}
 
+	/**
+	 * Adds a specified amount of an item to the wagon.
+	 *
+	 * @param itemName The name of the item to add.
+	 * @param amount The amount of the item to add.
+	 */
 	public void addItemAmount(String itemName, int amount) {
-		for(int i = 0; i < Items.size(); i++) {
-			if(itemName == Items.get(i).getName()) {
+		for (int i = 0; i < Items.size(); i++) {
+			if (itemName == Items.get(i).getName()) {
 				Items.get(i).addAmount(amount);
 			}
 		}
 	}
-	
+
+	/**
+	 * Removes a specified amount of an item from the wagon.
+	 *
+	 * @param itemName The name of the item to remove.
+	 * @param amount The amount of the item to remove.
+	 */
+
 	public void removeItemAmount(String itemName, int amount) {
 		for(int i = 0; i < Items.size(); i++) {
 			if(itemName == Items.get(i).getName()) {
@@ -110,12 +129,23 @@ public class Wagon {
 		}
 	}
 
+	/**
+	 * Returns the number of items in the wagon.
+	 *
+	 * @return The number of items in the wagon.
+	 */
 	public int sizeItems() {return Items.size();}
 
+	/**
+	 * Returns the list of items in the wagon.
+	 *
+	 * @return The list of items in the wagon.
+	 */
 	public ArrayList<Item> getItems() {return Items;}
 	
 	/**
 	 * setMilesPerDay - sets the miles traveled per day for travel calculations
+	 *
 	 * @param miles - the number of miles to be traveled each day
 	 */
 	public void setMilesPerDay(int miles) {milesPerDay = miles;}
@@ -170,7 +200,12 @@ public class Wagon {
 	 * @return - the number of miles traveled. 
 	 */
 	public int getMilesTraveled() {return milesTraveled;}
-	
+
+	/**
+	 * Gets the next landmark along the trail.
+	 *
+	 * @return The next landmark.
+	 */
 	public Destinations getNextLandmark() {
 		for(int i = 0; i < destinations.size(); i++) {
 			if(milesTraveled >= destinations.get(i).getDistance() &&
@@ -178,8 +213,12 @@ public class Wagon {
 		}
 		return destinations.get(1);
 	}
-	
 
+	/**
+	 * Adds a specified number of days to the total days traveled.
+	 *
+	 * @param days The number of days to add.
+	 */
 	public void addDays(int days) {daysTraveled += days;}
 	
 	/**
@@ -215,7 +254,12 @@ public class Wagon {
 		}
 		return 0;
 	}
-	
+
+	/**
+	 * Allows the party to rest for a specified number of days.
+	 *
+	 * @return The number of days rested.
+	 */
 	public int rest() {
 		Health med = new Health(people, this, events);
 		RandomEvents rnd = new RandomEvents(this, people);
@@ -233,7 +277,12 @@ public class Wagon {
 		}
 		return days;
 	}
-	
+
+	/**
+	 * Checks if the wagon has arrived at a destination.
+	 *
+	 * @return The destination if reached, null otherwise.
+	 */
 	public Destinations atDestination() {
 		int nextMiles = milesTraveled + milesPerDay;
 		Destinations dest = null;

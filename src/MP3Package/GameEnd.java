@@ -2,8 +2,8 @@ package MP3Package;
 
 public class GameEnd {
 
-    Wagon wagon;
-    Health health;
+    private Wagon wagon;
+    private Health health;
 
     public GameEnd(Wagon wagonlist, Health list)
     {

@@ -5,16 +5,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Class for generating random events durring the game.
+ * Class for generating random events during the game.
  */
 public class RandomEvents {
-    Random rnd = new Random();
-    Wagon wagon;
-    People people;
+    private Random rnd = new Random();
+    private Wagon wagon;
+    private People people;
 
     /**
      * Constructor for RandomEvents class.
      * @param wagonlist The wagon object for which events are generated.
+     * @param list The list of people in the game.
      */
     public RandomEvents(Wagon wagonlist, People list)
     {
@@ -23,7 +24,7 @@ public class RandomEvents {
     }
 
     /**
-     *
+     * Generate a random event.
      */
     public void allEvents() {
         switch(randomValue(18)) {
@@ -49,6 +50,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Generate random events when resting.
+     */
     public void restEvents() { //used for the player decides to rest for the day
         switch(randomValue(9)) {
             case 1: Thief(); break;
@@ -64,6 +68,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Generate environment-related events.
+     */
     public void environmentEvents() {
         switch(randomValue(6)) {
             case 1: severeThunderstorm(); break;
@@ -76,12 +83,19 @@ public class RandomEvents {
         }
     }
 
-    public int randomValue(int x) {
-        int rmd = rnd.nextInt(x) + 1;
+    /**
+     * Generate a random integer value.
+     * @param value The upper limit for the random value.
+     * @return The random integer value.
+     */
+    public int randomValue(int value) {
+        int rmd = rnd.nextInt(value) + 1;
         return rmd;
     }
 
-
+    /**
+     * Event: Thief - 2% chance, lots of supplies lost.
+     */
     private void Thief() { //2% & lots of supplies lost, does not currently work
     	int food = 0;
         String lostItems = "";
@@ -104,6 +118,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Indians Help - 5% chance, gain 30 pounds of food.
+     */
     private void indiansHelp() { // 5% chance to get 30 pounds of food
         if (randomValue(20) == 1) {
             wagon.changeTotalFood(30);
@@ -113,6 +130,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Severe Thunderstorm - 15% chance, lose a day.
+     */
     private void severeThunderstorm() { // 15% & lose a day // Need to implement weather
         if (randomValue(17) <= 3) {
             wagon.addDays(1);
@@ -122,6 +142,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Severe Blizzard - 15% chance, lose a day.
+     */
     private void severeBlizzard() { // 15% & lose a day // Need to implement weather
         if (randomValue(17) <= 3 || wagon.getMilesTraveled() > 1650 && wagon.getMilesTraveled() < 1750){
             wagon.addDays(1);
@@ -131,6 +154,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Heavy Fog - 6% chance, 50% lose a day.
+     */
     private void heavyFog() { // 6% after fort Hall & 50% lose a day
         // Need to implement weather
         // using salt lake city instead of fot Hall, which is 1235 miles from the start.
@@ -143,6 +169,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Hail Storm - 6% chance, 50% lose a day.
+     */
     private void hailStorm() { // 6% before fort Hall & 50% lose a day
         // Need to implement weather
         // using salt lake city instead of fot Hall, which is 1235 miles from the start.
@@ -155,6 +184,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Dead Ox - 2.5% chance, lose an ox.
+     */
     private void deadOX() { // 2.5%
         if (randomValue(40) == 1) {
             System.out.println("RIP OX");
@@ -164,6 +196,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Injured Member - 2.5% chance, a party member gets injured.
+     */
     private void injuredMember() { // 2.5% & gain 20 points
         Health healths = new Health(people, wagon, this);
         String part = "";
@@ -186,6 +221,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Snake Bite - 0.7% chance, a party member gets bitten by a snake.
+     */
     private void snakeBite() { // 0.7%
         Health healths = new Health(people, wagon, this);
         if (randomValue(1000) <= 7) {
@@ -197,6 +235,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Lose Trail - 5% chance, go the wrong way and lose some days.
+     */
     private void loseTrial() { // Make this higher due to diriy // 2% // set to 5%
         if (randomValue(20) == 1) {
             int rmd = randomValue(5);
@@ -207,6 +248,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Find Fruit - 4% chance, gain 20 pounds of food.
+     */
     private void fruit() { // 4% & gain 20 pounds of food
         if (randomValue(25) == 1) {
             wagon.changeTotalFood(20);
@@ -216,6 +260,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Wagon Fire - 2% chance, lose supplies due to a fire.
+     */
     private void wagonFire() { // 2% & lost supplies
         String lostItems = "";
         if (randomValue(50) == 1) {
@@ -233,6 +280,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Member Lost - 1% chance, a party member gets lost.
+     */
     private void memberLost() { // 1% & lose 5 days
         Health healths = new Health(people, wagon, this);
         if (randomValue(100) == 1) {
@@ -244,6 +294,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Find Wagon - 2% chance, find a deserted wagon with supplies.
+     */
     private void findWagon() { // 2% & gained supplies
         String freeItems = "";
         if (randomValue(50) == 1) {
@@ -262,6 +315,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Ox Wanders - 1% chance, an ox wanders off.
+     */
     private void oxWanders() { // 1% & lose 3 days
         if (randomValue(100) == 1) {
             wagon.addDays(3);
@@ -271,6 +327,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Water Contamination - 15% chance, lose food due to contaminated water.
+     */
     private void water() { // 15% & lose few pounds of food
         Health healths = new Health(people, wagon, this);
         if (randomValue(17) <= 3) {
@@ -283,6 +342,9 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Event: Bad Grass - 20% chance, lose food due to bad grass.
+     */
     private void badGrass() { // 20% & lose few pounds of food
         if (randomValue(5) == 1) {
             int rmd = randomValue(10);
@@ -293,6 +355,10 @@ public class RandomEvents {
         }
     }
 
+    /**
+     * Check if there's an illness event.
+     * @return true if an illness event occurs, false otherwise.
+     */
     public boolean isillness() { //0-40% based on health, person & disease random
         Health healths = new Health(people, wagon, this);
         String disease = "";
@@ -337,8 +403,11 @@ public class RandomEvents {
             return false;
     }
 
+    /**
+     * Event: Clothing Ripped - Random chance, lose a pair of clothing.
+     */
     private void clothingHealth() {
-        if (wagon.getMilesTraveled() > 100 && wagon.getMilesTraveled() % 10 > 6 && randomValue(100) == 1) {
+        if (wagon.getMilesTraveled() > 100 && wagon.getMilesTraveled() % 10 >= 6 && randomValue(100) == 1) {
             wagon.removeItemAmount("Clothing", 1);
             JOptionPane.showMessageDialog(null, "You lost one pair of clothing",
                     "Clothing ripped", JOptionPane.INFORMATION_MESSAGE);
