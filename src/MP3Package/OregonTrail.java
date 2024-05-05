@@ -64,7 +64,6 @@ public class OregonTrail {
 	// Implement a clock travel repetition
 	private javax.swing.Timer clock;
 	
-	
 	// Variable for the date
 	private GregorianCalendar calendar = new GregorianCalendar(1850, 2, 30);
 	private String pattern = "MMMMM d, yyyy";

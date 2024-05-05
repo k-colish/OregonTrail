@@ -27,7 +27,10 @@ public class Trading {
 	 * @param items - The ArrayList of all items that can be put in the wagon. (Subject to change)
 	 */
 	public Trading(Wagon wagon) {
+		
 		Random rnd = new Random();
+		
+		ArrayList <Item> items = wagon.getItems();
 		
 		System.out.println(wagon.getItems().size());
 		tradingIndex = rnd.nextInt(wagon.getItems().size());
@@ -58,25 +61,151 @@ public class Trading {
 		
 		
 		
-		System.out.println("Trader has: " + wagon.getItems().get(tradingIndex).getName());
-		System.out.println("Trader wants: " + wagon.getItems().get(yourIndex).getName());
 		
-		int res = JOptionPane.showOptionDialog(null, "Someone would like to trade " +
-				wagon.getItems().get(tradingIndex).getName() + " for " + wagon.getItems().get(yourIndex).getName() +
-				". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
-				null, new Object[] {"Yes", "No"}, -1);
-		if(res == JOptionPane.YES_OPTION) {
-			if(randomFoodAmt < wagon.getTotalFood()) {
-				if(tradingIndex == 0) {
-					wagon.changeTotalFood(randomFoodAmt);
-					wagon.removeItemAmount(wagon.getItems().get(yourIndex).getName(),randomFoodAmt);
-				}
-				if(yourIndex == 0) {
+		
+		System.out.println(traderItem.getAmount() + "Trader has: " + wagon.getItems().get(tradingIndex).getName());
+		System.out.println(yourItem.getAmount() + "Trader wants: " + wagon.getItems().get(yourIndex).getName());
+		
+		//trading food for an item
+		if(yourIndex==0 && tradingIndex!=2) {
+			int tradingFoodForItem = JOptionPane.showOptionDialog(null, "Someone would like to trade 1 " +
+					wagon.getItems().get(tradingIndex).getName() + " for " + randomFoodAmt + " " + wagon.getItems().get(yourIndex).getName() +
+					". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new Object[] {"Yes", "No"}, -1);
+			
+			if(tradingFoodForItem == JOptionPane.YES_OPTION) {
+				if(wagon.getTotalFood() >= randomFoodAmt) {
+					wagon.addItemAmount(wagon.getItems().get(tradingIndex).getName(),1);
 					wagon.changeTotalFood(-randomFoodAmt);
-					wagon.addItemAmount(wagon.getItems().get(yourIndex).getName(),randomFoodAmt);
+					
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You do not have the required items to make this trade",
+		                    "NOPE", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
-			
 		}
+		
+		//trading item for food
+		else if(yourIndex!=2 && tradingIndex==0) {
+			int recievingFoodForItem = JOptionPane.showOptionDialog(null, "Someone would like to trade " + randomFoodAmt + " " +
+					wagon.getItems().get(tradingIndex).getName() + " for 1 " + wagon.getItems().get(yourIndex).getName() +
+					". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new Object[] {"Yes", "No"}, -1);
+			
+			if(recievingFoodForItem == JOptionPane.YES_OPTION) {
+				if(yourItem.getAmount() > 1) {
+					wagon.changeTotalFood(randomFoodAmt);
+					wagon.removeItemAmount(wagon.getItems().get(yourIndex).getName(),1);
+					
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You do not have the required items to make this trade",
+		                    "NOPE", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+		
+		//trading clothing for an item
+		else if(yourIndex==2 && tradingIndex!=0) {
+			int tradingClothingForItem = JOptionPane.showOptionDialog(null, "Someone would like to trade 1 " +
+					wagon.getItems().get(tradingIndex).getName() + " for " + randomClothingAmt + " " + wagon.getItems().get(yourIndex).getName() +
+					". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new Object[] {"Yes", "No"}, -1);
+			
+			if(tradingClothingForItem == JOptionPane.YES_OPTION) {
+				if(yourItem.getAmount() >= randomClothingAmt) {
+					wagon.addItemAmount(wagon.getItems().get(tradingIndex).getName(),1);
+					wagon.removeItemAmount(wagon.getItems().get(yourIndex).getName(),randomClothingAmt);
+					
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You do not have the required items to make this trade",
+		                    "NOPE", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+		
+		//trading item for clothing
+		else if(yourIndex!=0 && tradingIndex ==2) {
+			int recievingClothingForItem = JOptionPane.showOptionDialog(null, "Someone would like to trade " + randomClothingAmt + " " +
+					wagon.getItems().get(tradingIndex).getName() + " for 1 " + wagon.getItems().get(yourIndex).getName() +
+					". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new Object[] {"Yes", "No"}, -1);
+			
+			if(recievingClothingForItem == JOptionPane.YES_OPTION) {
+				if(yourItem.getAmount() >= 1) {
+					wagon.addItemAmount(wagon.getItems().get(tradingIndex).getName(),randomClothingAmt);
+					wagon.removeItemAmount(wagon.getItems().get(yourIndex).getName(),1);
+					
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You do not have the required items to make this trade",
+		                    "NOPE", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+		
+		//trading clothing for food
+		else if(yourIndex == 2 && tradingIndex == 0) {
+			int tradingClothingForFood = JOptionPane.showOptionDialog(null, "Someone would like to trade " + randomFoodAmt + " " +
+					wagon.getItems().get(tradingIndex).getName() + " for " + randomClothingAmt + " " + wagon.getItems().get(yourIndex).getName() +
+					". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new Object[] {"Yes", "No"}, -1);
+			
+			if(tradingClothingForFood == JOptionPane.YES_OPTION) {
+				if(yourItem.getAmount() >= randomClothingAmt) {
+					wagon.changeTotalFood(randomFoodAmt);
+					wagon.removeItemAmount(wagon.getItems().get(yourIndex).getName(),randomClothingAmt);
+					
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You do not have the required items to make this trade",
+		                    "NOPE", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+		
+		//trading food for clothing
+		else if(yourIndex == 0 && tradingIndex == 2) {
+			int recievingClothingForFood = JOptionPane.showOptionDialog(null, "Someone would like to trade " + randomClothingAmt + " " +
+					wagon.getItems().get(tradingIndex).getName() + " for " + randomFoodAmt + " " + wagon.getItems().get(yourIndex).getName() +
+					". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new Object[] {"Yes", "No"}, -1);
+			
+			if(recievingClothingForFood == JOptionPane.YES_OPTION) {
+				if(wagon.getTotalFood() >= randomFoodAmt) {
+					wagon.addItemAmount(wagon.getItems().get(tradingIndex).getName(),randomClothingAmt);
+					wagon.changeTotalFood(-randomFoodAmt);
+					
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You do not have the required items to make this trade",
+		                    "NOPE", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+		
+		//trading an item for an item
+		else {
+			int ItemForItem = JOptionPane.showOptionDialog(null, "Someone would like to trade 1 " +
+					wagon.getItems().get(tradingIndex).getName() + " for 1 " + wagon.getItems().get(yourIndex).getName() +
+					". \nDo you want to trade?", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+					null, new Object[] {"Yes", "No"}, -1);
+			
+			if(ItemForItem == JOptionPane.YES_OPTION) {
+				if(yourItem.getAmount() >= 1) {
+					wagon.addItemAmount(wagon.getItems().get(tradingIndex).getName(),1);
+					wagon.removeItemAmount(wagon.getItems().get(yourIndex).getName(),1);
+					
+			}
+				else {
+					JOptionPane.showMessageDialog(null, "You do not have the required items to make this trade",
+		                    "NOPE", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		}
+		
+		
 	}
 }
