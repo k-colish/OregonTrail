@@ -80,6 +80,9 @@ public class OregonTrail {
 	private JPanel actionButtonPane = new JPanel();
 	private JButton travelButton = new JButton("Click to start traveling!");
 	private JPanel panel = new JPanel();
+
+	private RiverPanel riverPanel = null;
+	private FortPanel fortPanel = null;
 	
 	// Initialize objects for people and their healths
 	private Health healths = new Health(people, wagon, rndEvt);
@@ -124,7 +127,7 @@ public class OregonTrail {
 	 * @param e - ActionEvent
 	 */
 	public void clockActionPerformed(ActionEvent e) {
-
+		travelButton.setVisible(true);
 		calendar.add(GregorianCalendar.DATE, 1);
 		date = dateFormatter.format(calendar.getTime());
 		dateLabel.setText(date);
@@ -140,13 +143,12 @@ public class OregonTrail {
 			System.out.println(frame.getHeight());
 			System.out.println(frame.getContentPane().getHeight());
 			clock.stop();
-			travelButton.setText("Click to start traveling!");
 			travelButton.setVisible(false);
 			
 			if(dest.getName().contains("River")) {
 				River river = new River(dest.getDistance(), dest.getName());
 				riverPanel = new RiverPanel(river, clock);
-				frame.getContentPane().add(riverPanel, BorderLayout.CENTER);
+				frame.getContentPane().add(riverPanel, BorderLayout.CENTER, 1);
 				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
 				
 				switch(riverPanel.getStatus()) {
@@ -155,9 +157,14 @@ public class OregonTrail {
 					case 3: 
 					case 4: 
 				}
+
 			}
-			travelButton.setEnabled(false);
-			travelButton.setVisible(true);
+			else {
+				fortPanel = new FortPanel(dest, wagon, clock);
+				frame.getContentPane().add(fortPanel, BorderLayout.CENTER, 1);
+				fortPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
+
+			}
 		}
 		
 		

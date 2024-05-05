@@ -207,9 +207,17 @@ public class Wagon {
 	 * @return - the distance to the next landmark
 	 */
 	public int milesToLandmark() {
+		
 		for(int i = 0; i < destinations.size(); i++) {
-			if(milesTraveled >= destinations.get(i).getDistance() && milesTraveled <
-					destinations.get(i + 1).getDistance()) {
+			int nextDist;
+			
+			try {
+				nextDist = destinations.get(i+1).getDistance();			}
+			catch(Exception e) {
+				return 0;
+			}
+			
+			if(milesTraveled >= destinations.get(i).getDistance() && milesTraveled < nextDist) {
 				return destinations.get(i + 1).getDistance() - milesTraveled;
 			}
 		}
