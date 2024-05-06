@@ -29,7 +29,7 @@ public class Forts extends JPanel {
      * Constructs a new Forts instance.
      * Sets up the JFrame and initializes components.
      */
-    public Forts(Wagon wagon, FortPanel fort) {
+    public Forts(Wagon wagon, FortPanel fort, OregonTrail trail) {
     	setLayout(null); // Set layout to null for absolute positioning
 
         moneyAmountLabel = new JLabel("Current money amount: " + moneyTotal);
@@ -137,9 +137,8 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(wagon, itemCost, result);
-				int newResult = (int) result;
-				wagon.addItemAmount(wagon.getItems().get(wagonTongue).getName(), newResult);
+				spendMoney(itemCost, result);
+				trail.updateLabels();
 			}
 		});
 		

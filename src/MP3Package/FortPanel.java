@@ -25,8 +25,7 @@ public class FortPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public FortPanel(Destinations dest, Wagon wagon, javax.swing.Timer clock) {
-		setBackground(Color.GRAY);
+	public FortPanel(Destinations dest, Wagon wagon, javax.swing.Timer clock, OregonTrail trail) {
 		setLayout(new MigLayout("", "[150px][150px][200px][150px][150px]", "[18px][18px][18px][18px][18px][18px][20px][]"));
 		
 		JLabel FortName = new JLabel("You made it to " + dest.getName() + "!");
@@ -39,7 +38,7 @@ public class FortPanel extends JPanel{
 		JButton storeButton = new JButton("Go Shopping!");
 		storeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Forts store = new Forts(wagon, panel);
+				Forts store = new Forts(wagon, panel, trail);
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				comp.getParent().getParent().remove(panel);
