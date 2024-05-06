@@ -110,19 +110,6 @@ public class Health {
     }
 
     /**
-     * Adjust health based on weather conditions.
-     */
-    private void weatherHealth() {
-        //very hot = 2, hot = 1, cold = 2 if no clothing & between 0-2 if clothing is 1 per person
-        // cold = 4 if no clothing & between 0-4 if clothing is 1 per person
-
-//        Item item = new Item(1, "clothing", 0);
-//        if (weather thing && item.getAmount()/getPeopleAmount() < 2) {addPoints(2, getPeopleAmount());}
-//        else if (weather thing && item.getAmount()/getPeopleAmount() < 4) {addPoints(4, getPeopleAmount());}
-//        else if (//add that if its bad weather they still get 1 point and have clothing) {addPoints(1, getPeopleAmount());}
-    }
-
-    /**
      * Adjust health based on food consumption.
      */
     private void FoodHealth() {
@@ -151,6 +138,8 @@ public class Health {
      * Adjust health based on rest-related improvements.
      */
     private void restImprovement() { // when the player stops to rest each player losses some points
+        int rmd = random.randomValue(6);
+        addPoints(-rmd, getPeopleAmount());
         addPoints((-1 * 7), getPeopleAmount());
     }
 
