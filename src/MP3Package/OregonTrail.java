@@ -395,6 +395,10 @@ public class OregonTrail {
 		actionButtonPane.add(tradeButton);
 		
 		JButton suppliesButton = new JButton("Check Supplies");
+		suppliesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		suppliesButton.setMargin(new Insets(2, 10, 2, 10));
 		suppliesButton.setBackground(Color.WHITE);
 		suppliesButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -402,16 +406,38 @@ public class OregonTrail {
 		actionButtonPane.add(suppliesButton);
 		
 		JButton paceButton = new JButton("Change Pace");
+		paceButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int miles = 12;
+				Integer[] options = {12, 13, 14, 15, 16, 17, 18, 19, 20};
+				
+				miles = (int) JOptionPane.showInputDialog(null, "How many miles a day would you like to travel?",
+						"Travel Pace", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+				wagon.setMilesPerDay(miles);
+			}
+		});
 		paceButton.setBackground(Color.WHITE);
 		paceButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		paceButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(paceButton);
 		
 		JButton rationsButton = new JButton("Change Rations");
+		rationsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int pounds = 2;
+				Integer[] options = {1, 2, 3};
+				
+				pounds = (int) JOptionPane.showInputDialog(null, "How many pounds of food per person a day would you like to consume?",
+						"Food Consumption", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+				wagon.setFoodConsumption(pounds);
+			}
+		});
 		rationsButton.setBackground(Color.WHITE);
 		rationsButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(rationsButton);
+		
+		
 		// Instantiate timer
 		clock = new javax.swing.Timer(300, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
