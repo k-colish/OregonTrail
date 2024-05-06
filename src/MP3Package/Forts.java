@@ -32,25 +32,32 @@ public class Forts extends JPanel {
     public Forts(Wagon wagon, FortPanel fort, OregonTrail trail) {
     	setLayout(null); // Set layout to null for absolute positioning
 
+    	// Sets up the labels for how much money you have when shopping
         moneyAmountLabel = new JLabel("Current money amount: " + moneyTotal);
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         moneyAmountLabel.setBounds(10, 10, 300, 30);
         add(moneyAmountLabel);
         
-        
+        // sets the index of each item in the array list to a variable to be processed by the addItemAmount method
         this.wagon = wagon;
         ArrayList <Item> items = wagon.getItems();
-        
         int oxen = 1;
         int clothing = 2;
         int wagonWheel = 3;
         int wagonTongue = 4;
         int wagonAxle = 5;
         
-        
+        // initialize the panel for the store
         panel = this;
 		JOptionPane pane = null;
-
+		
+		
+		/*
+		 *  The following sections create the buttons to be clicked for when you want to purchase an item. 
+		 *  An action event is related to each Option Pane that appears when an item is selected which adds 
+		 *  items to the wagon and updates labels accordingly. 
+		 *  
+		 */
 		String foodCost = String.format("Food - $%.2f", (0.40 + 0.40 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnFood = new JRadioButton(foodCost);
 		rbtnFood.setBounds(10, 50, 200, 30);
