@@ -36,7 +36,17 @@ public class Forts extends JPanel {
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         moneyAmountLabel.setBounds(10, 10, 300, 30);
         add(moneyAmountLabel);
+        
+        
         this.wagon = wagon;
+        ArrayList <Item> items = wagon.getItems();
+        
+        int oxen = 1;
+        int clothing = 2;
+        int wagonWheel = 3;
+        int wagonTongue = 4;
+        int wagonAxle = 5;
+        
         
         panel = this;
 		JOptionPane pane = null;
@@ -53,7 +63,9 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.changeTotalFood(newResult);
 			}
 		});
 
@@ -71,7 +83,9 @@ public class Forts extends JPanel {
 				result1 = Double.parseDouble(input);
 				result = 2 * result1;
 				System.out.println(result);
-				spendMoney(itemCost, result1);
+				spendMoney(wagon, itemCost, result1);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(oxen).getName(), newResult);
 			}
 		});
 
@@ -87,7 +101,9 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(clothing).getName(), newResult);
 			}
 		});
 
@@ -103,7 +119,9 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(wagonWheel).getName(), newResult);
 			}
 		});
 		
@@ -119,7 +137,9 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(wagonTongue).getName(), newResult);
 			}
 		});
 		
@@ -135,13 +155,11 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(wagonAxle).getName(), newResult);
 			}
 		});
-		
-		
-		
-
 
 		// Initializing a button group, so only one radio button can be selected at one time
 		ButtonGroup storeButtons = new ButtonGroup();
@@ -152,6 +170,7 @@ public class Forts extends JPanel {
 		storeButtons.add(rbtnWagonTongue);
 		storeButtons.add(rbtnWagonAxle);
 		
+		// Button that sends you back to the home menu when you are done shopping
 		JButton doneButton = new JButton("Done");
 		doneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -166,8 +185,6 @@ public class Forts extends JPanel {
 		doneButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		doneButton.setBounds(175, 303, 95, 30);
 		add(doneButton);
-		
-		
     }
 
     /**
@@ -176,10 +193,16 @@ public class Forts extends JPanel {
      *
      * @param cost the cost of the item to be deducted
      */
-    private void spendMoney(double cost, double result ) {
+    private void spendMoney(Wagon wagon, double cost, double result ) {
         if (moneyTotal >= cost * result) {
+        	this.wagon= wagon;
+        	ArrayList <Item> items = wagon.getItems();
+        	
+        	
+        	
             moneyTotal -= cost * result ;
             String moneyAmount = String.format("Current money amount: %.2f", moneyTotal);
+            
             moneyAmountLabel.setText(moneyAmount);
         } else {
             System.err.println("Insufficient funds to buy this item: " + cost * result);
