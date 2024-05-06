@@ -145,7 +145,7 @@ public class RandomEvents {
     /**
      * Event: Severe Blizzard - 15% chance, lose a day.
      */
-    private void severeBlizzard() { // 15% & lose a day // Need to implement weather
+    private void severeBlizzard() { // 15% & lose a day
         if (randomValue(17) <= 3 || wagon.getMilesTraveled() > 1650 && wagon.getMilesTraveled() < 1750){
             wagon.addDays(1);
             JOptionPane.showMessageDialog(null, "You got stuck in a blizzard and lost one day.",
@@ -158,9 +158,7 @@ public class RandomEvents {
      * Event: Heavy Fog - 6% chance, 50% lose a day.
      */
     private void heavyFog() { // 6% after fort Hall & 50% lose a day
-        // Need to implement weather
         // using salt lake city instead of fot Hall, which is 1235 miles from the start.
-
         if (wagon.getMilesTraveled() > 1235 && randomValue(2) == 1) {
             System.out.println("FOG");
             wagon.addDays(1);
@@ -173,9 +171,7 @@ public class RandomEvents {
      * Event: Hail Storm - 6% chance, 50% lose a day.
      */
     private void hailStorm() { // 6% before fort Hall & 50% lose a day
-        // Need to implement weather
         // using salt lake city instead of fot Hall, which is 1235 miles from the start.
-
         if (wagon.getMilesTraveled() < 1235 && randomValue(2) == 1) {
             System.out.println("hail");
             wagon.addDays(1);
