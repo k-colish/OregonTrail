@@ -418,8 +418,8 @@ public class RandomEvents {
      * determines if you have successfully scavenged for food
      */
     public void scavenge() {
-        int food = randomValue(60)+19;
-    	if (randomValue(10) <= 7) {
+        int food = randomValue(30) + 10;
+    	if (randomValue(10) <= 5) {
     		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
                     "You have gained " + food + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
     		wagon.changeTotalFood(food);

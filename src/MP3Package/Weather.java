@@ -16,12 +16,7 @@ public class Weather {
 	private String weatherStatus = "Cool";
 	private boolean isRainy, heavyRain, lightRain, keepWeather, isDrought, isSevereDrought,
 					snowyTerrain;
-	private OregonTrail oregon;
 
-	Weather(OregonTrail trail)
-	{
-		this.oregon = trail;
-	}
 	
 	/**
 	 * getWeather - calculates and determines the weather conditions
