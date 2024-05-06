@@ -9,12 +9,13 @@
  */
 package MP3Package;
 
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import net.miginfocom.swing.MigLayout;
 
 public class RiverPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
@@ -115,7 +116,7 @@ public class RiverPanel extends JPanel{
 						
 						// Create a Random object to handle the chance of a person drowning
 						Random rnd = new Random();
-						int drown = rnd.nextInt(10) + 1;
+						int drown = rnd.nextInt(10);
 						
 						// Gives a 30% chance that one person will drown when the wagon does not make it across
 						if(drown <= 3) {
@@ -167,10 +168,10 @@ public class RiverPanel extends JPanel{
 						
 						// Create a Random Object to handle the chance of a person drowning
 						Random rnd = new Random();
-						int drown = rnd.nextInt(10) + 1;
+						int drown = rnd.nextInt(10);
 						
 						// Gives a 30% chance that one person will drown when the wagon does not make it across
-						if(drown <= 3) {
+						if(drown <= 10) {
 							
 							// Tell the user that they did not make it and that one person has died
 							JOptionPane.showMessageDialog(null, "The river was too deep" +

@@ -153,14 +153,13 @@ public class OregonTrail {
 				riverPanel = new RiverPanel(river, clock);
 				frame.getContentPane().add(riverPanel, BorderLayout.CENTER, 1);
 				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
-				
+
 				switch(riverPanel.getStatus()) {
 					case 1: break;
-					case 2: healths.addPoints(140, 1); 
-					case 3: 
-					case 4: 
+					case 2: healths.addPoints(200, 1);
+					case 3:
+					case 4:
 				}
-
 			}
 			else {
 				fortPanel = new FortPanel(dest, wagon, clock, this);
@@ -169,7 +168,7 @@ public class OregonTrail {
 
 			}
 		}
-		
+
 		
 
 		// Print out for debugging
