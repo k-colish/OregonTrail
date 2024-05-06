@@ -309,7 +309,6 @@ public class OregonTrail {
 				if(!clock.isRunning()) {
 					clock.start();
 					travelButton.setText("Click to stop travel");
-//					actionButtonPane.setEnabled(false);
 					actionButtonPane.setVisible(false);
 					frame.getContentPane().repaint();
 				}
@@ -348,12 +347,10 @@ public class OregonTrail {
 			public void actionPerformed(ActionEvent e) {
 				if(canScavenge) {
 					rndEvt.scavenge();
-					totalFood.setText(Integer.toString(wagon.getTotalFood()));
 					calendar.add(GregorianCalendar.DATE, 1);
 					date = dateFormatter.format(calendar.getTime());
-					dateLabel.setText(date);
-					wagon.changeTotalFood(healths.getPeopleAmount() * wagon.getFoodConsumption());
 					canScavenge = false;
+					updateLabels();
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "You must travel one more day before you can scavenge.");
@@ -369,11 +366,11 @@ public class OregonTrail {
 		restButton.setMargin(new Insets(2, 12, 2, 12));
 		restButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int days = wagon.rest();
+				int days = wagon.rest(healths);
 				calendar.add(GregorianCalendar.DATE, days);
 				date = dateFormatter.format(calendar.getTime());
-				dateLabel.setText(date);
-				totalFood.setText(Integer.toString(wagon.getTotalFood()));
+				wagon.changeTotalFood(-1 * (healths.getPeopleAmount() * wagon.getFoodConsumption()));
+				updateLabels();
 				healths.restNeeds();
 				System.out.println(healths.healthTotalScore());
 			}
