@@ -294,7 +294,7 @@ public class Wagon {
 		int nextMiles = milesTraveled + milesPerDay;
 		Destinations dest = null;
 		for(int i = 0; i < destinations.size(); i++) {
-			if(nextMiles >= destinations.get(i).getDistance() && nextMiles < destinations.get(i).getDistance() + 19) {
+			if(nextMiles >= destinations.get(i).getDistance() && nextMiles < destinations.get(i).getDistance() + (milesPerDay - 1)) {
 				milesTraveled = destinations.get(i).getDistance();
 				dest = destinations.get(i);
 			}

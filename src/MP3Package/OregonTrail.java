@@ -88,6 +88,8 @@ public class OregonTrail {
 	// Initialize objects for people and their healths
 	private Health healths = new Health(people, wagon, rndEvt);
 	private Weather weather = new Weather();
+	
+	private OregonTrail trail = this;
 
 	
 
@@ -124,6 +126,11 @@ public class OregonTrail {
 		milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
 		healthLabel.setText(healths.overallHealth());
 		weatherLabel.setText(weather.getWeather(wagon.getNextLandmark().getTemp(), wagon.getNextLandmark().getPrecipitation()));
+	}
+	
+	public void readdButtons() {
+		travelButton.setVisible(true);
+		actionButtonPane.setVisible(true);
 	}
 
 	/**
@@ -393,6 +400,13 @@ public class OregonTrail {
 		JButton suppliesButton = new JButton("Check Supplies");
 		suppliesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				SuppliesPanel panel = new SuppliesPanel(wagon, trail);
+				frame.getContentPane().add(panel, BorderLayout.CENTER, 1);
+				panel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
+				actionButtonPane.setVisible(false);
+				travelButton.setVisible(false);
+				frame.getContentPane().repaint();
+				frame.getContentPane().revalidate();
 			}
 		});
 		suppliesButton.setMargin(new Insets(2, 10, 2, 10));
