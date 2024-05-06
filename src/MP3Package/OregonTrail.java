@@ -90,6 +90,10 @@ public class OregonTrail {
 	private Weather weather = new Weather();
 	
 	private OregonTrail trail = this;
+	
+	private GameEnd GameEnd = new GameEnd(wagon, healths);
+
+	
 
 	
 
@@ -143,6 +147,10 @@ public class OregonTrail {
 		date = dateFormatter.format(calendar.getTime());
 		
 		
+		
+		
+		
+		
 		// Make it so the player can scavenge once after this clock cycle
 		canScavenge = true;
 		
@@ -182,13 +190,27 @@ public class OregonTrail {
 		System.out.println("Clock Action Performed");
 		wagon.travel();
 		healths.travelNeeds();
-		if(healths.getPeopleAmount() == 0) {
-			JOptionPane.showMessageDialog(null, "All members of your party have died!", "You lose!", JOptionPane.ERROR_MESSAGE);
-			System.exit(0);
-		}
+		
+		
+		if (wagon.getMilesTraveled() >= 1800)
+        {
+        	JOptionPane.showMessageDialog(null, "<html><center>You WIN!<center/><br><center> You took " + wagon.getTotalDaysTraveled() + " days to make it to California!<center/><br><center>You still had " + healths.getPeopleAmount() + " members of your party left!<center/><br><br><center>Have fun mining gold!",
+                    "WINNER! WOOP WOOP!", JOptionPane.INFORMATION_MESSAGE);
+        	System.exit(0);
+            //add pane for WINNERS! WHOOP WHOOP.
+            //displays how many people are left.
+            //maybe add a bit about what the group did when they got to Sacramento.
+        }
+		if (healths.getPeopleAmount() == 0)
+        {
+        	JOptionPane.showMessageDialog(null, "<html><center>You LOSE!<center/><br><center>You traveled " + wagon.getMilesTraveled() + " miles before all of your party died.<center/>",
+                    "LOSER! WOMP WOMP!", JOptionPane.INFORMATION_MESSAGE);
+        	System.exit(0);
+        }
 
 		
 		updateLabels();
+		//GameEnd.gameOutCome();
 	}
 
 	/**
@@ -451,7 +473,7 @@ public class OregonTrail {
 		// Instantiate timer
 		clock = new javax.swing.Timer(300, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				clockActionPerformed( evt );
+				clockActionPerformed( evt);
 			}});
 		
 
