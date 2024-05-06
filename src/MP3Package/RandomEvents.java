@@ -263,7 +263,7 @@ public class RandomEvents {
         String lostItems = "";
         if (randomValue(50) == 1) {
             System.out.println("FIRE!");
-            int food = randomValue(250);
+            int food = randomValue(wagon.getTotalFood());
             wagon.changeTotalFood(-food);
             for (int i = 0; i < randomValue(10); i++) {
                 ArrayList<Item> ThiefItems = wagon.getItems();
@@ -414,8 +414,8 @@ public class RandomEvents {
      * determines if you have successfully scavenged for food
      */
     public void scavenge() {
-        int food = randomValue(60)+19;
-    	if (randomValue(10) <= 7) {
+        int food = randomValue(30) + 20;
+    	if (randomValue(10) <= 8) {
     		JOptionPane.showMessageDialog(null, "You successfully scavenged for food! " +
                     "You have gained " + food + " pounds of food!", "SUCCESS", JOptionPane.INFORMATION_MESSAGE);
     		wagon.changeTotalFood(food);

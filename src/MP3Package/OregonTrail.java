@@ -54,6 +54,7 @@ public class OregonTrail {
 
 	// Initialize RandomEvents object
 	private RandomEvents rndEvt = new RandomEvents(wagon, people);
+	private boolean canScavenge = false;
 	
 	// ArrayList including all the items that can be added to the Wagon class object
 	private ArrayList<Item> allItems = new ArrayList<Item>();
@@ -73,6 +74,7 @@ public class OregonTrail {
 	private JLabel healthLabel;
 	
 	// Instantiating labels, buttons, and panels
+	private JLabel weatherLabel = new JLabel("Cool");
 	private JLabel totalFood = new JLabel(Integer.toString(wagon.getTotalFood()));
 	private JLabel landmarkLabel = new JLabel(Integer.toString(wagon.milesToLandmark()) + " miles");
 	private JLabel milesLabel = new JLabel(Integer.toString(wagon.getMilesTraveled()) + " miles");
@@ -85,6 +87,7 @@ public class OregonTrail {
 	
 	// Initialize objects for people and their healths
 	private Health healths = new Health(people, wagon, rndEvt);
+	private Weather weather = new Weather();
 
 	
 
@@ -114,11 +117,13 @@ public class OregonTrail {
 		//people.setNames();
 	}
 	
-	public void openPanel(JPanel panelOpen) {
-		frame.getContentPane().removeAll();
-		frame.getContentPane().add(panelOpen);
-		frame.getContentPane().revalidate();
-		frame.getContentPane().repaint();
+	public void updateLabels() {
+		dateLabel.setText(date);
+		totalFood.setText(Integer.toString(wagon.getTotalFood()));
+		landmarkLabel.setText(Integer.toString(wagon.milesToLandmark()));
+		milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
+		healthLabel.setText(healths.overallHealth());
+		weatherLabel.setText(weather.getWeather(wagon.getNextLandmark().getTemp(), wagon.getNextLandmark().getPrecipitation()));
 	}
 
 	/**
@@ -129,7 +134,10 @@ public class OregonTrail {
 		travelButton.setVisible(true);
 		calendar.add(GregorianCalendar.DATE, 1);
 		date = dateFormatter.format(calendar.getTime());
-		dateLabel.setText(date);
+		
+		
+		// Make it so the player can scavenge once after this clock cycle
+		canScavenge = true;
 		
 		// Instantiate and update list in RandomEvents object
 		rndEvt = new RandomEvents(wagon, people);
@@ -137,10 +145,6 @@ public class OregonTrail {
 		
 		Destinations dest = wagon.atDestination();
 		if(dest != null) {
-			System.out.println(dest.getName());
-			System.out.println(panel.getHeight());
-			System.out.println(frame.getHeight());
-			System.out.println(frame.getContentPane().getHeight());
 			clock.stop();
 			travelButton.setVisible(false);
 			
@@ -159,7 +163,7 @@ public class OregonTrail {
 
 			}
 			else {
-				fortPanel = new FortPanel(dest, wagon, clock);
+				fortPanel = new FortPanel(dest, wagon, clock, this);
 				frame.getContentPane().add(fortPanel, BorderLayout.CENTER, 1);
 				fortPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
 
@@ -170,50 +174,15 @@ public class OregonTrail {
 
 		// Print out for debugging
 		System.out.println("Clock Action Performed");
-		int gameStatus = wagon.travel();
-		// Check for sentinel value, this is true when all the people in the wagon are dead.
-		if (gameStatus == -1) {
-
-            // Display a loose message
-			JOptionPane.showMessageDialog(null, "You Lose!", "LOSER", JOptionPane.ERROR_MESSAGE);
-			clock.stop();
-		} else {
-			healths.travelNeeds();
-//			// Checks to see if the player has made it to Paris, IL
-//			if (wagon.getMilesTraveled() >= paris.getDistance() && (paris.getDistance() - wagon.getMilesTraveled() > -20)) {
-//
-//				// Display a message that the play has reached Paris
-//				JOptionPane.showMessageDialog(null, "You made it to " + paris.getName() + "!");
-//			}
-//
-//			// Checks to see if the player has made it to Springfield, IL
-//			else if (wagon.getMilesTraveled() >= springfield.getDistance() && (springfield.getDistance() - wagon.getMilesTraveled()) > -20) {
-//
-//				// Display a message that the play has reached Springfield
-//				JOptionPane.showMessageDialog(null, "You made it to " + springfield.getName() + "!", "You made it!", JOptionPane.INFORMATION_MESSAGE);
-//			}
-//			// Initialize the JOptionPane
-//			pane = new JOptionPane();
-
-			// Get the value from the JOptionPane, after the user selects one of the buttons
-//			int res = pane.showOptionDialog(null, "<HTML>You have traveled at total of " + wagon.getMilesTraveled() + " miles.<br> You are " + milesToLandmark() + " miles from the next landmark!<br>You have " + wagon.getTotalFood() + " food remaining.<br>Do you want to stop traveling?", "Travel Status", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Yes", "No"}, -1);
-
-			// If the selection equals 0, stop the clock and update weight labels, allowing the user to adjust pace and food rations
-//			if (res == JOptionPane.YES_OPTION) {
-//				System.out.println("Yes selected");
-//				clock.stop();
-//				TotalFoodLabel.setText("Total Food: " + wagon.getTotalFood());
-//			}
-
-			// If the selection equals 1, or if no selection is made, print debugging message and let the clock run
-//			else {
-//				System.out.println("No selected");
-//			}
-			totalFood.setText(Integer.toString(wagon.getTotalFood()));
-			landmarkLabel.setText(Integer.toString(wagon.milesToLandmark()));
-			milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
-			healthLabel.setText(healths.overallHealth());
+		wagon.travel();
+		healths.travelNeeds();
+		if(healths.getPeopleAmount() == 0) {
+			JOptionPane.showMessageDialog(null, "All members of your party have died!", "You lose!", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
 		}
+
+		
+		updateLabels();
 	}
 
 	/**
@@ -327,7 +296,7 @@ public class OregonTrail {
 		lblNewLabel_3.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel_3, "cell 9 5,alignx right");
 		
-		JLabel weatherLabel = new JLabel("Cool");
+		
 		weatherLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(weatherLabel, "cell 10 5");
 
@@ -340,7 +309,6 @@ public class OregonTrail {
 				if(!clock.isRunning()) {
 					clock.start();
 					travelButton.setText("Click to stop travel");
-//					actionButtonPane.setEnabled(false);
 					actionButtonPane.setVisible(false);
 					frame.getContentPane().repaint();
 				}
@@ -377,12 +345,16 @@ public class OregonTrail {
 		JButton scavengeButton = new JButton("Scavenge for Food");
 		scavengeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rndEvt.scavenge();
-				totalFood.setText(Integer.toString(wagon.getTotalFood()));
-				calendar.add(GregorianCalendar.DATE, 1);
-				date = dateFormatter.format(calendar.getTime());
-				dateLabel.setText(date);
-				wagon.changeTotalFood(healths.getPeopleAmount() * wagon.getFoodConsumption());
+				if(canScavenge) {
+					rndEvt.scavenge();
+					calendar.add(GregorianCalendar.DATE, 1);
+					date = dateFormatter.format(calendar.getTime());
+					canScavenge = false;
+					updateLabels();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "You must travel one more day before you can scavenge.");
+				}
 			}
 		});
 		scavengeButton.setBackground(Color.WHITE);
@@ -394,11 +366,13 @@ public class OregonTrail {
 		restButton.setMargin(new Insets(2, 12, 2, 12));
 		restButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int days = wagon.rest();
+				int days = wagon.rest(healths);
 				calendar.add(GregorianCalendar.DATE, days);
 				date = dateFormatter.format(calendar.getTime());
-				dateLabel.setText(date);
-				totalFood.setText(Integer.toString(wagon.getTotalFood()));
+				wagon.changeTotalFood(-1 * (healths.getPeopleAmount() * wagon.getFoodConsumption()));
+				updateLabels();
+				healths.restNeeds();
+				System.out.println(healths.healthTotalScore());
 			}
 		});
 		restButton.setBackground(Color.WHITE);
@@ -418,6 +392,10 @@ public class OregonTrail {
 		actionButtonPane.add(tradeButton);
 		
 		JButton suppliesButton = new JButton("Check Supplies");
+		suppliesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		suppliesButton.setMargin(new Insets(2, 10, 2, 10));
 		suppliesButton.setBackground(Color.WHITE);
 		suppliesButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -425,16 +403,38 @@ public class OregonTrail {
 		actionButtonPane.add(suppliesButton);
 		
 		JButton paceButton = new JButton("Change Pace");
+		paceButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int miles = 12;
+				Integer[] options = {12, 13, 14, 15, 16, 17, 18, 19, 20};
+				
+				miles = (int) JOptionPane.showInputDialog(null, "How many miles a day would you like to travel?",
+						"Travel Pace", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+				wagon.setMilesPerDay(miles);
+			}
+		});
 		paceButton.setBackground(Color.WHITE);
 		paceButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		paceButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(paceButton);
 		
 		JButton rationsButton = new JButton("Change Rations");
+		rationsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int pounds = 2;
+				Integer[] options = {1, 2, 3};
+				
+				pounds = (int) JOptionPane.showInputDialog(null, "How many pounds of food per person a day would you like to consume?",
+						"Food Consumption", JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+				wagon.setFoodConsumption(pounds);
+			}
+		});
 		rationsButton.setBackground(Color.WHITE);
 		rationsButton.setHorizontalTextPosition(SwingConstants.CENTER);
 		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(rationsButton);
+		
+		
 		// Instantiate timer
 		clock = new javax.swing.Timer(300, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {

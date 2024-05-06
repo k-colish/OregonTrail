@@ -29,18 +29,35 @@ public class Forts extends JPanel {
      * Constructs a new Forts instance.
      * Sets up the JFrame and initializes components.
      */
-    public Forts(Wagon wagon, FortPanel fort) {
+    public Forts(Wagon wagon, FortPanel fort, OregonTrail trail) {
     	setLayout(null); // Set layout to null for absolute positioning
 
+    	// Sets up the labels for how much money you have when shopping
         moneyAmountLabel = new JLabel("Current money amount: " + moneyTotal);
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
         moneyAmountLabel.setBounds(10, 10, 300, 30);
         add(moneyAmountLabel);
-        this.wagon = wagon;
         
+        // sets the index of each item in the array list to a variable to be processed by the addItemAmount method
+        this.wagon = wagon;
+        ArrayList <Item> items = wagon.getItems();
+        int oxen = 1;
+        int clothing = 2;
+        int wagonWheel = 3;
+        int wagonTongue = 4;
+        int wagonAxle = 5;
+        
+        // initialize the panel for the store
         panel = this;
 		JOptionPane pane = null;
-
+		
+		
+		/*
+		 *  The following sections create the buttons to be clicked for when you want to purchase an item. 
+		 *  An action event is related to each Option Pane that appears when an item is selected which adds 
+		 *  items to the wagon and updates labels accordingly. 
+		 *  
+		 */
 		String foodCost = String.format("Food - $%.2f", (0.40 + 0.40 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnFood = new JRadioButton(foodCost);
 		rbtnFood.setBounds(10, 50, 200, 30);
@@ -53,7 +70,10 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.changeTotalFood(newResult);
+				trail.updateLabels();
 			}
 		});
 
@@ -71,7 +91,10 @@ public class Forts extends JPanel {
 				result1 = Double.parseDouble(input);
 				result = 2 * result1;
 				System.out.println(result);
-				spendMoney(itemCost, result1);
+				spendMoney(wagon, itemCost, result1);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(oxen).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 
@@ -87,7 +110,10 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(clothing).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 
@@ -103,7 +129,10 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(wagonWheel).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 		
@@ -119,7 +148,10 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(wagonTongue).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 		
@@ -135,13 +167,12 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(wagonAxle).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
-		
-		
-		
-
 
 		// Initializing a button group, so only one radio button can be selected at one time
 		ButtonGroup storeButtons = new ButtonGroup();
@@ -152,6 +183,7 @@ public class Forts extends JPanel {
 		storeButtons.add(rbtnWagonTongue);
 		storeButtons.add(rbtnWagonAxle);
 		
+		// Button that sends you back to the home menu when you are done shopping
 		JButton doneButton = new JButton("Done");
 		doneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -166,8 +198,6 @@ public class Forts extends JPanel {
 		doneButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		doneButton.setBounds(175, 303, 95, 30);
 		add(doneButton);
-		
-		
     }
 
     /**
@@ -176,10 +206,16 @@ public class Forts extends JPanel {
      *
      * @param cost the cost of the item to be deducted
      */
-    private void spendMoney(double cost, double result ) {
+    private void spendMoney(Wagon wagon, double cost, double result ) {
         if (moneyTotal >= cost * result) {
+        	this.wagon= wagon;
+        	ArrayList <Item> items = wagon.getItems();
+        	
+        	
+        	
             moneyTotal -= cost * result ;
             String moneyAmount = String.format("Current money amount: %.2f", moneyTotal);
+            
             moneyAmountLabel.setText(moneyAmount);
         } else {
             System.err.println("Insufficient funds to buy this item: " + cost * result);

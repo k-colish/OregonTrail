@@ -79,6 +79,7 @@ public class Health {
      */
     private void death() { // displays that a person dies when they go 140+
         for (int i = 0; i < getPeopleAmount(); i ++) {
+        	System.out.println(i + "'s health: " + healths.get(i));
             if (healths.get(i) > 140) {
                 String person = people.getNames().get(random.randomValue(getPeopleAmount())-1);
                 JOptionPane.showMessageDialog(null, person + " has died.",
@@ -139,6 +140,7 @@ public class Health {
     private void restImprovement() { // when the player stops to rest each player losses some points
         int rmd = random.randomValue(6);
         addPoints(-rmd, getPeopleAmount());
+        addPoints((-1 * 7), getPeopleAmount());
     }
 
     /**
@@ -147,5 +149,10 @@ public class Health {
      * @param peopleAmount The number of people in the party.
      */
     public void addPoints(int points, int peopleAmount)
-    {for (int i = 0; i < peopleAmount; i++) {healths.set(i, healths.get(i) + points);}}
+    {
+    	for (int i = 0; i < peopleAmount; i++) {
+    		healths.set(i, healths.get(i) + points);
+    		System.out.println("Added " + points + " points.");
+    	}
+    }
 }
