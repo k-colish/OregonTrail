@@ -66,6 +66,7 @@ public class Forts extends JPanel {
 				spendMoney(wagon, itemCost, result);
 				int newResult = (int) result;
 				wagon.changeTotalFood(newResult);
+				trail.updateLabels();
 			}
 		});
 
@@ -86,6 +87,7 @@ public class Forts extends JPanel {
 				spendMoney(wagon, itemCost, result1);
 				int newResult = (int) result;
 				wagon.addItemAmount(wagon.getItems().get(oxen).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 
@@ -104,6 +106,7 @@ public class Forts extends JPanel {
 				spendMoney(wagon, itemCost, result);
 				int newResult = (int) result;
 				wagon.addItemAmount(wagon.getItems().get(clothing).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 
@@ -122,6 +125,7 @@ public class Forts extends JPanel {
 				spendMoney(wagon, itemCost, result);
 				int newResult = (int) result;
 				wagon.addItemAmount(wagon.getItems().get(wagonWheel).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 		
@@ -137,7 +141,9 @@ public class Forts extends JPanel {
 				input = JOptionPane.showInputDialog("How many of this item would you like to buy?");
 				result = Double.parseDouble(input);
 				System.out.println(result);
-				spendMoney(itemCost, result);
+				spendMoney(wagon, itemCost, result);
+				int newResult = (int) result;
+				wagon.addItemAmount(wagon.getItems().get(wagonTongue).getName(), newResult);
 				trail.updateLabels();
 			}
 		});
@@ -157,6 +163,7 @@ public class Forts extends JPanel {
 				spendMoney(wagon, itemCost, result);
 				int newResult = (int) result;
 				wagon.addItemAmount(wagon.getItems().get(wagonAxle).getName(), newResult);
+				trail.updateLabels();
 			}
 		});
 
