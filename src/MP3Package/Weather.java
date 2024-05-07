@@ -87,9 +87,16 @@ public class Weather {
 		if (destinationDistance >= 1800 )
 			destinationIndex = 8;
 		
+		if (Math.random() > .5)
+			keepWeather = true;
+		else
+			keepWeather = false;
+		
 		//updates current temp and precipitation based on the correct 2d array value
+		if (keepWeather) {
 		currentTemp = tempArray[destinationIndex][month] + (int)(Math.random()*41) - 20;
 		currentPrecipitation = precipitationArray[destinationIndex][month];
+		}
 		
 		
 		//implements 50% chance that weather stays the same
