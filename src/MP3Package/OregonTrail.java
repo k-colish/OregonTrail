@@ -266,7 +266,9 @@ public class OregonTrail {
 				+ "", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
 				null, new Object[] {"Yes", "No"}, -1);
 		if(startGame == JOptionPane.YES_OPTION) {
+				people.setNames();
 		}
+		
 		else {
 			System.exit(0);
 		}
