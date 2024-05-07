@@ -261,6 +261,15 @@ public class OregonTrail {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		int startGame = JOptionPane.showOptionDialog(null, "<html><center>You and your three other family members are about to embark on the journey of a lifetime!<br> It is 1850, and you are preparing to venture all the way to Sacramento, California from a small town in Ohio.<br> You and many others are in search of GOLD.<br> Stories have been passed East of the fortunes that have already been made on the rugged west coast of America.<br> You are traveling in a group with another family who have introduced themselves as the Frink Family.<br> The mother of the family, Margaret is hopeful to find her own fortune with her family.<br> You will attempt to complete the bold task of completing the California trail in hopes of finding your dreams out West.<br><br> Do you have what it takes?\r\n"
+				+ "", "", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE,
+				null, new Object[] {"Yes", "No"}, -1);
+		if(startGame == JOptionPane.YES_OPTION) {
+		}
+		else {
+			System.exit(0);
+		}
 
 		frame = new JFrame();
 //		frame = new MainPanel(wagon, date);
