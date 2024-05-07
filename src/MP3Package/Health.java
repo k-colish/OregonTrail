@@ -77,7 +77,7 @@ public class Health {
     /**
      * Check for deaths among party members.
      */
-    private void death() { // displays that a person dies when they go 140+
+    public void death() { // displays that a person dies when they go 140+
         for (int i = 0; i < getPeopleAmount(); i ++) {
         	System.out.println(i + "'s health: " + healths.get(i));
             if (healths.get(i) > 140) {

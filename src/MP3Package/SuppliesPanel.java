@@ -5,6 +5,8 @@ import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+
+import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -20,7 +22,7 @@ public class SuppliesPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SuppliesPanel(Wagon wagon, OregonTrail trail) {
+	public SuppliesPanel(Wagon wagon, OregonTrail trail, javax.swing.Timer clock, FortPanel fort) {
 		setLayout(new MigLayout("", "[grow][][][][grow,center][][][center][left][grow][][][]", "[][][][][][][][][][][][18.00,center]"));
 		
 		JLabel lblNewLabel = new JLabel("Supplies");
@@ -34,7 +36,12 @@ public class SuppliesPanel extends JPanel{
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
 				comp.getParent().getParent().remove(panel);
-				trail.readdButtons();
+				if(fort != null) {
+					win.add(fort, BorderLayout.CENTER, 1);
+				}
+				else {
+					trail.readdButtons();
+				}
 				win.revalidate();
 				win.repaint();
 			}

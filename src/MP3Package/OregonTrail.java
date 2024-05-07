@@ -82,6 +82,7 @@ public class OregonTrail {
 	private JPanel actionButtonPane = new JPanel();
 	private JButton travelButton = new JButton("Click to start traveling!");
 	private JPanel panel = new JPanel();
+	private JPanel panel_1 = new JPanel();
 
 	private RiverPanel riverPanel = null;
 	private FortPanel fortPanel = null;
@@ -134,8 +135,7 @@ public class OregonTrail {
 	}
 	
 	public void readdButtons() {
-		travelButton.setVisible(true);
-		actionButtonPane.setVisible(true);
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 	}
 
 	/**
@@ -166,22 +166,17 @@ public class OregonTrail {
 			
 			if(dest.getName().contains("River")) {
 				River river = new River(dest.getDistance(), dest.getName());
-				riverPanel = new RiverPanel(river, clock);
+				riverPanel = new RiverPanel(river, healths, rndEvt, clock);
 				frame.getContentPane().add(riverPanel, BorderLayout.CENTER, 1);
 				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
 
-				switch(riverPanel.getStatus()) {
-					case 1: break;
-					case 2: healths.addPoints(200, 1);
-					case 3:
-					case 4:
-				}
+				
 			}
 			else {
 				fortPanel = new FortPanel(dest, wagon, clock, this);
 				frame.getContentPane().add(fortPanel, BorderLayout.CENTER, 1);
 				fortPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
-
+				
 			}
 		}
 
@@ -280,7 +275,7 @@ public class OregonTrail {
 		panel.setBounds(new Rectangle(0, 0, 0, 0));
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new MigLayout("align 50% 100%", "[][][][][][][][][][][][][][][][][][][][]", "[][][][][][]"));
-
+		
 		JLabel lblNewLabel = new JLabel("Date: ");
 		lblNewLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(lblNewLabel, "cell 9 0,alignx right,growy");
@@ -329,10 +324,9 @@ public class OregonTrail {
 		weatherLabel.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		panel.add(weatherLabel, "cell 10 5");
 
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new BorderLayout(0, 0));
 		
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER, 1);
+		panel_1.setLayout(new BorderLayout(0, 0));
 		travelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!clock.isRunning()) {
@@ -412,7 +406,7 @@ public class OregonTrail {
 		JButton tradeButton = new JButton("Trade");
 		tradeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Trading trade = new Trading(wagon);
+				Trading trade = new Trading(wagon, trail);
 			}
 		});
 		tradeButton.setBackground(Color.WHITE);
@@ -423,7 +417,7 @@ public class OregonTrail {
 		JButton suppliesButton = new JButton("Check Supplies");
 		suppliesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SuppliesPanel panel = new SuppliesPanel(wagon, trail);
+				SuppliesPanel panel = new SuppliesPanel(wagon, trail, clock, null);
 				frame.getContentPane().add(panel, BorderLayout.CENTER, 1);
 				panel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
 				actionButtonPane.setVisible(false);
@@ -470,198 +464,16 @@ public class OregonTrail {
 		rationsButton.setFont(new Font("Myanmar Text", Font.BOLD, 12));
 		actionButtonPane.add(rationsButton);
 		
+		Forts store = new Forts(wagon, null, this);
+		store.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
+		
+		frame.getContentPane().add(store, BorderLayout.CENTER);
+		
 		
 		// Instantiate timer
 		clock = new javax.swing.Timer(300, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				clockActionPerformed( evt);
 			}});
-		
-
-	
-//		JLabel titleLabel = new JLabel("The Oregon Trail");
-//		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		titleLabel.setFont(new Font("Vineta BT", Font.PLAIN, 17));
-//		titleLabel.setBounds(250, 27, 267, 32);
-//		loadWagonPanel.add(titleLabel);
-//		
-//		JButton RiverButton = new JButton("Cross River");
-//		RiverButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-//		RiverButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				openPanel(panel);
-//			}
-//		});
-//		RiverButton.setBounds(53, 32, 118, 23);
-//		loadWagonPanel.add(RiverButton);
-//		
-//		StoreButton = new JButton("Buy Items");
-//		StoreButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-//		StoreButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				System.err.println("BUY ITEMS!"); //tell if its doing anything
-//	                    Forts fortsPanel = new Forts(wagon);
-//	                    openPanel(fortsPanel);
-//	                }
-//	            });
-//		
-//		StoreButton.setBounds(566, 11, 101, 23);
-//		loadWagonPanel.add(StoreButton);
-//		
-//		TradeButton = new JButton("Trade");
-//		TradeButton.setBounds(566, 61, 101, 23);
-//		TradeButton.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-//		loadWagonPanel.add(TradeButton);
-//		TradeButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				Trading trade = new Trading(allItems);
-//				
-//			}
-//		});
-//		
-//		// Displays the total amount of food that is in the wagon. Initial value displayed is set to 0.
-//		TotalFoodLabel = new JLabel("Total Food Weight: " + wagon.getTotalFood());
-//		TotalFoodLabel.setForeground(Color.WHITE);
-//		TotalFoodLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		TotalFoodLabel.setBounds(250, 550, 170, 16);
-//		loadWagonPanel.add(TotalFoodLabel);
-//		
-//		// [1] R. P. Bouchard, "Building the Mathematical Models" in You Have Died of Dysentery, R. P. Bouchard, 2016, ch. 16
-//		// "Filling" button sets the food consumption for each person to 3 lbs per person.
-//		JRadioButton rdbtnNewRadioButton = new JRadioButton("Filling");
-//		rdbtnNewRadioButton.setForeground(Color.WHITE);
-//		rdbtnNewRadioButton.setOpaque(false);
-//		rdbtnNewRadioButton.setBackground(new Color(240, 240, 240));
-//		rdbtnNewRadioButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				wagon.setFoodConsumption(3);
-//			}
-//		});
-//		rdbtnNewRadioButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		rdbtnNewRadioButton.setBounds(100, 607, 80, 23);
-//		loadWagonPanel.add(rdbtnNewRadioButton);
-//		
-//		// [1]
-//		// "Meager" button sets the food consumption for each person to 2 lbs per person.
-//		JRadioButton rdbtnMeager = new JRadioButton("Meager");
-//		rdbtnMeager.setForeground(Color.WHITE);
-//		rdbtnMeager.setOpaque(false);
-//		rdbtnMeager.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				wagon.setFoodConsumption(2);
-//			}
-//		});
-//		rdbtnMeager.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		rdbtnMeager.setBounds(179, 608, 80, 23);
-//		loadWagonPanel.add(rdbtnMeager);
-//		
-//		// [1]
-//		// "Bare Bones" button sets the food consumption for each person to 1 lbs per person.
-//		JRadioButton rdbtnBareBones = new JRadioButton("Bare Bones");
-//		rdbtnBareBones.setOpaque(false);
-//		rdbtnBareBones.setForeground(Color.WHITE);
-//		rdbtnBareBones.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				wagon.setFoodConsumption(1);
-//			}
-//		});
-//		rdbtnBareBones.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		rdbtnBareBones.setBounds(264, 608, 100, 23);
-//		loadWagonPanel.add(rdbtnBareBones);
-//		
-//		// An "Easter egg" work-in-progress feature for talking to strangers (Button is hidden below the travel! button)
-//		JButton talkButton = new JButton("Talk to People");
-//		talkButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				activity.talkToRandos();
-//			}});
-//		
-//		talkButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		talkButton.setBounds(525, 627, 142, 23);
-//		loadWagonPanel.add(talkButton);
-//		
-//		JLabel consumptionLabel = new JLabel("Choose Food Consumption: ");
-//		consumptionLabel.setForeground(Color.WHITE);
-//		consumptionLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		consumptionLabel.setBounds(100, 577, 197, 23);
-//		loadWagonPanel.add(consumptionLabel);
-//		
-//		// Initializing a button group, so only one radio button can be selected at one time
-//		ButtonGroup buttons = new ButtonGroup();
-//		buttons.add(rdbtnBareBones);
-//		buttons.add(rdbtnMeager);
-//		buttons.add(rdbtnNewRadioButton);
-//		
-//		JLabel milesLabel = new JLabel("How many miles per day?");
-//		milesLabel.setForeground(Color.WHITE);
-//		milesLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		milesLabel.setBounds(467, 510, 216, 23);
-//		loadWagonPanel.add(milesLabel);
-//		
-//		// Initialize and stateChange listener for a JSlider so the user can set the number of 
-//		// miles per day. 
-//		JSlider mileSlider = new JSlider(12, 20);
-//		mileSlider.setOpaque(false);
-//		mileSlider.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		wagon.setMilesPerDay(mileSlider.getValue());
-//		mileSlider.addChangeListener(new ChangeListener() {
-//			public void stateChanged(ChangeEvent e) {
-//				System.out.println(mileSlider.getValue());
-//				wagon.setMilesPerDay(mileSlider.getValue());
-//			}
-//		});
-//		mileSlider.setBounds(467, 540, 200, 35);
-//		mileSlider.setLabelTable(mileSlider.createStandardLabels(1, 12));
-//		mileSlider.setPaintLabels(true);
-//		mileSlider.setForeground(Color.WHITE);
-//		
-//		loadWagonPanel.add(mileSlider);
-//		
-//		
-//		// JLabel to display errors if the user either has added more than 2,400 lbs to the wagon,
-//		// or if the user did not select a food consumption rate
-//		JLabel ConsumptionErrorLabel = new JLabel("");
-//		ConsumptionErrorLabel.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		ConsumptionErrorLabel.setBounds(486, 600, 197, 16);
-//		ConsumptionErrorLabel.setForeground(Color.WHITE);
-//		loadWagonPanel.add(ConsumptionErrorLabel);
-//		
-//		
-//		/* 
-//		 * JButton for the user to select that calculates whether the user will make it
-//		 * to Oregon with the amount of food, food consumption, and miles per day that were selected
-//		 */
-//		JButton travelButton = new JButton("Travel!");
-//		travelButton.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				/* 
-//				 * Checks if a button has been selected. Otherwise, tell the user to select
-//				 * a consumption rate button.
-//				 */
-//				if(buttons.getSelection() == null) {
-//					System.out.println("Select a consumption rate.");
-//					ConsumptionErrorLabel.setText("Select a Consumption Rate");
-//				}
-//				/*	
-//				 * Checks if the total amount of weight of items selected is over the maximum allowed (2,400).
-//				 * If there is too much weight, tell the user that they have too much weight on the wagon.
-//				 */
-//				else if(wagon.getTotalFood() > 2400) {
-//					ConsumptionErrorLabel.setText("Wagon cannot be over 2,400 lbs");
-//				}
-//				
-//				// Starts the clock to start traveling
-//				else {
-//					System.out.println("Clock start");
-//					clock.start();
-//				}
-//			}
-//		});
-//		travelButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-//		travelButton.setBounds(525, 578, 89, 23);
-//		loadWagonPanel.add(travelButton);
-
-
-
 	}
 }

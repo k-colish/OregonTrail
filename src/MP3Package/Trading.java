@@ -26,7 +26,7 @@ public class Trading {
 	 * @param item 
 	 * @param items - The ArrayList of all items that can be put in the wagon. (Subject to change)
 	 */
-	public Trading(Wagon wagon) {
+	public Trading(Wagon wagon, OregonTrail trail) {
 		
 		Random rnd = new Random();
 		
@@ -205,7 +205,7 @@ public class Trading {
 				}
 			}
 		}
-		
+		trail.updateLabels();
 		
 	}
 }

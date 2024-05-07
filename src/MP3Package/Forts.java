@@ -189,9 +189,14 @@ public class Forts extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JComponent comp = (JComponent) e.getSource();
 				Window win = SwingUtilities.getWindowAncestor(comp);
-				comp.getParent().getParent().getParent().add(fort, BorderLayout.CENTER);
-				comp.getParent().getParent().remove(panel);
+				if(!(wagon.getMilesTraveled() == 0)) {
+					comp.getParent().getParent().getParent().add(fort, BorderLayout.CENTER);
+					comp.getParent().getParent().remove(panel);
+				}
+				win.remove(panel);
+				trail.readdButtons();
 				win.revalidate();
+				win.repaint();
 			}
 		});
 		doneButton.setMargin(new Insets(4, 14, 0, 14));

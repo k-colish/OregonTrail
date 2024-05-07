@@ -21,8 +21,13 @@ public class RiverPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private int status = 0;
+	private River river;
+	private Timer clock;
 	
-	public RiverPanel(River river, javax.swing.Timer clock) {
+	public RiverPanel(River river, Health healths, RandomEvents rndEvt, javax.swing.Timer clock) {
+		this.river = river;
+		this.clock = clock;
+		
 		setLayout(new MigLayout("", "[300px][4px][400px]", "[18px][18px][18px][18px][18px][18px][20px][]"));
 		
 		// General Label creation
@@ -82,12 +87,12 @@ public class RiverPanel extends JPanel{
 					if(res == JOptionPane.YES_OPTION) {
 						JOptionPane.showMessageDialog(null, "You made it across the river!",
 								"", JOptionPane.INFORMATION_MESSAGE);
-						status = 4;
+						
+						// Remove this panel from the screen
 						JComponent comp = (JComponent) e.getSource();
 						Window win = SwingUtilities.getWindowAncestor(comp);
 						win.remove(panel);
 						win.repaint();
-						clock.start();
 					}
 					// Otherwise, the pane closes and the user can input another selection
 					
@@ -103,12 +108,12 @@ public class RiverPanel extends JPanel{
 						// Display to the user that they made it across the river
 						JOptionPane.showMessageDialog(null, "You made it across the river!",
 								"", JOptionPane.INFORMATION_MESSAGE);
-						status = 1;
+						
+						// Remove this panel from the screen
 						JComponent comp = (JComponent) e.getSource();
 						Window win = SwingUtilities.getWindowAncestor(comp);
 						win.remove(panel);
 						win.repaint();
-						clock.start();
 					}
 					
 					// If here, the wagon did not make it across the river
@@ -120,15 +125,16 @@ public class RiverPanel extends JPanel{
 						
 						// Gives a 30% chance that one person will drown when the wagon does not make it across
 						if(drown <= 3) {
+							
 							// Tell the user that they did not make it and that one person has died
 							JOptionPane.showMessageDialog(null, "The river's current was " +
 									"too strong and one member of your party drowned!");
-							status = 2;
+							
+							
 							JComponent comp = (JComponent) e.getSource();
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
-							clock.start();
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -141,7 +147,6 @@ public class RiverPanel extends JPanel{
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
-							clock.start();
 						}
 					}
 				}
@@ -160,7 +165,6 @@ public class RiverPanel extends JPanel{
 						Window win = SwingUtilities.getWindowAncestor(comp);
 						win.remove(panel);
 						win.repaint();
-						clock.start();
 					}
 					
 					// Otherwise, the wagon did not make it across
@@ -181,7 +185,6 @@ public class RiverPanel extends JPanel{
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
-							clock.start();
 						}
 						
 						// Otherwise, only tell the user that the wagon was lost in the current of the river ( Will add other consequences in later version )
@@ -194,14 +197,13 @@ public class RiverPanel extends JPanel{
 							Window win = SwingUtilities.getWindowAncestor(comp);
 							win.remove(panel);
 							win.repaint();
-							clock.start();
 						}
 					}
 				}
 				else {
 					System.out.println(textField.getText());
 				}
-				
+				getStatus(healths, rndEvt);
 			}
 		});
 		
@@ -237,11 +239,22 @@ public class RiverPanel extends JPanel{
 	
 	
 	/**
-	 * getStatus - returns the status from crossing the river
-	 * @return the status from crossing the river (1: made it across river safely, 2: failed to make it across + party member died, 
-	 * 3: failed to cross, but everyone is safe, 4: took the ferry across)
+	 * getStatus - determines the result from crossing the river ( 1 = made it across safely, 2 = did not make it, lost an item, food, and 1 person died, 
+	 * 3 = did not make it, lost and item and food, 4 = took ferry and made it across )
+	 * @param healths - Health class object to handle the death of one party member
+	 * @param rndEvt - RandomEvents class object to call riverLoss() to remove lost items
 	 */
-	public int getStatus() {
-		return status;
+	public void getStatus(Health healths, RandomEvents rndEvt) {
+		switch(status) {
+		case 1: break;
+		case 2: healths.addPoints(140, 1); 
+				healths.death(); 
+				rndEvt.riverLoss(river);
+				break;
+		case 3: rndEvt.riverLoss(river);
+				break;
+		case 4: break;
+		}
+		clock.start();
 	}
 }
