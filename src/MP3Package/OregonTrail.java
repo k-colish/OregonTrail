@@ -131,7 +131,7 @@ public class OregonTrail {
 		landmarkLabel.setText(Integer.toString(wagon.milesToLandmark()));
 		milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
 		healthLabel.setText(healths.overallHealth());
-		weatherLabel.setText(weather.getWeather(wagon.getMilesTraveled(),calendar.MONTH));
+		weatherLabel.setText(weather.getWeather(wagon.getMilesTraveled(),calendar.getTime().getMonth()));
 	}
 	
 	public void readdButtons() {
