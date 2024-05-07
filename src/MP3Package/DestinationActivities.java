@@ -59,11 +59,39 @@ public class DestinationActivities{
 			// Get the quote index
 			int quote = itemData.nextInt();
 			String q = itemData.next();
+			
+				// Message dialogs like to show long strings in one huge line across the screen.
+				// Let's instead parse this string and add newline characters using a StringBuilder,
+				// to split it up into a sizable paragraph.
+				StringBuilder splitMessage = new StringBuilder();
+				int charCount = 0;
+				
+		        for (int i = 0; i < q.length(); i++) {
+		            char c = q.charAt(i);
+		            splitMessage.append(c);
+		            charCount++;
+		            
+		            // Only add new lines for spaces, which all avoid cutting into words
+		            if (charCount >= 50 && c != ' ') {
+		                int lastSpaceIndex = splitMessage.lastIndexOf(" ");
+		                if (lastSpaceIndex != -1) {
+		                	splitMessage.replace(lastSpaceIndex, lastSpaceIndex + 1, "\n");
+		                    charCount = splitMessage.length() - lastSpaceIndex;
+		                }
+		            // If the character is a newline, reset charCount
+		            } else if (c == '\n') {
+		                charCount = 0;
+		            }
+		        }
+				
+				String title = "Dialogue";
+			
+			
 			// Check if the random value equals the quote index
 			if(quote == line) {
 				
 				// Display the quote when a matching index is found
-				JOptionPane.showMessageDialog(null, q, "Rando", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, splitMessage.toString(), "Rando", JOptionPane.ERROR_MESSAGE);
 			}
 			
 			// Close the Scanner for the current line
