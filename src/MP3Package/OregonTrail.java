@@ -169,7 +169,6 @@ public class OregonTrail {
 				riverPanel = new RiverPanel(river, healths, rndEvt, clock);
 				frame.getContentPane().add(riverPanel, BorderLayout.CENTER, 1);
 				riverPanel.setBounds(0, 0, frame.getContentPane().getWidth(), frame.getContentPane().getHeight() - panel.getHeight());
-
 				
 			}
 			else {
