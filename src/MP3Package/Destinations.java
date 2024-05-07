@@ -94,6 +94,7 @@ public class Destinations {
 		
 	}
 	
+	
 	/**
 	 * getDistance - gets the distance traveled from the starting point.
 	 * @return - distance traveled from the starting point.

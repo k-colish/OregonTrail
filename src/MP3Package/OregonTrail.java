@@ -37,6 +37,7 @@ import java.awt.event.ActionListener;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.Scanner;
@@ -123,13 +124,13 @@ public class OregonTrail {
 		//people.setNames();
 	}
 	
-	public void updateLabels() {
+		public void updateLabels() {
 		dateLabel.setText(date);
 		totalFood.setText(Integer.toString(wagon.getTotalFood()));
 		landmarkLabel.setText(Integer.toString(wagon.milesToLandmark()));
 		milesLabel.setText(Integer.toString(wagon.getMilesTraveled()) + " miles");
 		healthLabel.setText(healths.overallHealth());
-		weatherLabel.setText(weather.getWeather(wagon.getNextLandmark().getTemp(), wagon.getNextLandmark().getPrecipitation()));
+		weatherLabel.setText(weather.getWeather(wagon.getMilesTraveled(),calendar.MONTH));
 	}
 	
 	public void readdButtons() {
@@ -477,7 +478,7 @@ public class OregonTrail {
 			}});
 		
 
-
+	
 //		JLabel titleLabel = new JLabel("The Oregon Trail");
 //		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 //		titleLabel.setFont(new Font("Vineta BT", Font.PLAIN, 17));
