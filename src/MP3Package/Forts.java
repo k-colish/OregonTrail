@@ -210,8 +210,9 @@ public class Forts extends JPanel {
      * Updates the money amount label to reflect the remaining money.
      *
      * @param cost the cost of the item to be deducted
+     * @
      */
-    private void spendMoney(Wagon wagon, double cost, double result ) {
+    public void spendMoney(Wagon wagon, double cost, double result ) {
         if (moneyTotal >= cost * result) {
         	this.wagon= wagon;
         	ArrayList <Item> items = wagon.getItems();

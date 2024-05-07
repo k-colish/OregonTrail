@@ -23,10 +23,14 @@ public class RiverPanel extends JPanel{
 	private int status = 0;
 	private River river;
 	private Timer clock;
+	private Wagon wagon;
+	private OregonTrail trail;
 	
-	public RiverPanel(River river, Health healths, RandomEvents rndEvt, javax.swing.Timer clock) {
+	public RiverPanel(River river, Health healths, RandomEvents rndEvt, javax.swing.Timer clock, Wagon wagon, OregonTrail trail) {
 		this.river = river;
 		this.clock = clock;
+		this.wagon = wagon;
+		this.trail = trail;
 		
 		setLayout(new MigLayout("", "[300px][4px][400px]", "[18px][18px][18px][18px][18px][18px][20px][]"));
 		
@@ -253,7 +257,10 @@ public class RiverPanel extends JPanel{
 				break;
 		case 3: rndEvt.riverLoss(river);
 				break;
-		case 4: break;
+		case 4: Forts fort = new Forts(wagon, null, trail);
+				double cost = river.takeFerry();
+				fort.spendMoney(wagon,cost,1);
+				break;
 		}
 		clock.start();
 	}
