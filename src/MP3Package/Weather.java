@@ -132,24 +132,28 @@ public class Weather {
 		}
 			**/
 		
-		//gets probability of it raining
 		double chanceOfRainfall = (currentPrecipitation / 20);
-		
-		//determines whether it is raining or not
-		if(chanceOfRainfall > Math.random())
-			isRainy = true;
-		else
-			isRainy = false;
-		
-		//determines whether it is heavy rain or light
-		if (isRainy == true) {
-			if (Math.random() < 0.3)
-				heavyRain = true;
-			else
-				lightRain = true;
+
+		// Determines whether it is raining or not
+		if (chanceOfRainfall > Math.random()) {
+		    isRainy = true;
+		} else {
+		    isRainy = false; // Reset chance of rain to false
 		}
-		else
-			isRainy = false;
+
+		// Determines whether it is heavy rain or light
+		if (isRainy == true) {
+		    if (Math.random() < 0.3) {
+		        heavyRain = true;
+		    } else {
+		        lightRain = true;
+		    }
+		} else {
+		    // Reset rain flags if not raining
+		    heavyRain = false;
+		    lightRain = false;
+		}
+
 		
 		
 		//updates the rain or snow on the ground for new days weather conditions
