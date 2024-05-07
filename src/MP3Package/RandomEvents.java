@@ -425,4 +425,15 @@ public class RandomEvents {
                     "next time...", "FAILED", JOptionPane.INFORMATION_MESSAGE);
     	}
     }
+    
+    public void riverLoss(River river) {
+    	double loss = river.getLossSeverity();
+    	Random rnd = new Random();
+    	int index = rnd.nextInt(1, wagon.getItems().size());
+    	wagon.removeItemAmount(wagon.getItems().get(index).getName(), 1);
+    	wagon.changeTotalFood((int)(-loss * 10));
+    	JOptionPane.showMessageDialog(null, "You lost 1 " + wagon.getItems().get(index).getName() + " and " + (int)(loss * 10) + " food in the river!");
+    	
+    	
+    }
 }

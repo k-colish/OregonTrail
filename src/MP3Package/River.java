@@ -79,7 +79,7 @@ public class River extends Destinations{
 			return true;
 		}
 		else{
-			this.lossSeverity = this.depth - 2.5;
+			this.lossSeverity = this.depth;
 			return false;
 		}
 	}
@@ -89,8 +89,8 @@ public class River extends Destinations{
 	 * @return - true if the wagon makes it across, false otherwise
 	 */
 	public boolean floatRiver() {
-		if(flow > 1) {
-			lossSeverity = this.depth - 2.5;
+		if(flow > 2) {
+			lossSeverity = this.depth;
 			return false;
 		}
 		else return true;

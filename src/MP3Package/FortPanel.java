@@ -26,7 +26,7 @@ public class FortPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	public FortPanel(Destinations dest, Wagon wagon, javax.swing.Timer clock, OregonTrail trail) {
-		setLayout(new MigLayout("", "[150px][150px][200px][150px][150px]", "[18px][18px][18px][18px][18px][18px][20px][]"));
+		setLayout(new MigLayout("", "[150px][150px][200px][150px][150px]", "[18px][18px][18px][18px][18px][18px][20px][][][]"));
 		
 		JLabel FortName = new JLabel("You made it to " + dest.getName() + "!");
 		FortName.setFont(new Font("Myanmar Text", Font.BOLD, 15));
@@ -67,12 +67,26 @@ public class FortPanel extends JPanel{
 		JButton tradeButton = new JButton("Trade");
 		tradeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Trading trade = new Trading(wagon);
+				Trading trade = new Trading(wagon, trail);
 			}
 		});
 		tradeButton.setMargin(new Insets(0, 14, 0, 14));
 		tradeButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
 		add(tradeButton, "cell 0 7 2 1,growx");
+		
+		JButton suppliesButton = new JButton("Check Supplies");
+		suppliesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SuppliesPanel supps = new SuppliesPanel(wagon, trail, clock, panel);
+				JComponent comp = (JComponent) e.getSource();
+				Window win = SwingUtilities.getWindowAncestor(comp);
+				comp.getParent().getParent().remove(panel);
+				win.add(supps, BorderLayout.CENTER);
+				win.revalidate();
+			}
+		});
+		suppliesButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
+		add(suppliesButton, "cell 3 7 2 1,grow");
 		
 		JButton travelButton = new JButton("Continue on Trail");
 		travelButton.addActionListener(new ActionListener() {
@@ -87,7 +101,7 @@ public class FortPanel extends JPanel{
 		});
 		travelButton.setMargin(new Insets(0, 14, 0, 14));
 		travelButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		add(travelButton, "cell 3 7 2 1,growx");
+		add(travelButton, "cell 2 9,growx");
 	}
 	
 
