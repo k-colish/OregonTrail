@@ -33,7 +33,7 @@ public class River extends Destinations{
 		super(distance, name, false);
 		this.depth = rnd.nextDouble(1, 6);
 		this.width = rnd.nextDouble(300, 700);
-		this.flow = rnd.nextInt(1, 3);
+		this.flow = rnd.nextInt(1, 4);
 	}
 	
 	/**

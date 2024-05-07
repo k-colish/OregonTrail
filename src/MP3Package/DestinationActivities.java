@@ -35,7 +35,7 @@ public class DestinationActivities{
 		
 		// Generate a new random number to select a line from the CSV
 		Random rnd = new Random();
-		int line = rnd.nextInt(5) + 1; // Randomly choose a line number (1 to 5)
+		int line = rnd.nextInt(9) + 1; // Randomly choose a line number (1 to 9)
 		
 		
 		// Open the CSV file for reading using an InputStreamReader
@@ -58,12 +58,12 @@ public class DestinationActivities{
 			
 			// Get the quote index
 			int quote = itemData.nextInt();
-			
+			String q = itemData.next();
 			// Check if the random value equals the quote index
 			if(quote == line) {
 				
 				// Display the quote when a matching index is found
-				JOptionPane.showMessageDialog(null, itemData.next(), "Rando", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, q, "Rando", JOptionPane.ERROR_MESSAGE);
 			}
 			
 			// Close the Scanner for the current line

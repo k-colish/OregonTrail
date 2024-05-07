@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import net.miginfocom.swing.MigLayout;
 
 /**
  * The Forts class represents a GUI application for managing items with associated costs.
@@ -30,13 +31,12 @@ public class Forts extends JPanel {
      * Sets up the JFrame and initializes components.
      */
     public Forts(Wagon wagon, FortPanel fort, OregonTrail trail) {
-    	setLayout(null); // Set layout to null for absolute positioning
+        setLayout(new MigLayout("", "[][][][][221.00px][][][][]", "[30px][30px][30px][30px][30px][30px][30px][30px]"));
 
     	// Sets up the labels for how much money you have when shopping
         moneyAmountLabel = new JLabel("Current money amount: " + moneyTotal);
         moneyAmountLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-        moneyAmountLabel.setBounds(10, 10, 300, 30);
-        add(moneyAmountLabel);
+        add(moneyAmountLabel, "cell 4 0,alignx left,growy");
         
         // sets the index of each item in the array list to a variable to be processed by the addItemAmount method
         this.wagon = wagon;
@@ -60,8 +60,7 @@ public class Forts extends JPanel {
 		 */
 		String foodCost = String.format("Food - $%.2f", (0.40 + 0.40 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnFood = new JRadioButton(foodCost);
-		rbtnFood.setBounds(10, 50, 200, 30);
-		add(rbtnFood);
+		add(rbtnFood, "cell 4 1,alignx left,growy");
 		rbtnFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double itemCost = (0.40 + 0.40 * (wagon.getMilesTraveled() / 10000));
@@ -79,8 +78,7 @@ public class Forts extends JPanel {
 
 		String oxenCost = String.format("Yoke of Oxen - $%.2f", (40.00 + 40.00 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnOxen = new JRadioButton(oxenCost);
-		rbtnOxen.setBounds(10, 90, 200, 30);
-		add(rbtnOxen);
+		add(rbtnOxen, "cell 4 2,alignx left,growy");
 		rbtnOxen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double itemCost = (40.00 + 40.00 * (wagon.getMilesTraveled() / 10000));
@@ -100,8 +98,7 @@ public class Forts extends JPanel {
 
 		String clothingCost = String.format("Clothing - $%.2f", (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnClothing = new JRadioButton(clothingCost);
-		rbtnClothing.setBounds(10, 130, 200, 30);
-		add(rbtnClothing);
+		add(rbtnClothing, "cell 4 3,alignx left,growy");
 		rbtnClothing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
@@ -119,8 +116,7 @@ public class Forts extends JPanel {
 
 		String wheelCost = String.format("Wagon Wheel - $%.2f", (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnWagonWheel = new JRadioButton(wheelCost);
-		rbtnWagonWheel.setBounds(10, 170, 200, 30);
-		add(rbtnWagonWheel);
+		add(rbtnWagonWheel, "cell 4 4,alignx left,growy");
 		rbtnWagonWheel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
@@ -138,8 +134,7 @@ public class Forts extends JPanel {
 		
 		String tongueCost = String.format("Wagon Tongue - $%.2f", (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnWagonTongue = new JRadioButton(tongueCost);
-		rbtnWagonTongue.setBounds(10, 210, 200, 30);
-		add(rbtnWagonTongue);
+		add(rbtnWagonTongue, "cell 4 5,alignx left,growy");
 		rbtnWagonTongue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
@@ -157,8 +152,7 @@ public class Forts extends JPanel {
 		
 		String axleCost = String.format("Wagon Axle - $%.2f", (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000)));
 		JRadioButton rbtnWagonAxle = new JRadioButton(axleCost);
-		rbtnWagonAxle.setBounds(10, 250, 200, 30);
-		add(rbtnWagonAxle);
+		add(rbtnWagonAxle, "cell 4 6,alignx left,growy");
 		rbtnWagonAxle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double itemCost = (10.00 + 10.00 * (wagon.getMilesTraveled() / 10000));
@@ -201,8 +195,7 @@ public class Forts extends JPanel {
 		});
 		doneButton.setMargin(new Insets(4, 14, 0, 14));
 		doneButton.setFont(new Font("Myanmar Text", Font.BOLD, 15));
-		doneButton.setBounds(175, 303, 95, 30);
-		add(doneButton);
+		add(doneButton, "cell 5 7,alignx right,growy");
     }
 
     /**
