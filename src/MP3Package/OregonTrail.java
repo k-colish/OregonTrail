@@ -134,8 +134,16 @@ public class OregonTrail {
 		weatherLabel.setText(weather.getWeather(wagon.getMilesTraveled(),calendar.getTime().getMonth()));
 	}
 	
-	public void readdButtons() {
-		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
+	public void readdButtons(boolean atFort) {
+		if(atFort) {
+			frame.getContentPane().add(panel_1, BorderLayout.CENTER);
+			
+		}
+		else {
+			travelButton.setVisible(true);
+			actionButtonPane.setVisible(true);
+			
+		}
 	}
 
 	/**
@@ -481,7 +489,7 @@ public class OregonTrail {
 		
 		
 		// Instantiate timer
-		clock = new javax.swing.Timer(300, new ActionListener() {
+		clock = new javax.swing.Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				clockActionPerformed( evt);
 			}});

@@ -40,7 +40,7 @@ public class SuppliesPanel extends JPanel{
 					win.add(fort, BorderLayout.CENTER, 1);
 				}
 				else {
-					trail.readdButtons();
+					trail.readdButtons(false);
 				}
 				win.revalidate();
 				win.repaint();

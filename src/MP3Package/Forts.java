@@ -188,7 +188,7 @@ public class Forts extends JPanel {
 					comp.getParent().getParent().remove(panel);
 				}
 				win.remove(panel);
-				trail.readdButtons();
+				trail.readdButtons(true);
 				win.revalidate();
 				win.repaint();
 			}
